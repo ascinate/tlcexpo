@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
-class AdminloginController extends Controller
+class AdminController extends Controller
 {
     //
     function adminlogin(Request $request)
@@ -34,7 +35,13 @@ class AdminloginController extends Controller
         }
         else
         {
-            echo "Login Failed";
+            return redirect('admin/login')->with('failed', 'WRONG CREDENTIALS!');
         }
+    }
+
+    public function index()
+    {
+        $data = Customer::all();
+        return view('admin/dashboard',['customers' => $data]);
     }
 }

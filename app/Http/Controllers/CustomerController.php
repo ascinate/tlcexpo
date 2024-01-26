@@ -12,7 +12,7 @@ class CustomerController extends Controller
     public function customers()
     {
         $data = Customer::all();
-        return view('admin/customers', ['datas' => $data]);
+        return view('admin/customers', ['customers' => $data]);
     }
 
     ///////////// Userend Functions /////////////

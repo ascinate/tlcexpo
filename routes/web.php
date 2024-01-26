@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminloginController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,5 +58,15 @@ Route::get('logout', function () {
 /////////////// Administrator Routes //////////////////
 
 Route::view('admin/login','admin/login');
-Route::post('adminlogin', [AdminloginController::class, 'adminlogin']);
-Route::view('admin/dashboard', 'admin/dashboard');
+Route::post('adminlogin', [AdminController::class, 'adminlogin']);
+Route::get('admin/dashboard', [AdminController::class, 'index'])->middleware('adminauth');
+Route::get('admin/customers',[CustomerController::class, 'customers'])->middleware('adminauth');
+Route::view('admin/addcustomer','admin/addcustomer')->middleware('adminauth');
+Route::get('admin/logout', function () {
+
+    if(session()->has('adminuser'))
+    {
+        session()->pull('adminuser', null);
+    }
+    return redirect('admin/login');
+});

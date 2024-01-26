@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Clickauction Admin</title>
+    <title>Tlc-expo Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
@@ -29,17 +29,6 @@
         }
      </style>
   </head>
-
-  @php
-    if(session('adminuser')=='')
-    {
-  @endphp
-        <script>
-            window.location.href='http://localhost:8000/admin/login';
-        </script>
-   @php
-    }
-  @endphp
 
   <body>
     <div class="container-scroller">
@@ -72,7 +61,7 @@
 
 
             <li class="nav-item nav-logout d-none d-lg-block">
-              <a class="nav-link" href="{{ URL::to('/logout') }}">
+              <a class="nav-link" href="{{ URL::to('admin/logout') }}">
                 <i class="mdi mdi-power"></i>
               </a>
             </li>

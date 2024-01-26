@@ -76,5 +76,22 @@
 
 
     </script>
+
+<script>
+    $(document).ready(function(){
+        $("#limitation").change(function(){
+            var lim = $("#limitation").val();
+
+            if(lim=='Other')
+            {
+                $("#xother").show();
+            }
+            else
+            {
+                $("#xother").hide();
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -26,9 +26,10 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo text-center">
-                  <img src="../assets/images/logo.svg">
+                  <img src="../assets/images/logo.png">
                 </div>
                 <h4 class="text-center">Administrator Control Panel!</h4>
+                <p class="text-center col-lg-7 mx-auto" style="color:red; margin-top:20px;">{{ session('failed') }}</p>
                 <form name="frm" action="{{ URL::to('adminlogin') }}" method="POST" class="pt-3">
                     @csrf
                   <div class="form-group">

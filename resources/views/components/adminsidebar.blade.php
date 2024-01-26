@@ -25,30 +25,29 @@
 
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Users</span>
+            <span class="menu-title">Manage Customers</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-account menu-icon"></i>
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/adduser') }}">Add User</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/sellers') }}">Seller List</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/bidders') }}">Bidder List</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addcustomer') }}">Add Customer</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/customers') }}">Customer List</a></li>
             </ul>
           </div>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Memberships</span>
+            <span class="menu-title">Manage Tradeshows</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-account-multiple-plus menu-icon"></i>
           </a>
 
           <div class="collapse" id="ui-basic6">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addmembership') }}">Add Membership</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/memberships') }}">Membership Plans</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addtradeshow') }}">Add Tradeshow</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/tradeshows') }}">Tradeshow List</a></li>
             </ul>
           </div>
 
