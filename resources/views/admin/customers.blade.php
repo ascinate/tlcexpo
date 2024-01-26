@@ -40,10 +40,10 @@
                             <td>{{ $customer->city }}</td>
                             <td>{{ $customer->country }}</td>
                             <td>
-                                <a href="{{ URL::to('editcustomer/'.$customer->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/editcustomer/'.$customer->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deletecustomer/'.$customer->id }}" style="color: #333;">
+                                <a href="{{ 'admin/deletecustomer/'.$customer->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

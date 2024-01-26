@@ -62,6 +62,9 @@ Route::post('adminlogin', [AdminController::class, 'adminlogin']);
 Route::get('admin/dashboard', [AdminController::class, 'index'])->middleware('adminauth');
 Route::get('admin/customers',[CustomerController::class, 'customers'])->middleware('adminauth');
 Route::view('admin/addcustomer','admin/addcustomer')->middleware('adminauth');
+Route::post('insertcustomer',[CustomerController::class,'insertcustomer']);
+Route::get('admin/editcustomer/{id}',[CustomerController::class,'showData']);
+Route::post('updatecustomer',[CustomerController::class,'updatecustomer']);
 Route::get('admin/logout', function () {
 
     if(session()->has('adminuser'))

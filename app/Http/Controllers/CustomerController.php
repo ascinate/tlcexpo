@@ -148,6 +148,7 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->address_line_1 = $request->address_line_1;
         $customer->address_line_2 = $request->address_line_2;
+        $customer->address_line_3 = $request->address_line_3;
         $customer->city = $request->city;
         $customer->state = $request->state;
         $customer->zipcode = $request->zipcode;
