@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\TradeshowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,11 +62,30 @@ Route::get('logout', function () {
 Route::view('admin/login','admin/login');
 Route::post('adminlogin', [AdminController::class, 'adminlogin']);
 Route::get('admin/dashboard', [AdminController::class, 'index'])->middleware('adminauth');
+
+//// Customers
 Route::get('admin/customers',[CustomerController::class, 'customers'])->middleware('adminauth');
 Route::view('admin/addcustomer','admin/addcustomer')->middleware('adminauth');
-Route::post('insertcustomer',[CustomerController::class,'insertcustomer']);
-Route::get('admin/editcustomer/{id}',[CustomerController::class,'showData']);
-Route::post('updatecustomer',[CustomerController::class,'updatecustomer']);
+Route::post('insertcustomer',[CustomerController::class,'insertcustomer'])->middleware('adminauth');
+Route::get('admin/editcustomer/{id}',[CustomerController::class,'showData'])->middleware('adminauth');
+Route::post('updatecustomer',[CustomerController::class,'updatecustomer'])->middleware('adminauth');
+
+//// Tradeshows
+Route::get('admin/tradeshows',[TradeshowController::class, 'index'])->middleware('adminauth');
+Route::view('admin/addtradeshow','admin/addtradeshow')->middleware('adminauth');
+Route::post('inserttradeshow',[TradeshowController::class,'inserttradeshow'])->middleware('adminauth');
+Route::get('admin/edittradeshow/{id}',[TradeshowController::class,'showData'])->middleware('adminauth');
+Route::post('updatetradeshow',[TradeshowController::class,'updatetradeshow'])->middleware('adminauth');
+Route::get('admin/deletetradeshow/{id}', [TradeshowController::class, 'delete'])->middleware('adminauth');
+
+//// Events
+Route::get('admin/events',[EventController::class, 'index'])->middleware('adminauth');
+Route::view('admin/addevent','admin/addevent')->middleware('adminauth');
+Route::post('insertevent',[EventController::class,'insertevent'])->middleware('adminauth');
+Route::get('admin/editevent/{id}',[EventController::class,'showData'])->middleware('adminauth');
+Route::post('updateevent',[EventController::class,'updateevent'])->middleware('adminauth');
+Route::get('admin/deleteevent/{id}', [EventController::class, 'delete'])->middleware('adminauth');
+
 Route::get('admin/logout', function () {
 
     if(session()->has('adminuser'))
