@@ -16,42 +16,30 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Tradeshow List</h4>
+                    <h4 class="card-title">Event List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
                           <th> Show Name </th>
-                          <th> Start Date </th>
-                          <th> Stop Date </th>
-                          <th> Management </th>
+                          <th> Event </th>
+                          <th> Venue </th>
+                          <th> Site </th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        @foreach ($trades as $trade)
+                        @foreach ($events as $event)
                         <tr>
-                            <td>{{ $trade->show_name }}</td>
+                            <td>{{ $event->tradeshow }}</td>
+                            <td>{{ $event->event_name }}</td>
+                            <td>{{ $event->main_venue }}</td>
+                            <td>{{ $trade->showsite }}</td>
                             <td>
-                                @php
-                                    $ex = explode("-", $trade->start_publishing);
-                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
-                                    echo date('F j, Y', $dt);
-                                @endphp
-                            </td>
-                            <td>
-                                @php
-                                    $ex = explode("-", $trade->stop_publishing);
-                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
-                                    echo date('F j, Y', $dt);
-                                @endphp
-                            </td>
-                            <td>{{ $trade->show_management }}</td>
-                            <td>
-                                <a href="{{ URL::to('admin/edittradeshow/'.$trade->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/editevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deletetradeshow/'.$trade->id }}" style="color: #333;">
+                                <a href="{{ 'deleteevent/'.$event->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

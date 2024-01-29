@@ -55,15 +55,15 @@
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Categories</span>
+            <span class="menu-title">Manage Events</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-arrange-send-to-back menu-icon"></i>
           </a>
 
           <div class="collapse" id="ui-basic2">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addcategory') }}">Add Category</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/categories') }}">Category List</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addevent') }}">Add Event</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/events') }}">Event List</a></li>
             </ul>
           </div>
         </li>

@@ -14,7 +14,7 @@ class TradeshowController extends Controller
         return view('admin/tradeshows',['trades'=>$data]);
     }
 
-    public function insertshow(Request $request)
+    public function inserttradeshow(Request $request)
     {
         $trade = new Tradeshow();
         $trade->show_name = $request->show_name;
@@ -29,10 +29,10 @@ class TradeshowController extends Controller
     public function showData($id)
     {
         $data = Tradeshow::find($id);
-        return view('admin/editshow',['datas'=>$data]);
+        return view('admin/edittradeshow',['data'=>$data]);
     }
 
-    public function updateshow(Request $request)
+    public function updatetradeshow(Request $request)
     {
         $trade = Tradeshow::find($request->id);
         $trade->show_name = $request->show_name;
