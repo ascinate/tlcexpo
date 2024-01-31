@@ -46,7 +46,12 @@
                                     echo date('F j, Y', $dt);
                                 @endphp
                             </td>
-                            <td>{{ $trade->show_management }}</td>
+                            <td>
+                                @php
+                                    $data = \DB::table('managecontractors')->where('id', $trade->show_management)->get();
+                                    echo $data[0]->contractor_name;
+                                @endphp
+                            </td>
                             <td>
                                 <a href="{{ URL::to('admin/edittradeshow/'.$trade->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>

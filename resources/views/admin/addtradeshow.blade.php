@@ -41,7 +41,16 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label"> Show Manager </label>
-                                        <select name="show_manager" class="form-select">
+                                        <select name="show_management" class="form-select" required>
+                                            <option value="">--Select--</option>
+                                            @php
+                                                $datas = \DB::table('managecontractors')->get();
+                                                foreach($datas as $data) {
+                                            @endphp
+                                            <option value="{{ $data->id }}">{{ $data->contractor_name }}</option>
+                                            @php
+                                                }
+                                            @endphp
                                     </select>
                                     </div>
                                 </div>

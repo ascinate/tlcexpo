@@ -11,7 +11,7 @@ class VenueController extends Controller
     public function venues()
     {
         $data = Venue::all();
-        return view('admin/venues',['datas' => $data]);
+        return view('admin/venues',['venues' => $data]);
     }
 
     public function showData($id)

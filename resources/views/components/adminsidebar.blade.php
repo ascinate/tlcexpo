@@ -24,6 +24,22 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
+            <span class="menu-title">Website Content</span>
+            <i class="menu-arrow"></i>
+            <i class="mdi mdi-arrange-send-to-back menu-icon"></i>
+          </a>
+
+          <div class="collapse" id="ui-basic3">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/edithome') }}">Home Page</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/whytlc') }}">Why Tlc Expo</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/testimonials') }}">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <span class="menu-title">Manage Customers</span>
             <i class="menu-arrow"></i>
@@ -69,90 +85,32 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Auctions</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-database menu-icon"></i>
-          </a>
-
-          <div class="collapse" id="ui-basic9">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addauction') }}">Add Auction</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/auctions') }}">Manage Auctions</a></li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Items</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-database menu-icon"></i>
-          </a>
-
-          <div class="collapse" id="ui-basic3">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/additem') }}">Add Item</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/items') }}">Item List</a></li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Bids</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-crown menu-icon"></i>
-          </a>
-
-          <div class="collapse" id="ui-basic4">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addbid') }}">Add Bid</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/bids') }}">Bid List</a></li>
-            </ul>
-          </div>
-
-        </li>
-
-        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Orders</span>
+            <span class="menu-title">Manage Venue</span>
             <i class="menu-arrow"></i>
-            <i class="mdi mdi-basket-fill menu-icon"></i>
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
           </a>
 
           <div class="collapse" id="ui-basic7">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/orders') }}">Orders</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addvenue') }}">Add Venue</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/venues') }}">Venue List</a></li>
             </ul>
           </div>
+
         </li>
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Payments</span>
+            <span class="menu-title">Manage Contractors</span>
             <i class="menu-arrow"></i>
-            <i class="mdi mdi-cash-usd menu-icon"></i>
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
           </a>
 
           <div class="collapse" id="ui-basic8">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/payments') }}">Payments History</a></li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Blog</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-box-shadow menu-icon"></i>
-          </a>
-
-          <div class="collapse" id="ui-basic5">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addpost') }}">Add Post</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/posts') }}">Post List</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addshowcontractor') }}">Add Show Contractors</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/managementcontractors') }}">Show Contractors</a></li>
             </ul>
           </div>
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Customer;
+use App\Models\Tradeshow;
+use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -42,6 +44,8 @@ class AdminController extends Controller
     public function index()
     {
         $data = Customer::all();
-        return view('admin/dashboard',['customers' => $data]);
+        $trade = Tradeshow::all();
+        $event = Event::all();
+        return view('admin/dashboard',['customers' => $data, 'trades' => $trade, 'events' => $event]);
     }
 }

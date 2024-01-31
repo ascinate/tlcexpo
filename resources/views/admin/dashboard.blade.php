@@ -31,10 +31,10 @@
                   <div class="card bg-gradient-success card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Admin Commission <i class="mdi mdi-dollar mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Tradeshows <i class="mdi mdi-dollar mdi-24px float-right"></i>
                       </h4>
                       <h2 class="mb-5">
-
+                            {{ count($trades) }}
                       </h2>
                     </div>
                   </div>
@@ -44,10 +44,10 @@
                   <div class="card bg-gradient-success card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Total Transactions<i class="mdi mdi-dollar mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Total Events<i class="mdi mdi-dollar mdi-24px float-right"></i>
                       </h4>
                       <h2 class="mb-5">
-
+                        {{ count($events) }}
                       </h2>
                     </div>
                   </div>
@@ -57,12 +57,9 @@
                   <div class="card bg-gradient-info card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Total Properties <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Shipments <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                       </h4>
-                      <h2 class="mb-5">
-
-
-                      </h2>
+                      <h2 class="mb-5">0 </h2>
                     </div>
                   </div>
                 </div>
@@ -105,23 +102,53 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Latest Items</h4>
+                    <h4 class="card-title">Latest Tradeshows</h4>
                     </p>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Title </th>
-                          <th> Photo </th>
-                          <th> Category </th>
-                          <th> Seller </th>
-                          <th>Start Price</th>
-                          <th>End Date</th>
-                          <th>Pickup</th>
+                          <th> # </th>
+                          <th> Show Name </th>
+                          <th> Publish Date </th>
+                          <th> End Date </th>
+                          <th>Show Management</th>
                         </tr>
                       </thead>
 
                       <tbody>
-
+                        @php
+                        $i =1;
+                        foreach ($trades as $trade)
+                        {
+                            @endphp
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ $trade->show_name }}</td>
+                            <td>
+                                @php
+                                    $ex = explode("-", $trade->start_publishing);
+                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
+                                    echo date('F j, Y', $dt);
+                                @endphp
+                            </td>
+                            <td>
+                                @php
+                                    $ex = explode("-", $trade->stop_publishing);
+                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
+                                    echo date('F j, Y', $dt);
+                                @endphp
+                            </td>
+                            <td>
+                                @php
+                                    $data = \DB::table('managecontractors')->where('id', $trade->show_management)->get();
+                                    echo $data[0]->contractor_name;
+                                @endphp
+                           </td>
+                        </tr>
+                        @php
+                         $i++;
+                             }
+                        @endphp
 
                       </tbody>
                     </table>

@@ -25,8 +25,8 @@ class ManagecontractorController extends Controller
         $contractor = new Managecontractor();
         $contractor->contractor_name = $request->contractor_name;
         $contractor->short_name = $request->short_name;
-        $contractor->type = $request->type;
-        $contractor->other = $request->other;
+       // $contractor->type = $request->type;
+       // $contractor->other = $request->other;
         $contractor->address_line_1 = $request->address_line_1;
         $contractor->address_line_2 = $request->address_line_2;
         $contractor->address_line_3 = $request->address_line_3;
@@ -47,8 +47,8 @@ class ManagecontractorController extends Controller
         $contractor = Managecontractor::find($request->id);
         $contractor->contractor_name = $request->contractor_name;
         $contractor->short_name = $request->short_name;
-        $contractor->type = $request->type;
-        $contractor->other = $request->other;
+       // $contractor->type = $request->type;
+        //$contractor->other = $request->other;
         $contractor->address_line_1 = $request->address_line_1;
         $contractor->address_line_2 = $request->address_line_2;
         $contractor->address_line_3 = $request->address_line_3;

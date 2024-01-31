@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css"/>
   </head>
 <body>
-
+@php
+    $data = \DB::table('homes')->get();
+@endphp
 <header class="float-start w-100 haeder02-deign">
   <div class="header-top-sction d-inline-block w-100">
     <div class="container">
@@ -25,14 +27,14 @@
          <div class="col-xl-8 col-lg-8 d-none d-lg-inline-block">
           <ul class="emailtexr d-flex align-items-center">
              <li>
-              <p class="mb-0"> <i class="fas fa-map-marker-alt"></i> 7108 Katella Avenue, CA 90680 </p>
+              <p class="mb-0"> <i class="fas fa-map-marker-alt"></i> {{ $data[0]->top_address }} </p>
              </li>
              <li>
               <p class="mb-0"> <i class="fas fa-envelope"></i>
-                info@tlc-expo.com </p>
+                {{ $data[0]->top_email }} </p>
              </li>
              <li>
-              <p class="mb-0"> <i class="fas fa-phone-alt"></i> (888) 852-3976 </p>
+              <p class="mb-0"> <i class="fas fa-phone-alt"></i> {{ $data[0]->top_contact }} </p>
              </li>
           </ul>
 
@@ -81,7 +83,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="{{ URL::to('about-us') }}"  role="button">
+                  <a class="nav-link dropdown-toggle" href="#"  role="button">
                     About Us
                   </a>
                   <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">

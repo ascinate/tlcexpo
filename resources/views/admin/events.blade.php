@@ -31,14 +31,22 @@
                       <tbody>
                         @foreach ($events as $event)
                         <tr>
-                            <td>{{ $event->tradeshow }}</td>
+                            <td>
+                            @php
+                                $data = \DB::table('tradeshows')->where('id', '=', $event->tradeshow)->get();
+                                echo $data[0]->show_name;
+                            @endphp
+                            </td>
                             <td>{{ $event->event_name }}</td>
                             <td>{{ $event->main_venue }}</td>
-                            <td>{{ $trade->showsite }}</td>
+                            <td>{{ $event->showsite }}</td>
                             <td>
-                                <a href="{{ URL::to('admin/editevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
-                                    <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
+                                <a href="{{ URL::to('admin/viewevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
+                                    <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
                                 </a>
+                                <!--<a href="{{ URL::to('admin/editevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
+                                    <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
+                                </a>-->
                                 <a href="{{ 'deleteevent/'.$event->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
