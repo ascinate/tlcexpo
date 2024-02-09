@@ -84,13 +84,18 @@ class CustomerController extends Controller
         }
     }
 
-
     /////////// Admin functions ////////////
 
     public function showData($id)
     {
         $data = Customer::find($id);
         return view('admin/editcustomer',['data' => $data]);
+    }
+
+    public function viewData($id)
+    {
+        $data = Customer::find($id);
+        return view('admin/viewcustomer',['data' => $data]);
     }
 
     public function insertcustomer(Request $request)
@@ -105,6 +110,16 @@ class CustomerController extends Controller
         {
             $limitation = $request->limitation;
         }
+
+       /* $additional_addr = array("add_address" => $request->add_address,
+                                 "add_address1" => $request->add_address1,
+                                 "add_address2" => $request->add_address2,
+                                 "add_city" => $request->add_city,
+                                 "add_state" => $request->add_state,
+                                 "add_zipcode" => $request->add_zipcode,
+                                 "add_country" => $request->add_country);
+
+        $json_addr = json_encode($additional_addr);*/
 
         $customer->customer_name = $request->customer_name;
         $customer->address = $request->address;
@@ -126,6 +141,7 @@ class CustomerController extends Controller
         $customer->margin = $request->margin;
         $customer->limitation = $limitation;
         $customer->notes = $request->notes;
+       // $customer->contact = $json_addr;
 
         $customer->save();
         return redirect('admin/customers');
@@ -144,6 +160,16 @@ class CustomerController extends Controller
             $limitation = $request->limitation;
         }
 
+       /* $additional_addr = array("add_address" => $request->add_address,
+                                 "add_address1" => $request->add_address1,
+                                 "add_address2" => $request->add_address2,
+                                 "add_city" => $request->add_city,
+                                 "add_state" => $request->add_state,
+                                 "add_zipcode" => $request->add_zipcode,
+                                 "add_country" => $request->add_country);
+
+        $json_addr = json_encode($additional_addr); */
+
         $customer->customer_name = $request->customer_name;
         $customer->address = $request->address;
         $customer->address_line_1 = $request->address_line_1;
@@ -164,6 +190,7 @@ class CustomerController extends Controller
         $customer->margin = $request->margin;
         $customer->limitation = $limitation;
         $customer->notes = $request->notes;
+       // $customer->contact = $json_addr;
 
         $customer->save();
         return redirect('admin/customers');

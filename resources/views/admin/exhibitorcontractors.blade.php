@@ -10,12 +10,11 @@
                     <i class="mdi mdi-home"></i>
                   </span> Dashboard
                 </h3>
-
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                       <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{{ URL::to('admin/addtradeshow') }}" class="btn btn-gradient-success btn-fw">
-                            Add Tradeshow
+                        <a href="{{ URL::to('admin/addexhibitorcontractor') }}" class="btn btn-gradient-success btn-fw">
+                            Add Exhibitor Contractors
                         </a>
                       </li>
                     </ul>
@@ -26,48 +25,33 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Tradeshow List</h4>
+                    <h4 class="card-title">Exhibitor Contractors List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> #</th>
-                          <th> Show Name </th>
-                          <th> Attendences </th>
-                          <th> Exhibitors </th>
+                          <th> Contractor Name </th>
+                          <th> Address </th>
+                          <th> Phone </th>
+                          <th> Website </th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        @foreach ($trades as $trade)
+                        @foreach ($datas as $data)
                         <tr>
+                            <td>{{ $data->contractor_name }}</td>
+                            <td>{{ $data->address_line_1.', '.$data->address_line_2 }}</td>
+                            <td>{{ $data->phone }}</td>
+                            <td>{{ $data->website }}</td>
                             <td>
-                                @php
-                                    if($trade->logo!='')
-                                    {
-                                @endphp
-                                <img src="../uploads/{{ $trade->logo }}" width="120" height="80"/>
-                                @php
-                                    }
-                                    else
-                                    {
-                                @endphp
-                                <img src="../images/placeholder.png" width="120" height="80"/>
-                                @php
-                                    }
-                                @endphp
-                            </td>
-                            <td>{{ $trade->show_name }}</td>
-                            <td>{{ $trade->total_attendance }}</td>
-                            <td>{{ $trade->total_exhibitors }}</td>
-                            <td>
-                                <!--<a href="{{ URL::to('admin/viewtradeshow/'.$trade->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/viewexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
-                                </a>-->
-                                <a href="{{ URL::to('admin/edittradeshow/'.$trade->id) }}" style="color: #333; text-decoration: none;">
+                                </a>
+                                <a href="{{ URL::to('admin/editexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deletetradeshow/'.$trade->id }}" style="color: #333;">
+                                <a href="{{ 'deleteexhibitorcontractor/'.$data->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

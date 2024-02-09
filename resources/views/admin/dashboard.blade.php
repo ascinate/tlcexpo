@@ -31,11 +31,9 @@
                   <div class="card bg-gradient-success card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Tradeshows <i class="mdi mdi-dollar mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Leads <i class="mdi mdi-dollar mdi-24px float-right"></i>
                       </h4>
-                      <h2 class="mb-5">
-                            {{ count($trades) }}
-                      </h2>
+                      <h2 class="mb-5">0</h2>
                     </div>
                   </div>
                 </div>
@@ -44,11 +42,9 @@
                   <div class="card bg-gradient-success card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Total Events<i class="mdi mdi-dollar mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Qualified Leads<i class="mdi mdi-dollar mdi-24px float-right"></i>
                       </h4>
-                      <h2 class="mb-5">
-                        {{ count($events) }}
-                      </h2>
+                      <h2 class="mb-5">0 </h2>
                     </div>
                   </div>
                 </div>
@@ -57,7 +53,7 @@
                   <div class="card bg-gradient-info card-img-holder text-white">
                     <div class="card-body">
                       <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                      <h4 class="font-weight-normal mb-3">Shipments <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                      <h4 class="font-weight-normal mb-3">Prospects <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                       </h4>
                       <h2 class="mb-5">0 </h2>
                     </div>
@@ -109,9 +105,6 @@
                         <tr>
                           <th> # </th>
                           <th> Show Name </th>
-                          <th> Publish Date </th>
-                          <th> End Date </th>
-                          <th>Show Management</th>
                         </tr>
                       </thead>
 
@@ -124,27 +117,7 @@
                         <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $trade->show_name }}</td>
-                            <td>
-                                @php
-                                    $ex = explode("-", $trade->start_publishing);
-                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
-                                    echo date('F j, Y', $dt);
-                                @endphp
-                            </td>
-                            <td>
-                                @php
-                                    $ex = explode("-", $trade->stop_publishing);
-                                    $dt = mktime(12,0,0, $ex[1],$ex[2],$ex[0]);
-                                    echo date('F j, Y', $dt);
-                                @endphp
-                            </td>
-                            <td>
-                                @php
-                                    $data = \DB::table('managecontractors')->where('id', $trade->show_management)->get();
-                                    echo $data[0]->contractor_name;
-                                @endphp
-                           </td>
-                        </tr>
+                       </tr>
                         @php
                          $i++;
                              }

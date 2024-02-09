@@ -8,21 +8,35 @@ use App\Models\Exhibitorcontractor;
 class ExhibitorcontractorController extends Controller
 {
     //
-    public function contractors()
+    public function index()
     {
         $data = Exhibitorcontractor::all();
-        return view('admin/contractors',['datas' => $data]);
+        return view('admin/exhibitorcontractors',['datas' => $data]);
     }
 
     public function showData($id)
     {
         $data = Exhibitorcontractor::find($id);
-        return view('admin/editcontractor',['data' => $data]);
+        return view('admin/editexhibitorcontractor',['data' => $data]);
     }
 
-    public function insertcontractor(Request $request)
+    public function viewData($id)
+    {
+        $data = Exhibitorcontractor::find($id);
+        return view('admin/viewexhibitorcontractor',['data' => $data]);
+    }
+
+    public function insertexhibitorcontractor(Request $request)
     {
         $contractor = new Exhibitorcontractor();
+        $contact_values = array("first_name" => $request->first_name,
+                                "last_name" => $request->last_name,
+                                "title" => $request->title,
+                                "exhibit_phone" => $request->exhibit_phone,
+                                "exhibit_email" => $request->exhibit_email);
+
+        $exhibit_contacts = json_encode($contact_values);
+
         $contractor->contractor_name = $request->contractor_name;
         $contractor->short_name = $request->short_name;
         $contractor->type = $request->type;
@@ -37,15 +51,24 @@ class ExhibitorcontractorController extends Controller
         $contractor->phone = $request->phone;
         $contractor->website = $request->website;
         $contractor->email = $request->email;
-        $contractor->contact = $request->contact;
+        $contractor->contact = $exhibit_contacts;
 
         $contractor->save();
-        return redirect('admin/venues');
+        return redirect('admin/exhibitorcontractors');
     }
 
-    public function updatecontractor(Request $request)
+    public function updateexhibitorcontractor(Request $request)
     {
         $contractor = Exhibitorcontractor::find($request->id);
+
+        $contact_values = array("first_name" => $request->first_name,
+                                "last_name" => $request->last_name,
+                                "title" => $request->title,
+                                "exhibit_phone" => $request->exhibit_phone,
+                                "exhibit_email" => $request->exhibit_email);
+
+        $exhibit_contacts = json_encode($contact_values);
+
         $contractor->contractor_name = $request->contractor_name;
         $contractor->short_name = $request->short_name;
         $contractor->type = $request->type;
@@ -60,16 +83,16 @@ class ExhibitorcontractorController extends Controller
         $contractor->phone = $request->phone;
         $contractor->website = $request->website;
         $contractor->email = $request->email;
-        $contractor->contact = $request->contact;
+        $contractor->contact = $exhibit_contacts;
 
         $contractor->save();
-        return redirect('admin/contractors');
+        return redirect('admin/exhibitorcontractors');
     }
 
     public function delete($id)
     {
         $contractor = Exhibitorcontractor::find($id);
         $contractor->delete();
-        return redirect('admin/contractors');
+        return redirect('admin/exhibitorcontractors');
     }
 }

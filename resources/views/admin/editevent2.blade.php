@@ -4,10 +4,14 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
+
+            <form name="addfrm" action="{{ URL::to('updateevent') }}" method="POST" class="forms-sample">
+            <input type="hidden" name="id" value="{{ $data['id'] }}" />
+            @csrf
             <div class="row">
 
                <div class="col-12 grid-margin stretch-card d-inline-block">
-                   <h3 class="mb-3 col-lg-12"> View Event </h3>
+                   <h3 class="mb-3 col-lg-12"> Edit Event </h3>
                    <div class="card col-lg-12">
                       <div class="card-body">
 
@@ -15,12 +19,22 @@
                                <div class="col-lg-6">
                                     <div class="form-group crm-oi">
                                         <label for="exampleInputName1">Choose Tradeshow</label>
-                                        <span class="d-block">
+                                        <select name="tradeshow" class="form-select">
+                                            <option value="">--Select--</option>
                                             @php
-                                                $show = \DB::table('tradeshows')->where('id',$data['tradeshow'])->get();
-                                                echo $show[0]->show_name;
+                                            $shows = \DB::table('tradeshows')->get();
+                                            foreach($shows as $show)
+                                            {
                                             @endphp
-                                        </span>
+                                            <option value="{{ $show->id }}"@php
+                                                if($show->id==$data['tradeshow']) { echo 'selected'; }
+                                            @endphp>
+                                                {{ $show->show_name }}
+                                            </option>
+                                            @php
+                                                }
+                                            @endphp
+                                        </select>
                                     </div>
                                 </div>
 
@@ -53,33 +67,6 @@
                                         </span>
                                    </div>
                                 </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group crm-oi">
-                                        <label> Start Date</label>
-                                        <span class="d-block">
-                                        {{ $data['event_start_date'] }}
-
-                                        </span>
-                                   </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group crm-oi">
-                                        <label> End Date</label>
-                                        <span class="d-block">
-                                        {{ $data['event_end_date'] }}
-                                        </span>
-                                   </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Event Photo</label>
-                                    <img src="../../uploads/{{ $data['event_logo'] }}" width="150" height="120" />
-                                </div>
-                                </div>
-
                             </div>
                       </div>
                    </div>
@@ -381,15 +368,18 @@
                                             </div>
                                             </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+
                 </div>
 
-                  <div class="crm-div my-5">
+                <div class="crm-div my-5">
                       <h3 class="mb-3"> Exhibitor Move-in </h3>
                       <div class="card">
                           <div class="card-body">
+
                           @php
                             $exhibitor_movein = json_decode($data['exhibitor_movein'],true);
 
@@ -562,7 +552,10 @@
                      <button type="button" class="btn btn-gradient-primary me-2" onclick="javascript:history.go(-1);">Back</button>
                     </div>
                 </div>
+
                </div>
+            </form>
+
 
            </div>
           <!-- content-wrapper ends -->

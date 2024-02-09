@@ -10,6 +10,15 @@
                     <i class="mdi mdi-home"></i>
                   </span> Dashboard
                 </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                      <li class="breadcrumb-item active" aria-current="page">
+                        <a href="{{ URL::to('admin/addshowcontractor') }}" class="btn btn-gradient-success btn-fw">
+                            Add Show Contractor
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
               </div>
 
             <div class="row">
@@ -36,6 +45,9 @@
                             <td>{{ $data->phone }}</td>
                             <td>{{ $data->website }}</td>
                             <td>
+                                <a href="{{ URL::to('admin/viewmanagementcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                    <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
+                                </a>
                                 <a href="{{ URL::to('admin/editshowcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>

@@ -37,9 +37,17 @@
   margin-left: 20px;
 
 }
-
+.comobh-btn .but-diuv02{
+    left: 24px;
+    top: 22px;
+}
 .button-cover {
 
+}
+
+.bg-light .form-select{
+  border:none !important;
+  height: 46px;
 }
 
 .button-cover:before {

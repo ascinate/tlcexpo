@@ -2,11 +2,11 @@
 
 <section class="sub-banner d-inline-block w-100 position-relative" style="background: url(./images/conuy.jpg); background-size: cover; background-position: center;">
     <div class="container">
-        <h1 class="page-titels"> why tlc-expo </h1>
+        <h1 class="page-titels"> why TLC-expo </h1>
         <nav>
             <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">why tlc-expo</li>
+              <li class="breadcrumb-item active">why TLC-expo</li>
             </ol>
           </nav>
     </div>

@@ -31,11 +31,11 @@
                              </a>
                         </li>
                         <li>
-                            <a href="{{ URL::to('tradeshows') }}" class="link05">
+                            <a href="#" class="link05">
                                 <span class="cion02">
                                     <i data-feather="package"></i>
                                 </span>
-                                <span> Tradeshows </span>
+                                <span> Cargo Items </span>
                              </a>
                         </li>
                     </ul>
@@ -99,7 +99,7 @@
                             <div class="card-body">
                                 <div class="amount-shopiments01 d-flex align-items-start justify-content-between">
                                 <div class="tec-div">
-                                    <h5> Tradeshows </h5>
+                                    <h5> Cargo Items </h5>
                                     <h2 class="mt-2 d-block"> 48.89 </h2>
                                 </div>
                                 <span class="iconu-comon one3">

@@ -10,6 +10,15 @@
                     <i class="mdi mdi-home"></i>
                   </span> Dashboard
                 </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                      <li class="breadcrumb-item active" aria-current="page">
+                        <a href="{{ URL::to('admin/addevent') }}" class="btn btn-gradient-success btn-fw">
+                            Add Event
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
               </div>
 
             <div class="row">
@@ -20,39 +29,56 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Show Name </th>
                           <th> Event </th>
                           <th> Venue </th>
-                          <th> Site </th>
+                          <th>Show Site </th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        @foreach ($events as $event)
+                        @php
+                            $tradeshows = \DB::table('tradeshows')->get();
+                            foreach($tradeshows as $trade)
+                            {
+                                $events = \DB::table('events')->where('tradeshow',$trade->id)->get();
+                                $count = count($events);
+                                if($count!=0)
+                                {
+                        @endphp
+                        <tr style="background-color:#e9ef24">
+                            <td colspan="4"><h4>{{ $trade->show_name }}</h4></td>
+                        </tr>
+                        @php
+                            }
+                        foreach ($events as $event)
+                        {
+                        @endphp
                         <tr>
-                            <td>
-                            @php
-                                $data = \DB::table('tradeshows')->where('id', '=', $event->tradeshow)->get();
-                                echo $data[0]->show_name;
-                            @endphp
-                            </td>
                             <td>{{ $event->event_name }}</td>
-                            <td>{{ $event->main_venue }}</td>
+                            <td>
+                              @php
+                                $venue = \DB::table('venues')->where('id', '=', $event->main_venue)->get();
+                                echo $venue[0]->address;
+                              @endphp
+                            </td>
                             <td>{{ $event->showsite }}</td>
                             <td>
                                 <a href="{{ URL::to('admin/viewevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
                                 </a>
-                                <!--<a href="{{ URL::to('admin/editevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/editevent/'.$event->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
-                                </a>-->
+                                </a>
                                 <a href="{{ 'deleteevent/'.$event->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
+                        @php
+                             }
+                            }
+                        @endphp
                       </tbody>
                     </table>
                   </div>

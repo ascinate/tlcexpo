@@ -5,7 +5,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">
-                <form name="addfrm" action="{{ URL::to('insertevent') }}" method="POST" class="forms-sample">
+                <form name="addfrm" action="{{ URL::to('insertevent') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                  @csrf
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
@@ -59,9 +59,31 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Show Site</label>
-                                    <input type="text" name="showsite" class="form-control" required/>
+                                    <input type="text" name="showsite" class="form-control"/>
                                 </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label> Start Date</label>
+                                    <input type="date" name="event_start_date" class="form-control" required/>
+                                </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label> End Date</label>
+                                    <input type="date" name="event_end_date" class="form-control" required/>
+                                </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label> Event Photo</label>
+                                    <input type="file" name="event_logo" class="form-control" />
+                                </div>
+                                </div>
+
                             </div>
                       </div>
 
@@ -69,7 +91,6 @@
                           <h4 class="card-title">Exhibit Hours</h4>
 
                               <div class="row input-form" id="primary-div">
-
                                  <div class="col-lg-12 mb-2">
                                      <h5> Day 1 </h5>
                                  </div>
@@ -451,7 +472,7 @@
                </div>
 
                <button type="submit" class="btn btn-gradient-primary me-2" align="right">Submit</button>
-               <button class="btn btn-light" onclick="javascript:history.go(-1);" align="right">Cancel</button>
+               <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);" align="right">Cancel</button>
              </form>
            </div>
           <!-- content-wrapper ends -->

@@ -54,6 +54,20 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Entities</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic1">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addentity') }}">Add Entity</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/entities') }}">Entity List</a></li>
+              </ul>
+            </div>
+          </li>
+
+        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
             <span class="menu-title">Manage Tradeshows</span>
             <i class="menu-arrow"></i>
@@ -62,27 +76,13 @@
 
           <div class="collapse" id="ui-basic6">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addtradeshow') }}">Add Tradeshow</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/tradeshows') }}">Tradeshow List</a></li>
-            </ul>
-          </div>
-
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Manage Events</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-arrange-send-to-back menu-icon"></i>
-          </a>
-
-          <div class="collapse" id="ui-basic2">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addevent') }}">Add Event</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/events') }}">Event List</a></li>
             </ul>
           </div>
+
         </li>
+
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
@@ -93,8 +93,10 @@
 
           <div class="collapse" id="ui-basic7">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addvenue') }}">Add Venue</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/venues') }}">Venue List</a></li>
+              <!--<li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addvenue') }}">Add Venue</a></li>-->
+              <!--<li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/venues') }}">Venue List</a></li>-->
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addvenueentity') }}">Add Venue</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/tradevenues') }}">Venue List</a></li>
             </ul>
           </div>
 
@@ -109,7 +111,7 @@
 
           <div class="collapse" id="ui-basic8">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addshowcontractor') }}">Add Show Contractors</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/exhibitorcontractors') }}">Exhibit Contractors</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/managementcontractors') }}">Show Contractors</a></li>
             </ul>
           </div>

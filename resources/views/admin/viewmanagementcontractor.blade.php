@@ -11,22 +11,18 @@
                     <div class="card">
                       <div class="card-body">
                         <h4 class="card-title">Add Show Contractor</h4>
-                        <form name="addfrm" action="{{ URL::to('updatecontractor') }}" method="POST" class="forms-sample">
-                        <input type="hidden" name="id" value="{{ $data['id'] }}" />
-                            @csrf
-
                             <div class="row">
                                 <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Contractor Name</label>
-                                    <input type="text" class="form-control" name="contractor_name" value="{{ $data['contractor_name'] }}" required>
+                                    <span class="d-block">{{ $data['contractor_name'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label>Short Name </label>
-                                    <input type="text" name="short_name" class="form-control" value="{{ $data['short_name'] }}"/>
+                                    <span class="d-block">{{ $data['short_name'] }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -35,21 +31,21 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                     <label> Address line 1 </label>
-                                    <input type="text" name="address_line_1" class="form-control" value="{{ $data['address_line_1'] }}"/>
+                                    <span class="d-block">{{ $data['address_line_1'] }}</span>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                     <label> Address line 2</label>
-                                    <input type="text" name="address_line_2" class="form-control" value="{{ $data['address_line_2'] }}"/>
+                                    <span class="d-block">{{ $data['address_line_2'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label"> Address line 3 </label>
-                                        <input type="text" name="address_line_3" class="form-control" value="{{ $data['address_line_3'] }}"/>
+                                        <span class="d-block">{{ $data['address_line_3'] }}</span>
                                     </select>
                                     </div>
                                 </div>
@@ -59,14 +55,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> City</label>
-                                    <input type="text" name="city" class="form-control" value="{{ $data['city'] }}"/>
+                                    <span class="d-block">{{ $data['city'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label"> State </label>
-                                        <input type="text" name="state" class="form-control" value="{{ $data['state'] }}"/>
+                                        <span class="d-block">{{ $data['state'] }}</span>
                                     </select>
                                     </div>
                                 </div>
@@ -76,22 +72,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Zipcode</label>
-                                    <input type="text" name="zipcode" class="form-control" value="{{ $data['zipcode'] }}"/>
+                                    <span class="d-block">{{ $data['zipcode'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label"> Country </label>
-                                        <select class="form-select" name="country">
-                                            <option value="USA"@php
-                                                if($data['country']=='USA') { echo 'selected'; }
-                                            @endphp>United State</option>
-                                            <option value="Canada"@php
-                                            if($data['country']=='Canada') { echo 'selected'; }
-                                        @endphp>Canada</option>
-                                        </select>
-                                    </div>
+                                        <span class="d-block">{{ $data['country'] }}</span>
+                                 </div>
                                 </div>
                             </div>
 
@@ -99,21 +88,21 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                     <label> Phone</label>
-                                    <input type="text" name="phone" class="form-control" value="{{ $data['phone'] }}"/>
+                                    <span class="d-block">{{ $data['phone'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                     <label> Email</label>
-                                    <input type="email" name="email" class="form-control" value="{{ $data['email'] }}"/>
+                                    <span class="d-block">{{ $data['email'] }}</span>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label"> Website </label>
-                                        <input type="text" name="website" class="form-control" value="{{ $data['website'] }}"/>
+                                        <span class="d-block">{{ $data['website'] }}</span>
                                     </select>
                                     </div>
                                 </div>
@@ -140,35 +129,35 @@
                                     <div class="col-lg-2">
                                         <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" name="first_name_manage[]" value="{{ $exhibitor_contact['first_name_manage'][$k-1] }}" class="form-control txt"/>
+                                        <span class="d-block">{{ $exhibitor_contact['first_name_manage'][$k-1] }}</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-2">
                                         <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" name="last_name_manage[]" value="{{ $exhibitor_contact['last_name_manage'][$k-1] }}" class="form-control txt"/>
+                                        <span class="d-block">{{ $exhibitor_contact['last_name_manage'][$k-1] }}</span>
                                         </div>
                                     </div>
 
                                    <div class="col-lg-2">
                                       <div class="form-group">
                                       <label>Phone</label>
-                                      <input type="text" name="exhibit_phone_manage[]" value="{{ $exhibitor_contact['exhibit_phone_manage'][$k-1] }}" class="form-control txt"/>
+                                      <span class="d-block">{{ $exhibitor_contact['exhibit_phone_manage'][$k-1] }}</span>
                                      </div>
                                    </div>
 
                                   <div class="col-lg-3">
                                       <div class="form-group">
                                       <label>Email</label>
-                                      <input type="email" name="exhibit_email_manage[]" value="{{ $exhibitor_contact['exhibit_email_manage'][$k-1] }}" class="form-control txt"/>
+                                      <span class="d-block">{{ $exhibitor_contact['exhibit_email_manage'][$k-1] }}</span>
                                      </div>
                                  </div>
 
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                     <label>Website</label>
-                                    <input type="text" name="exhibit_website_manage[]" value="{{ $exhibitor_contact['exhibit_website_manage'][$k-1] }}" class="form-control txt"/>
+                                    <span class="d-block">{{ $exhibitor_contact['exhibit_website_manage'][$k-1] }}</span>
                                     </div>
                                 </div>
 
@@ -183,24 +172,13 @@
                               @php
                                }
                               @endphp
-
-                                <div id="mnclone" class="col-lg-12"></div>
-                                <div class="row">
-                                  <div class="col-lg-3">
-                                      <button  type='button' id='manage_add' class="btn btn-gradient-primary me-2">Add new</button>
-                                   </div>
-                                </div>
-
                           </div>
                         </div>
                     </div>
 
                  </div>
 
-
-                <button type="submit" name="btn" class="btn btn-gradient-primary me-2">Submit</button>
-                <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">Cancel</button>
-            </form>
+                <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">Back</button>
 
         </div>
           <!-- content-wrapper ends -->

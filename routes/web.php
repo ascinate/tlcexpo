@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EntityController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ExhibitorcontractorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagecontractorController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TradeshowController;
+use App\Http\Controllers\TradevenueController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\WhytlcController;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +76,7 @@ Route::get('admin/customers',[CustomerController::class, 'customers'])->middlewa
 Route::view('admin/addcustomer','admin/addcustomer')->middleware('adminauth');
 Route::post('insertcustomer',[CustomerController::class,'insertcustomer'])->middleware('adminauth');
 Route::get('admin/editcustomer/{id}',[CustomerController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewcustomer/{id}',[CustomerController::class,'viewData'])->middleware('adminauth');
 Route::post('updatecustomer',[CustomerController::class,'updatecustomer'])->middleware('adminauth');
 Route::get('admin/deletecustomer/{id}', [CustomerController::class, 'delete'])->middleware('adminauth');
 
@@ -81,6 +85,7 @@ Route::get('admin/tradeshows',[TradeshowController::class, 'index'])->middleware
 Route::view('admin/addtradeshow','admin/addtradeshow')->middleware('adminauth');
 Route::post('inserttradeshow',[TradeshowController::class,'inserttradeshow'])->middleware('adminauth');
 Route::get('admin/edittradeshow/{id}',[TradeshowController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewtradeshow/{id}',[TradeshowController::class,'viewData'])->middleware('adminauth');
 Route::post('updatetradeshow',[TradeshowController::class,'updatetradeshow'])->middleware('adminauth');
 Route::get('admin/deletetradeshow/{id}', [TradeshowController::class, 'delete'])->middleware('adminauth');
 
@@ -114,10 +119,31 @@ Route::get('admin/deletetestimonial/{id}', [TestimonialController::class, 'delet
 /// Venues
 Route::get('admin/venues', [VenueController::class, 'venues']);
 Route::view('admin/addvenue', 'admin/addvenue')->middleware('adminauth');
+Route::view('admin/addvenueentity', 'admin/addvenueentity')->middleware('adminauth');
 Route::post('insertvenue',[VenueController::class,'insertvenue']);
 Route::get('admin/editvenue/{id}',[VenueController::class,'showData'])->middleware('adminauth');
 Route::post('updatevenue',[VenueController::class,'updatevenue']);
 Route::get('admin/deletevenue/{id}', [VenueController::class, 'delete'])->middleware('adminauth');
+
+/// Trade venues
+Route::get('admin/tradevenues', [TradevenueController::class, 'index']);
+Route::view('admin/addvenueentity', 'admin/addvenueentity')->middleware('adminauth');
+Route::post('inserttradevenue',[TradevenueController::class,'inserttradevenue']);
+Route::get('admin/edittradevenue/{id}',[TradevenueController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewtradevenue/{id}',[TradevenueController::class,'viewData'])->middleware('adminauth');
+
+Route::post('updatetradevenue',[TradevenueController::class,'updatetradevenue']);
+Route::get('admin/deletetradevenue/{id}', [TradevenueController::class, 'delete'])->middleware('adminauth');
+
+/// Entity table
+Route::get('admin/entities', [EntityController::class, 'index']);
+Route::view('admin/addentity', 'admin/addentity')->middleware('adminauth');
+Route::post('insertentity',[EntityController::class,'insertentity']);
+Route::get('admin/editentity/{id}',[EntityController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewentity/{id}',[EntityController::class,'viewData'])->middleware('adminauth');
+Route::post('updateentity',[EntityController::class,'updateentity']);
+Route::get('admin/deleteentity/{id}', [EntityController::class, 'delete'])->middleware('adminauth');
+
 
 /// Show Contractor
 Route::get('admin/managementcontractors', [ManagecontractorController::class, 'contractors']);
@@ -125,11 +151,22 @@ Route::view('admin/addshowcontractor', 'admin/addmanagecontractor')->middleware(
 Route::post('insertcontractor',[ManagecontractorController::class,'insertcontractor']);
 Route::get('admin/editshowcontractor/{id}',[ManagecontractorController::class,'showData'])->middleware('adminauth');
 Route::post('updatecontractor',[ManagecontractorController::class,'updatecontractor']);
+Route::get('admin/viewmanagementcontractor/{id}',[ManagecontractorController::class,'viewData'])->middleware('adminauth');
 Route::get('admin/deleteshowcontractor/{id}', [ManagecontractorController::class, 'delete'])->middleware('adminauth');
 
+/// Exhibitor Contractor
+Route::get('admin/exhibitorcontractors', [ExhibitorcontractorController::class, 'index']);
+Route::view('admin/addexhibitorcontractor', 'admin/addexhibitorcontractor')->middleware('adminauth');
+Route::post('insertexhibitorcontractor',[ExhibitorcontractorController::class,'insertexhibitorcontractor']);
+Route::get('admin/editexhibitcontractor/{id}',[ExhibitorcontractorController::class,'showData'])->middleware('adminauth');
+Route::post('updateexhibitorcontractor',[ExhibitorcontractorController::class,'updateexhibitorcontractor']);
+Route::get('admin/viewexhibitcontractor/{id}',[ExhibitorcontractorController::class,'viewData'])->middleware('adminauth');
+Route::get('admin/deleteexhibitorcontractor/{id}', [ExhibitorcontractorController::class, 'delete'])->middleware('adminauth');
+
+///// Request Quote
+Route::view('admin/addrequestquote', 'admin/addrequestquote')->middleware('adminauth');
 
 Route::get('admin/logout', function () {
-
     if(session()->has('adminuser'))
     {
         session()->pull('adminuser', null);
