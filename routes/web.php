@@ -6,7 +6,9 @@ use App\Http\Controllers\EntityController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExhibitorcontractorController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ManagecontractorController;
+use App\Http\Controllers\RequestquoteController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TradeshowController;
 use App\Http\Controllers\TradevenueController;
@@ -144,7 +146,6 @@ Route::get('admin/viewentity/{id}',[EntityController::class,'viewData'])->middle
 Route::post('updateentity',[EntityController::class,'updateentity']);
 Route::get('admin/deleteentity/{id}', [EntityController::class, 'delete'])->middleware('adminauth');
 
-
 /// Show Contractor
 Route::get('admin/managementcontractors', [ManagecontractorController::class, 'contractors']);
 Route::view('admin/addshowcontractor', 'admin/addmanagecontractor')->middleware('adminauth');
@@ -163,8 +164,25 @@ Route::post('updateexhibitorcontractor',[ExhibitorcontractorController::class,'u
 Route::get('admin/viewexhibitcontractor/{id}',[ExhibitorcontractorController::class,'viewData'])->middleware('adminauth');
 Route::get('admin/deleteexhibitorcontractor/{id}', [ExhibitorcontractorController::class, 'delete'])->middleware('adminauth');
 
+//// Location
+Route::view('admin/addlocation','admin/addlocation');
+Route::get('admin/locations', [LocationController::class,'index'])->middleware('adminauth');
+Route::post('insertdata',[LocationController::class,'insertdata']);
+Route::get('admin/editlocation/{id}',[LocationController::class,'showData'])->middleware('adminauth');
+Route::post('updatedata',[LocationController::class,'updatedata']);
+Route::get('admin/viewlocation/{id}',[LocationController::class,'viewData'])->middleware('adminauth');
+Route::get('admin/deletelocation/{id}', [LocationController::class, 'delete'])->middleware('adminauth');
+
 ///// Request Quote
 Route::view('admin/addrequestquote', 'admin/addrequestquote')->middleware('adminauth');
+Route::get('admin/quotes', [RequestquoteController::class,'index'])->middleware('adminauth');
+Route::post('insertquote',[RequestquoteController::class,'insertquote']);
+Route::get('admin/editrequestquote/{id}',[RequestquoteController::class,'showData'])->middleware('adminauth');
+Route::post('updatequote',[RequestquoteController::class,'updatequote']);
+Route::get('admin/viewrequestquote/{id}',[RequestquoteController::class,'viewData'])->middleware('adminauth');
+Route::get('admin/deletequote/{id}', [RequestquoteController::class, 'delete'])->middleware('adminauth');
+
+Route::get('admin/testquote/{id}',[RequestquoteController::class,'testData']);
 
 Route::get('admin/logout', function () {
     if(session()->has('adminuser'))

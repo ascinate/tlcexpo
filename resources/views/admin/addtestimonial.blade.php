@@ -25,8 +25,8 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                    <label> Start Publishing </label>
-                                    <input type="text" name="position" class="form-control" placeholder="Position" required/>
+                                    <label> Position </label>
+                                    <input type="text" name="position" class="form-control" placeholder="e.g. Director" required/>
                                     </div>
                                 </div>
                             </div>

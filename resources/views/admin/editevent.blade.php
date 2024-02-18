@@ -75,14 +75,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Start Date</label>
-                                    <input type="date" name="event_start_date" class="form-control" value="{{ $data['event_start_date'] }}"/>
+                                    <input type="date" name="event_start_date" class="form-control" value="{{ $data['event_start_date'] }}" required/>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> End Date</label>
-                                    <input type="date" name="event_end_date" class="form-control" value="{{ $data['event_end_date'] }}"/>
+                                    <input type="date" name="event_end_date" class="form-control" value="{{ $data['event_end_date'] }}" required/>
                                 </div>
                                 </div>
 

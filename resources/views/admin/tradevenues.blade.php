@@ -17,7 +17,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Venue List</h4>
-                    <table class="table table-striped">
+                    <table id="exampleyu" class="table table-striped">
                       <thead>
                         <tr>
                           <th> Venue Entity </th>

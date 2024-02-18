@@ -10,7 +10,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Entities</h4>
+                        <h4 class="card-title">Add An Entity</h4>
                         <p> Person or Business </p>
                         <form name="addfrm" action="{{ URL::to('insertentity') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                             @csrf
@@ -83,9 +83,9 @@
                                 <div class="col-lg-6">
                                   <div class="form-group">
                                       <label class="form-label"> Business Type </label>
-                                        <select name="business_type" class="form-select">
+                                        <select id="business_type" name="business_type" class="form-select">
                                           <option value=""></option>
-                                          <option value="Sole Proprieter">Sole Proprieter</option>
+                                          <option value="Sole Proprieter" selected>Sole Proprieter</option>
                                           <option value="Partnership">Partnership</option>
                                           <option value="LLC-Limited Libility Company">LLC-Limited Libility Company</option>
                                           <option value="C-Corporation">C-Corporation</option>
@@ -361,7 +361,21 @@
 
                                        <div class="form-group">
                                             <label for="exampleInputName1" class="form-label">Address found</label>
-                                            <input type="text" class="form-control" name="address[]">
+
+                                            <select name="address[]" class="form-select">
+                                                <option value=""></option>
+                                                @php
+                                                    $value = \DB::table('locations')->get();
+                                                    foreach($value as $val)
+                                                    {
+
+                                                    $address = @$val->address_line_1.', '.$val->city.', '.$val->state.', '.$val->zipcode;
+                                                @endphp
+                                                   <option value="{{ $address }}"> {{ $address }}</option>
+                                                  @php
+                                                    }
+                                                @endphp
+                                              </select>
                                         </div>
 
                                 </div>

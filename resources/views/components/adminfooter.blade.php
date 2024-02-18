@@ -43,10 +43,10 @@
     });
 </script>
 
-<script src="{{ asset('assets/js/jquery.dataTables.min.j') }}"></script>
-<script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/js/responsive.bootstrap5.min.js') }}"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 <script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>
  <script>
     $(document).ready(function(){
@@ -71,6 +71,10 @@
             pageLength: 50,
             autoWidth: false,
             searching: true
+        });
+
+        $('#exampleyu').dataTable({
+            responsive: true
         });
     });
 
@@ -144,19 +148,37 @@
         });
 
         $('#business').click(function(){
+
+            var btype = $("#business_type").val();
             $('#businessd').show();
-        });
 
-        $('#person').click(function(){
+            if(btype=='Sole Proprieter')
+            {
+                $("#personal").show();
+            }
+            else
+            {
+                $("#personal").hide();
+            }
+            });
+
+            $('#person').click(function(){
             $('#businessd').hide();
+            });
+
+            $("#business_type").change(function(){
+            var btype = $("#business_type").val();
+
+            if($("#business").prop("checked", true) && btype=='Sole Proprieter')
+            {
+                $("#personal").show();
+            }
+            else
+            {
+                 $("#personal").hide();
+            }
+
         });
-
-        $('#person').click(function(){
-            $('#businessd').hide();
-        });
-
-
-
 
 
         $('#clo-loading').click(function(){
@@ -174,6 +196,25 @@
         $('.deladdr').click(function(){
             $('#addr-div').hide();
         });
+
+        $('#maiu').click(function(){
+            $('#ash-div').hide();
+        });
+
+        $('#flexCheckCheckedrd2').click(function(){
+            $('#imj2').show();
+        });
+        $('#flexCheckCheckedrd').click(function(){
+            $('#imj2').hide();
+        });
+
+        $('#flexCheckCheckedn').click(function(){
+            $('#imj').toggle();
+        });
+
+
+
+
 
         /// Customer table addition address
 
@@ -544,7 +585,7 @@
                         '<div class="but-diuv02"> <a class="btn btn-default delBtnmcmloc p-0" id="eliminacorso['+$countyemloc+']" aria-label="Elimina"><span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg> </span> </a> </div>' +
 
                         '<div class="row w-100 mt-3 float-start">' +
-                            '<div class="col-lg-12"> <div class="form-group"><label> Address found </label><input type="text" class="form-control" name="address[]"></div></div>' +
+                            '<div class="col-lg-12"> <div class="form-group"><label> Address found </label><select name="address[]" class="form-select"><option value=""></option>@php $value = \DB::table('tradevenues')->get(); foreach($value as $val){ $loading = json_decode($val->loading_locations,true);$cnt = count($loading['address_1']);for($x=0;$x<$cnt;$x++){ $address = @$loading['address_1'][$x].', '.$loading['city'][$x].', '.$loading['state'][$x].', '.$loading['zipcode'][$x];@endphp<option value="{{ $address }}">{{ $address }}</option>@php }}@endphp</select></div>' +
                         '</div>' +
 
                     '</div>' +
@@ -585,12 +626,55 @@
 
         $(this).parent().parent().remove();
             });
+
+
+
+       // Request Quote
+
+       var $countyemloccre = 1;
+        $('#sh-addvemsloccre').on('click',function () {
+                $countyemloccre ++;
+                $('#ccolonejemloccre').append(
+                    '<div class="input-form bg-light p-4 mt-4 comobh-btn d-inline-block w-100 position-relative" id="corsoj2['+ $countyemloccre +']>' +
+
+                        '<label class="hedr"><h4 class="float-start ms-2 spm-hed"> Item  ' + $countyemloccre +' </h4></label>' +
+                        '<div class="but-diuv02"> <a class="btn btn-default delBtnmcmloccre p-0" id="eliminacorso['+$countyemloccre+']" aria-label="Elimina"><span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg> </span> </a> </div>' +
+
+                        '<div class="row w-100 mt-3 float-start">' +
+
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Type </label>    <input type="text" class="form-control" name="type[]"> </div> </div>' +
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Qty </label>    <input type="text" class="form-control" name="qty[]"> </div> </div>' +
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Length </label>    <input type="text" class="form-control" name="length[]"> </div> <p class="mt-1 comon-texr"> (inches) </p> </div>' +
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Width </label>    <input type="text" class="form-control" name="width[]"> </div> <p class="mt-1 comon-texr"> (inches) </p> </div>' +
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Height </label>    <input type="text" class="form-control" name="height[]"> </div> <p class="mt-1 comon-texr"> (inches) </p> </div>' +
+                            '<div class="col-lg-2"> <div class="form-group mb-1"> <label> Weight </label>    <input type="text" class="form-control" name="weight[]"> </div> <p class="mt-1 comon-texr"> (pounds) </p> </div>' +
+                            '<div class="col-lg-6"> <div class="form-group mb-1"> <label> Description </label>    <input type="text" class="form-control" name="description[]"> </div> <p class="mt-1 comon-texr"> Color, Material, Markings, Contents </p> </div>' +
+                            '<div class="col-lg-2"> <div class="form-check ps-4"> <input class="form-check-input" type="checkbox" value="Y" name="Hazardous[]" id="flexCheckDefault"> <label class="form-check-label ms-0" for="flexCheckDefault"> Hazardous </label>   </div> <p class="mt-1 comon-texr"> Is this a hazardous material? </p> </div>' +
+                            '<div class="col-lg-2"> <div class="form-check ps-4"> <input class="form-check-input" type="checkbox" value="Y" name="Stackable[]" id="flexCheckDefault"> <label class="form-check-label ms-0" for="flexCheckDefault"> Stackable </label>   </div> <p class="mt-1 comon-texr"> Allowed on outbound shipments. </p> </div>' +
+                            //'<div class="col-lg-2"> <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Photo </label> <div class="duio"> <input class="form-control" type="file" id="formFile"> </div>    </div> <p class="mt-1 comon-texr"> bmp, jpg, png, pdf, (2MB) </p> </div>' +
+                        '</div>' +
+                    '</div>' +
+                '');
+            });
+
+        $('#ccolonejemloccre').on('click', '.delBtnmcmloccre', function() {
+        console.log('this :'+$(this));
+        $countyemloccre --;
+
+        $(this).parent().parent().remove();
+            });
 });
+
+$(function () {
+        $("#return_to_origin").click(function () {
+            if ($(this).is(":checked")) {
+                $("#altaddress").hide();
+            } else {
+                $("#altaddress").show();
+            }
+        });
+    });
 </script>
-
-
-
-
 
 </body>
 </html>

@@ -16,16 +16,16 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Entity List</h4>
+                    <h4 class="card-title">Location List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> # </th>
-                          <th> Legal Name </th>
+                          <th> Address </th>
+                          <th> City </th>
+                          <th> State </th>
+                          <th> Zipcode </th>
                           <th> Type </th>
-                          <th> Name </th>
-                          <th> Position </th>
-                          <th> DBA </th>
+                          <th> Timezone </th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -33,20 +33,20 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td><img src="../uploads/{{ $data->logo }}" width="50" height="50"></td>
-                            <td>{{ $data->legeal_name }}</td>
-                            <td>{{ $data->entity_type }}</td>
-                            <td>{{ $data->firstname.' '.$data->lastname }}</td>
-                            <td>{{ $data->position }}</td>
-                            <td>{{ $data->dba }}</td>
+                            <td>{{ $data->address_line_1 }}</td>
+                            <td>{{ $data->city }}</td>
+                            <td>{{ $data->state }}</td>
+                            <td>{{ $data->zipcode }}</td>
+                            <td>{{ $data->location_type }}</td>
+                            <td>{{ $data->timezone }}</td>
                             <td>
-                                <a href="{{ URL::to('admin/viewentity/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                <!--<a href="{{ URL::to('admin/viewlocation/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
-                                </a>
-                                <a href="{{ URL::to('admin/editentity/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                </a>-->
+                                <a href="{{ URL::to('admin/editlocation/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deleteentity/'.$data->id }}" style="color: #333;">
+                                <a href="{{ 'deletelocation/'.$data->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

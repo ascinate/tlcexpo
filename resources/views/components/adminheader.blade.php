@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
 
      <style>
@@ -28,6 +28,9 @@
             margin-bottom: 30px;
         }
 
+        table.dataTable tbody tr.child td {
+  word-break: break-word; word-break: break-all; white-space: normal;
+}
         .toggle-button-cover {
   display: table-cell;
   position: relative;
@@ -37,12 +40,34 @@
   margin-left: 20px;
 
 }
+.pout-texr .form-check{
+  margin-left: 0;
+  margin-right: 15px;
+}
+.mne .form-select{
+  height: 45px;
+}
+.pout-texr .form-check .form-check-input{
+  margin-left: 0;
+}
+.pout-texr .form-check .form-check-label{
+ 
+}
 .comobh-btn .but-diuv02{
     left: 24px;
     top: 22px;
 }
 .button-cover {
 
+}
+.comon-texr{
+  font-size:10px;
+}
+#imj2{
+  display: none;
+}
+.soy-hegiht{
+  height: 45px;
 }
 
 .bg-light .form-select{

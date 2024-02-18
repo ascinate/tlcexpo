@@ -4,18 +4,15 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-
             <div class="row">
-
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Entities</h4>
+                        <h4 class="card-title">View Entity</h4>
                         <p> Person or Business </p>
                         <form name="addfrm" action="{{ URL::to('updateentity') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="{{ $data['id'] }}">
                             @csrf
-
                             <div class="row">
                                 <div class="col-lg-3">
                                   <div class="form-group">

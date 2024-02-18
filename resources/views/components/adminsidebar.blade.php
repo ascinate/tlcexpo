@@ -40,6 +40,20 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic12" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Quotes</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic12">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addrequestquote') }}">Add Quotes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/quotes') }}">Quote List</a></li>
+              </ul>
+            </div>
+          </li>
+
+        <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <span class="menu-title">Manage Customers</span>
             <i class="menu-arrow"></i>
@@ -80,9 +94,22 @@
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/events') }}">Event List</a></li>
             </ul>
           </div>
-
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic11" aria-expanded="false" aria-controls="ui-basic">
+            <span class="menu-title">Manage Locations</span>
+            <i class="menu-arrow"></i>
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+          </a>
+
+          <div class="collapse" id="ui-basic11">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addlocation') }}">Add Location</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/locations') }}">Location List</a></li>
+            </ul>
+          </div>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">

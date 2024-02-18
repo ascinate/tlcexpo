@@ -33,31 +33,71 @@
           </div>
           <div class="events-slider01 owl-carousel owl-theme sp-maring">
 
-           <div class="itemsr-headr">
-               <h2> January, 2024 </h2>
+            @php
+                date_default_timezone_set('America/New_York');
+                $data = \DB::table('events')->get();
+
+                for($x=2024;$x<=2025;$x++)
+                {
+
+                for($i=1; $i<=12; $i++)
+                {
+                    $month = date('F', mktime(0, 0, 0, $i, 10));
+
+            @endphp
+
+            <div class="itemsr-headr">
+               <h2> {{ $month.', '.$x }} </h2>
                <div class="row row-cols-1 row-cols-lg-2 w-100 blog-posts">
+
+                @php
+                   foreach($data as $value)
+                    {
+                        $event_start_date = explode("-", $value->event_start_date);
+                        $start = mktime(12,0,0, @$event_start_date[1], @$event_start_date[2], @$event_start_date[0]);
+                        $start_dt = date('F j, Y',$start);
+
+                        $event_end_date = explode("-", @$value->event_end_date);
+                        $end = mktime(12,0,0, $event_end_date[1],$event_end_date[2],$event_end_date[0]);
+                        $end_dt = date('F j, Y',$end);
+
+                        $year = @$event_start_date[0];
+                        $month = @$event_start_date[1];
+
+                        if(($month==$i) && ($year==$x))
+                        {
+                @endphp
                 <div class="col">
                   <article class="comonevents d-inline-block w-100">
                       <div class="img-boxu w-100 d-inline-block">
-                          <img alt="evnts" src="images/conuy.jpg"/>
+                        @php
+                            if($value->event_logo!='')
+                            {
+                        @endphp
+                          <img alt="evnts" src="uploads/{{ $value->event_logo }}"/>
+                        @php
+                            }
+                            else {
+                                @endphp
+                                <img alt="evnts" src="images/eventplace.jpg" height="225" width="300"/>
+                                @php
+                            }
+                        @endphp
                       </div>
                       <div class="text-ar-events w-100">
                           <div class="dater">
                               <span>
-                                  <i class="far fa-user"></i>
-                                  Admin
-                              </span>
-                              <span>
                                   <i class="fas fa-calendar-alt"></i>
-                                  january 9 (Tuesday) - 12 (Friday)
+                                  @php
+                                        echo @$start_dt.' - '.$end_dt;
+                                  @endphp
                               </span>
-
                           </div>
                           <h2 class="events-timles">
-                              #CES 2024, Las Vegas, NV
+                            {{ $value->event_name }}
                           </h2>
                           <p> Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the industry's </p>
+                              and typesetting industry. Lorem Ipsum has been the industry </p>
 
                           <div class="shared d-flex align-items-center">
                               <h5> Share </h5>
@@ -77,221 +117,19 @@
                       </div>
                   </article>
                 </div>
-                <div class="col">
-                  <article class="comonevents d-inline-block w-100">
-                      <div class="img-boxu w-100 d-inline-block">
-                          <img alt="evnts" src="images/conuy.jpg"/>
-                      </div>
-                      <div class="text-ar-events w-100">
-                          <div class="dater">
-                              <span>
-                                  <i class="far fa-user"></i>
-                                  Admin
-                              </span>
-                              <span>
-                                  <i class="fas fa-calendar-alt"></i>
-                                  february 5 (Monday) - 6 (Tuesday)
-                              </span>
-
-                          </div>
-                          <h2 class="events-timles">
-                              WCAF Expo, Las Vegas, NV
-                          </h2>
-                          <p> Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the industry's </p>
-
-                          <div class="shared d-flex align-items-center">
-                              <h5> Share </h5>
-                              <ul class="d-flex align-items-center">
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                  </li>
-                              </ul>
-                          </div>
-
-                      </div>
-                  </article>
-                </div>
-                <div class="col">
-                  <article class="comonevents d-inline-block w-100">
-                      <div class="img-boxu w-100 d-inline-block">
-                          <img alt="evnts" src="images/conuy.jpg"/>
-                      </div>
-                      <div class="text-ar-events w-100">
-                          <div class="dater">
-                              <span>
-                                  <i class="far fa-user"></i>
-                                  Admin
-                              </span>
-                              <span>
-                                  <i class="fas fa-calendar-alt"></i>
-                                  february 22 (Thursday) - 24 (Saturday)
-                              </span>
-
-                          </div>
-                          <h2 class="events-timles">
-                              LMT LAB DAY CHICAGO 2024, CHICAGO IL
-                          </h2>
-                          <p> Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the industry's </p>
-
-                          <div class="shared d-flex align-items-center">
-                              <h5> Share </h5>
-                              <ul class="d-flex align-items-center">
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                  </li>
-                              </ul>
-                          </div>
-
-                      </div>
-                  </article>
-
-                </div>
-
+                @php
+                      }
+                    }
+                @endphp
 
               </div>
            </div>
-           <div class="itemsr-headr">
-            <h2> February, 2024 </h2>
-            <div class="row row-cols-1 row-cols-lg-2 w-100 blog-posts">
-              <div class="col">
-                <article class="comonevents d-inline-block w-100">
-                    <div class="img-boxu w-100 d-inline-block">
-                        <img alt="evnts" src="images/conuy.jpg"/>
-                    </div>
-                    <div class="text-ar-events w-100">
-                        <div class="dater">
-                            <span>
-                                <i class="far fa-user"></i>
-                                Admin
-                            </span>
-                            <span>
-                                <i class="fas fa-calendar-alt"></i>
-                                january 9 (Tuesday) - 12 (Friday)
-                            </span>
 
-                        </div>
-                        <h2 class="events-timles">
-                            #CES 2024, Las Vegas, NV
-                        </h2>
-                        <p> Lorem Ipsum is simply dummy text of the printing
-                            and typesetting industry. Lorem Ipsum has been the industry's </p>
+            @php
+                }
+             }
+            @endphp
 
-                        <div class="shared d-flex align-items-center">
-                            <h5> Share </h5>
-                            <ul class="d-flex align-items-center">
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </article>
-              </div>
-              <div class="col">
-                <article class="comonevents d-inline-block w-100">
-                    <div class="img-boxu w-100 d-inline-block">
-                        <img alt="evnts" src="images/conuy.jpg"/>
-                    </div>
-                    <div class="text-ar-events w-100">
-                        <div class="dater">
-                            <span>
-                                <i class="far fa-user"></i>
-                                Admin
-                            </span>
-                            <span>
-                                <i class="fas fa-calendar-alt"></i>
-                                february 5 (Monday) - 6 (Tuesday)
-                            </span>
-
-                        </div>
-                        <h2 class="events-timles">
-                            WCAF Expo, Las Vegas, NV
-                        </h2>
-                        <p> Lorem Ipsum is simply dummy text of the printing
-                            and typesetting industry. Lorem Ipsum has been the industry's </p>
-
-                        <div class="shared d-flex align-items-center">
-                            <h5> Share </h5>
-                            <ul class="d-flex align-items-center">
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </article>
-              </div>
-              <div class="col">
-                <article class="comonevents d-inline-block w-100">
-                    <div class="img-boxu w-100 d-inline-block">
-                        <img alt="evnts" src="images/conuy.jpg"/>
-                    </div>
-                    <div class="text-ar-events w-100">
-                        <div class="dater">
-                            <span>
-                                <i class="far fa-user"></i>
-                                Admin
-                            </span>
-                            <span>
-                                <i class="fas fa-calendar-alt"></i>
-                                february 22 (Thursday) - 24 (Saturday)
-                            </span>
-
-                        </div>
-                        <h2 class="events-timles">
-                            LMT LAB DAY CHICAGO 2024, CHICAGO IL
-                        </h2>
-                        <p> Lorem Ipsum is simply dummy text of the printing
-                            and typesetting industry. Lorem Ipsum has been the industry's </p>
-
-                        <div class="shared d-flex align-items-center">
-                            <h5> Share </h5>
-                            <ul class="d-flex align-items-center">
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </article>
-              </div>
-            </div>
-           </div>
           </div>
        </div>
     </section>

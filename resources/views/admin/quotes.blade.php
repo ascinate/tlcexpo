@@ -4,6 +4,7 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
+
             <div class="page-header">
                 <h3 class="page-title">
                   <span class="page-title-icon bg-gradient-primary text-white me-2">
@@ -16,37 +17,35 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Entity List</h4>
+                    <h4 class="card-title">Quote List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> # </th>
-                          <th> Legal Name </th>
-                          <th> Type </th>
                           <th> Name </th>
-                          <th> Position </th>
-                          <th> DBA </th>
+                          <th> Email </th>
+                          <th> Phone </th>
+                          <th> Shipment </th>
+                          <th>Origin</th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        @foreach ($datas as $data)
+                        @foreach ($quotes as $quote)
                         <tr>
-                            <td><img src="../uploads/{{ $data->logo }}" width="50" height="50"></td>
-                            <td>{{ $data->legeal_name }}</td>
-                            <td>{{ $data->entity_type }}</td>
-                            <td>{{ $data->firstname.' '.$data->lastname }}</td>
-                            <td>{{ $data->position }}</td>
-                            <td>{{ $data->dba }}</td>
+                            <td>{{ $quote->customer_contact_name }}</td>
+                            <td>{{ $quote->email }}</td>
+                            <td>{{ $quote->phone }}</td>
+                            <td>{{ $quote->shipment_type }}</td>
+                            <td>{{ $quote->origin_address_line_1 }}</td>
                             <td>
-                                <a href="{{ URL::to('admin/viewentity/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/viewrequestquote/'.$quote->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ URL::to('admin/editentity/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/editrequestquote/'.$quote->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deleteentity/'.$data->id }}" style="color: #333;">
+                                <a href="{{ 'deletequote/'.$quote->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

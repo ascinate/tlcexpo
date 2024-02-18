@@ -33,7 +33,7 @@ class EntityController extends Controller
         $email_address = array('email_type' => $request->email_type,
                                'email' => $request->email);
 
-        $accounts = array('service' => $request->email_type,
+        $accounts = array('service' => $request->service,
                           'account_url' => $request->account_url);
 
         $telephone = array('type' => $request->type,
@@ -97,7 +97,7 @@ class EntityController extends Controller
         $email_address = array('email_type' => $request->email_type,
                                'email' => $request->email);
 
-        $accounts = array('service' => $request->email_type,
+        $accounts = array('service' => $request->service,
                           'account_url' => $request->account_url);
 
         $telephone = array('type' => $request->type,

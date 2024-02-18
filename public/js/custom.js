@@ -1,4 +1,4 @@
-	
+
  $(document).ready(function(){
 
 	$('.slider-div').owlCarousel({
@@ -35,7 +35,7 @@
 		responsive: {
 			0: {
 				items:1
-				
+
 			},
 			600: {
 				items:1
@@ -58,7 +58,7 @@
 
 	 $('.events-slider01').owlCarousel({
 		loop: false,
-		autoplay:true,
+		autoplay:false,
 		nav:true,
 		dots:false,
 		responsive: {
@@ -85,7 +85,7 @@
 
 
 
-	 
+
 });
 
 
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	$('#war2').click(function() {
 		$("#marshaling2").toggle();
 	});
-	
+
 });
 $(document).ready(function() {
 

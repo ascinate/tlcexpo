@@ -10,7 +10,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Entities</h4>
+                        <h4 class="card-title">Edit An Entity</h4>
                         <p> Person or Business </p>
                         <form name="addfrm" action="{{ URL::to('updateentity') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="{{ $data['id'] }}">
@@ -319,7 +319,7 @@
                                           <div class="col-lg-8">
                                              <div class="form-group">
                                                   <label for="exampleInputName1" class="form-label">URL</label>
-                                                  <input type="text" value="{{ $internetaccounts['account_url'][$k-1] }}" class="form-control" name="account_url[]">
+                                                  <input type="text" value="{{ @$internetaccounts['account_url'][$k-1] }}" class="form-control" name="account_url[]">
                                              </div>
                                           </div>
                                        </div>
@@ -453,13 +453,28 @@
                                        </div>
 
                                        <div class="form-group">
-                                            <!--<label for="exampleInputName1" class="form-label">Address found</label>-->
-                                            <input type="text" class="form-control" name="address[]" value="{{ $locations['address'][$j-1] }}">
+                                        <select name="address[]" class="form-select">
+                                                <option value=""></option>
+                                            @php
+                                                $value = \DB::table('locations')->get();
+                                                foreach($value as $val)
+                                                {
+                                                    $address = @$val->address_line_1.', '.$val->city.', '.$val->state.', '.$val->zipcode;
+                                            @endphp
+                                                <option value="{{ $address }}"@php
+                                                    if($locations['address'][$j-1]==$address) { echo 'selected'; }
+                                                @endphp>
+                                                {{ $address }}
+                                                </option>
+                                                @php
+                                                }
+                                            @endphp
+                                        </select>
                                         </div>
-                                </div>
-                                @php
-                                    }
-                                @endphp
+                                 </div>
+                                    @php
+                                        }
+                                    @endphp
                                 <div id="ccolonejemloc"></div>
 
                                 <a id="sh-addvemsloc" class="btn p-3 btn-primary d-table btn-add-btn mt-3 mb-4"> <span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
