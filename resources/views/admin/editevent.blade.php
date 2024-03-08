@@ -49,15 +49,39 @@
                                     <select name="main_venue" class="form-select">
                                         <option value="">--Select--</option>
                                         @php
-                                        $venues = \DB::table('venues')->get();
+                                        $venues = \DB::table('tradevenues')->get();
                                         foreach($venues as $venue)
                                         {
+                                            $parent = \DB::table('entities')->where('id',$venue->entity_id)->get();
+                                            $venueentity = @$parent[0]->legeal_name;
                                         @endphp
-                                          <option value="{{ $venue->id }}"@php
-                                            if($venue->id==$data['main_venue']) { echo 'selected'; }
+                                          <option value="{{ $venueentity }}"@php
+                                            if($venueentity==$data['main_venue']) { echo 'selected'; }
                                         @endphp>
-                                            {{ $venue->address }}
+                                            {{ $venueentity }}
                                         </option>
+                                        @php
+                                            }
+                                        @endphp
+                                    </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label> Show Contractor </label>
+                                    <select name="show_contractor" class="form-select">
+                                        <option value="">--Select--</option>
+                                        @php
+                                          $contractors = \DB::table('managecontractors')->get();
+                                          foreach($contractors as $contract)
+                                          {
+                                        @endphp
+                                          <option value="{{ $contract->id }}"@php
+                                            if($contract->id==$data['show_contractor']) { echo 'selected'; }
+                                        @endphp>
+                                            {{ $contract->contractor_name }}
+                                         </option>
                                         @php
                                             }
                                         @endphp

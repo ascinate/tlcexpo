@@ -48,7 +48,7 @@
 
             <div class="itemsr-headr">
                <h2> {{ $month.', '.$x }} </h2>
-               <div class="row row-cols-1 row-cols-lg-2 w-100 blog-posts">
+               <div class="row row-cols-1 row-cols-lg-3 w-100 blog-posts">
 
                 @php
                    foreach($data as $value)
@@ -93,25 +93,25 @@
                                   @endphp
                               </span>
                           </div>
+
                           <h2 class="events-timles">
                             {{ $value->event_name }}
                           </h2>
-                          <p> Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the industry </p>
 
-                          <div class="shared d-flex align-items-center">
-                              <h5> Share </h5>
-                              <ul class="d-flex align-items-center">
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-facebook-f"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-linkedin-in"></i> </a>
-                                  </li>
-                                  <li>
-                                      <a href="#" class="btn btnface"> <i class="fab fa-twitter"></i> </a>
-                                  </li>
-                              </ul>
+                           <div class="dater mt-4 mb-0 align-items-start">
+                              <span>
+                                  <i class="fas fa-map-marker-alt"></i>
+                                  {{ $value->address_line_1.' '.$value->zipcode }}
+                              </span>
+                          </div>
+
+                          <div class="shared d-flex justify-content-between w-100 align-items-start mt-3">
+                            <div class="tradehow05">
+                                <h5 class="mt-0"> <span class="bhj me-2"> <i class="fas fa-warehouse"></i> </span>
+                                    <small> {{ $value->main_venue }} </small>
+                                </h5>
+                            </div>
+
                           </div>
 
                       </div>

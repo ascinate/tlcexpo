@@ -48,4 +48,48 @@ class AdminController extends Controller
         $event = Event::all();
         return view('admin/dashboard',['customers' => $data, 'trades' => $trade, 'events' => $event]);
     }
+
+    public function users()
+    {
+        $data = Admin::all();
+        return view('admin/users',['users' => $data]);
+    }
+
+    public function showData($id)
+    {
+        $data = Admin::find($id);
+        return view('admin/edituser',['data'=>$data]);
+    }
+
+    public function insertuser(Request $request)
+    {
+        $user = new Admin();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role;
+
+        $user->save();
+        return redirect('admin/users');
+    }
+
+    public function updateuser(Request $request)
+    {
+        $user = Admin::find($request->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role;
+
+        $user->save();
+        return redirect('admin/users');
+    }
+
+    public function delete($id)
+    {
+        $data = Admin::find($id);
+        $data->delete();
+        return view('admin/users');
+    }
 }

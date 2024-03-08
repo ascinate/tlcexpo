@@ -13,6 +13,8 @@
     <div class="page-overlay"></div>
 </section>
 
+<form name="frmquote" action="{{ URL::to('requestquote') }}" method="POST">
+    @csrf
 <main class="float-start w-100">
     <section class="ship-form-diuv d-inline-block w-100">
         <div class="container">
@@ -23,51 +25,52 @@
                     <div class="col-lg-4">
                        <div class="form-group">
                           <label class="form-label"> Customer Contact Name* </label>
-                          <input type="text" class="form-control"/>
+                          <input type="text" name="customer_contact_name" class="form-control" required/>
                        </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Email* </label>
-                           <input type="email" class="form-control"/>
+                           <input type="email" name="email" class="form-control" required/>
                         </div>
                      </div>
                      <div class="col-lg-4">
                         <div class="form-group">
-                           <label class="form-label"> Phone </label>
-                           <input type="text" class="form-control"/>
+                           <label class="form-label"> Phone* </label>
+                           <input type="text" name="phone" class="form-control" required/>
                         </div>
                      </div>
 
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Shipment Type </label>
-                           <select class="form-select">
-                            <option value="1">Round trip</option>
-                            <option value="2">Inbound Only</option>
-                            <option value="3">Outbound Only</option>
-                            <option value="4">Show-to-Show</option>
-                          </select>
+                           <select name="shipment_type" class="form-select" required>
+                                <option value=""></option>
+                                <option value="Round trip">Round trip</option>
+                                <option value="Inbound only">Inbound only</option>
+                                <option value="Outbound only">Outbound only</option>
+                                <option value="Show-to-show">Show-to-show</option>
+                            </select>
                         </div>
                      </div>
 
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Exhibitor Name </label>
-                           <input type="text" class="form-control"/>
+                           <input type="text" name="exhibitor_name" class="form-control"/>
                         </div>
                      </div>
 
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Booth # </label>
-                           <input type="text" class="form-control"/>
+                           <input type="text" name="booth" class="form-control"/>
                         </div>
                      </div>
                      <div class="col-lg-12">
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="return" checked>
+                                <input class="form-check-input" name="return_to_origin" type="checkbox" value="Yes" id="return_to_origin" checked>
                                 <label class="form-check-label" for="return">
                                     Return to Origin
                                 </label>
@@ -78,21 +81,58 @@
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Tradeshow Name * </label>
-                           <input type="text" class="form-control"/>
+                           <select name="tradeshow_name" class="form-select" required>
+                            <option value=""></option>
+                            @php
+                                $data = \DB::table('tradeshows')->get();
+                                foreach($data as $val)
+                                {
+                            @endphp
+                            <option value="{{ $val->id }}">{{ $val->show_name }}</option>
+                             @php
+                                }
+                             @endphp
+                          </select>
                         </div>
                      </div>
 
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Show Management Contractor </label>
-                           <input type="text" class="form-control"/>
+                           <select name="show_management_contractor" class="form-select">
+                            <option value="">--Select--</option>
+                            @php
+                              $contractors = \DB::table('managecontractors')->get();
+                              foreach($contractors as $contract)
+                              {
+                            @endphp
+                              <option value="{{ $contract->id }}">
+                                {{ $contract->contractor_name }}
+                             </option>
+                            @php
+                                }
+                            @endphp
+                        </select>
                         </div>
                      </div>
 
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Tradeshow Venue * </label>
-                           <input type="text" class="form-control"/>
+                           <select name="tradeshow_venue" class="form-select" required>
+                            <option value=""></option>
+                            @php
+                                $value = \DB::table('locations')->get();
+                                foreach($value as $val)
+                                {
+
+                                $address = @$val->location_description;
+                            @endphp
+                               <option value="{{ $address }}"> {{ $address }}</option>
+                              @php
+                                }
+                            @endphp
+                          </select>
                         </div>
                      </div>
 
@@ -100,13 +140,13 @@
                         <div class="form-group">
                            <label class="form-label"> Show Destination* </label>
                            <div class="form-check">
-                            <input class="form-check-input" type="radio" name="optionwar" id="war1" checked>
+                            <input class="form-check-input" type="radio" value="Advance Warehouse" name="show_destination" id="war1" checked>
                             <label class="form-check-label" for="war1">
                                 Advance Warehouse
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="optionwar" id="war2">
+                            <input class="form-check-input" type="radio" value="Direct to Show" name="show_destination" id="war2">
                             <label class="form-check-label" for="war2">
                                 Direct to Show
                             </label>
@@ -117,9 +157,10 @@
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Service Level </label>
-                           <select class="form-select">
-                            <option value="1">Standard Ground</option>
-                            <option value="2">Expedited Delivery</option>
+                           <select name="service_level" class="form-select soy-hegiht">
+                                <option value=""></option>
+                                <option value="Standard Ground" selected>Standard Ground</option>
+                                <option value="Expedited Ground">Expedited Ground</option>
                           </select>
                         </div>
                      </div>
@@ -127,63 +168,65 @@
                      <div class="col-lg-4">
                         <div class="form-group">
                            <label class="form-label"> Equipment </label>
-                           <select class="form-select">
-                            <option value="1">LTL Less-than-Truckload</option>
-                            <option value="2">Linehaul w/Shuttles</option>
-                            <option value="3">Full Truckload 53' Dry Van</option>
-                            <option value="4">Dropdeck Flatbed</option>
-                            <option value="3">26' Straight Truck</option>
-                            <option value="3">16' Box Truck</option>
-                            <option value="3">Sprinter Van</option>
+                           <select name="equipment" class="form-select">
+                            <option value="LTL Less-than-Truckload">LTL Less-than-Truckload</option>
+                            <option value="Linehaul w/Shuttles">Linehaul w/Shuttles</option>
+                            <option value="Full Truckload 53' Dry Van">Full Truckload 53' Dry Van</option>
+                            <option value="Dropdeck Flatbed">Dropdeck Flatbed</option>
+                            <option value="26' Straight Truck">26' Straight Truck</option>
+                            <option value="16' Box Truck">16' Box Truck</option>
+                            <option value="Sprinter Van">Sprinter Van</option>
                           </select>
                         </div>
                      </div>
+
                      <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-label">  Detention Allowance </label>
-                            <select class="form-select">
-                             <option value="1">30 Minutes</option>
-                             <option value="2">1 Hour</option>
-                             <option value="3">2 Hours</option>
-                           </select>
+                            <select name="detention_allowance" class="form-select soy-hegiht">
+                                <option value=""></option>
+                                <option value="30 Minutes" selected>30 Minutes</option>
+                                <option value="1 Hour">1 Hour</option>
+                                <option value="2 Hours">2 Hours</option>
+                              </select>
                          </div>
                      </div>
                      <div class="col-lg-8">
-                        <label class="form-label">  Detention Allowance </label>
+                        <label class="form-label">  Accessorials </label>
                         <div class="d-flex flex-wrap align-items-center pso-gap">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="detention1">
+                                <input class="form-check-input" name="accessorials[]" type="checkbox" value="Scales Tickets" id="detention1">
                                 <label class="form-check-label" for="detention1">
                                     Scales Tickets
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="detention2" checked>
+                                <input class="form-check-input" name="accessorials[]" type="checkbox" value="Marshaling Yard" id="detention2">
                                 <label class="form-check-label" for="detention2">
                                     Marshaling Yard
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="detention3">
+                                <input class="form-check-input" name="accessorials[]" type="checkbox" value="Liftgate" id="detention3">
                                 <label class="form-check-label" for="detention3">
                                     Liftgate
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="detention4">
+                                <input class="form-check-input" name="accessorials[]" type="checkbox" value="Palletjack" id="detention4">
                                 <label class="form-check-label" for="detention4">
                                     Palletjack
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="detention5">
+                                <input class="form-check-input" name="accessorials[]" type="checkbox" value="Inside Pickup/​Delivery" id="detention5">
                                 <label class="form-check-label" for="detention5">
                                     Inside Pickup/​Delivery
                                 </label>
                               </div>
                               <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="detention6">
-                                <input type="text" class="others" placeholder="Other" id="detention6"/>
+                                <input type="text" class="others" name="other" placeholder="Other" id="detention6"/>
                               </div>
                         </div>
                      </div>
@@ -218,49 +261,46 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-label"> Origin Location </label>
-                                    <input type="text" class="form-control" placeholder="Address Line 1"/>
+                                    <input type="text" class="form-control" name="origin_address_line_1" placeholder="Address Line 1" required/>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address Line 2"/>
+                                    <input type="text" class="form-control" name="origin_address_line_2" placeholder="Address Line 2" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="City"/>
+                                    <input type="text" class="form-control" name="origin_city" placeholder="City" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State / Province / Region"/>
+                                    <input type="text" class="form-control" name="origin_state" placeholder="State / Province / Region" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Postal / Zip Code"/>
+                                    <input type="text" class="form-control" name="origin_zipcode" placeholder="Postal / Zip Code" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select class="form-select">
-                                     <option value="1">United States</option>
-                                     <option value="2">United Kingdom</option>
-                                     <option value="3">United Arab Emirates</option>
-                                     <option value="4">Uganda</option>
-                                     <option value="5">Ukraine</option>
-                                     <option value="6">Tuvalu</option>
-                                   </select>
+                                    <select name="origin_country" class="form-select soy-hegiht" required>
+                                        <option value=""></option>
+                                        <option value="United States" selected>United States</option>
+                                        <option value="Canada">Canada</option>
+                                      </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label"> Origin Location </label>
-                                <input type="date" class="form-control" placeholder="DD/MM/YYYY"/>
+                                <input type="date" class="form-control" name="pickup_date" placeholder="DD/MM/YYYY" required/>
                                 <p class="nu-text mt-2"> Avoid weekends and holidays when possible. </p>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label"> Driver check-in before: </label>
-                                <input type="time" class="form-control"/>
+                                <input type="time" name="driver_check_in" class="form-control" required/>
                                 <p class="nu-text mt-2"> Choose a time at least 30 minutes before your warehouse closes. </p>
                             </div>
                         </div>
@@ -271,49 +311,45 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-label"> Destination Location </label>
-                                    <input type="text" class="form-control" placeholder="Address Line 1"/>
+                                    <input type="text" class="form-control" name="destination_address_line_1" placeholder="Address Line 1" required/>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address Line 2"/>
+                                    <input type="text" class="form-control" name="destination_address_line_2" placeholder="Address Line 2" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="City"/>
+                                    <input type="text" class="form-control" name="destination_city" placeholder="City" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State / Province / Region"/>
+                                    <input type="text" class="form-control" name="destination_state" placeholder="State / Province / Region" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Postal / Zip Code"/>
+                                    <input type="text" class="form-control" name="destination_zipcode" placeholder="Postal / Zip Code" required/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select class="form-select">
-                                     <option value="1">United States</option>
-                                     <option value="2">United Kingdom</option>
-                                     <option value="3">United Arab Emirates</option>
-                                     <option value="4">Uganda</option>
-                                     <option value="5">Ukraine</option>
-                                     <option value="6">Tuvalu</option>
-                                   </select>
+                                    <select name="destination_country" class="form-select soy-hegiht" required>
+                                        <option value="United States">United States</option>
+                                        <option value="Canada">Canada</option>
+                                      </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label"> Delivery Deadline </label>
-                                <input type="date" class="form-control" placeholder="DD/MM/YYYY"/>
+                                <input type="date" class="form-control" placeholder="DD/MM/YYYY" name="delivery_deadline" required/>
 
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label"> Driver Check-in Deadline </label>
-                                <input type="time" class="form-control"/>
+                                <input type="time" class="form-control" name="driver_check_in_deadline" required/>
 
                             </div>
                         </div>
@@ -324,42 +360,71 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-label"> Marshaling Yard Address </label>
-                                    <input type="text" class="form-control" placeholder="Address Line 1"/>
+                                    <input type="text" class="form-control" name="marshaling_address_line_1" placeholder="Address Line 1"/>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address Line 2"/>
+                                    <input type="text" class="form-control" name="marshaling_address_line_2" placeholder="Address Line 2"/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="City"/>
+                                    <input type="text" class="form-control" name="marshaling_city" placeholder="City"/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select class="form-select">
-                                        <option value="1">States</option>
-                                        <option value="2">United Kingdom</option>
-                                        <option value="3">United Arab Emirates</option>
-                                        <option value="4">Uganda</option>
-                                        <option value="5">Ukraine</option>
-                                        <option value="6">Tuvalu</option>
-                                      </select>
+                                    <input type="text" class="form-control" name="marshaling_state" placeholder="State">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State / Province / Region"/>
+                                    <input type="text" class="form-control" name="marshaling_zipcode" placeholder="Zip Code">
                                 </div>
                                 <p class="nu-text mt-2"> (No worries. We'll look it up for you if it's not handy). </p>
 
                             </div>
                         </div>
                      </div>
-                     <div class="col-lg-6 mt-5">
 
+                     <div class="col-lg-6 mt-5"  id="altaddress" style="display: none;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-label"> Alternate Address </label>
+                                    <input type="text" name="alt_address_line_1" class="form-control" placeholder="Address Line 1"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" name="alt_address_line_2" class="form-control" placeholder="Address Line 2"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" name="alt_city" class="form-control" placeholder="City"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" name="alt_state" class="form-control" placeholder="State"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" name="alt_zipcode" class="form-control" placeholder="Postal / Zip Code"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <select name="alt_country" class="form-select">
+                                        <option value="United States">United States</option>
+                                        <option value="Canada">Canada</option>
+                                   </select>
+                                </div>
+                            </div>
+                        </div>
                      </div>
 
                      <div class="col-lg-12 mt-5">
@@ -381,82 +446,76 @@
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
                                       </svg>
                                     </span>
-                                <h5 class="float-start mt-2">   Item 1 </h5>
+                                <h5 class="float-start mt-2">   Item  </h5>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Type </label>
-                                        <select class="form-select">
-                                            <option value="1">Crate</option>
-                                            <option value="2">Carton</option>
-                                            <option value="3">Case</option>
-                                            <option value="4">Skid / Pallet</option>
-                                            <option value="5">Security Cage</option>
-                                            <option value="6">Carpet Bag</option>
-                                            <option value="6">Machine</option>
+                                        <select name="type[]" class="form-select">
+                                            <option value="Crate">Crate</option>
+                                            <option value="Carton">Carton</option>
+                                            <option value="Case">Case</option>
+                                            <option value="Skid / Pallet">Skid / Pallet</option>
+                                            <option value="Security Cage">Security Cage</option>
+                                            <option value="Carpet Bag">Carpet Bag</option>
+                                            <option value="Machine">Machine</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Qty </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="qty[]" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Length </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="length[]" class="form-control"/>
                                         <p class="nu-text mt-2"> (inches) </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Width </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="width[]" class="form-control"/>
                                         <p class="nu-text mt-2"> (inches) </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Height </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="height[]" class="form-control"/>
                                         <p class="nu-text mt-2"> (inches) </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label class="smal-label"> Weight </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="weight[]" class="form-control"/>
                                         <p class="nu-text mt-2"> (pounds) </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <label class="smal-label"> Description </label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" name="description[]" class="form-control"/>
                                         <p class="nu-text mt-2"> Color, Material, Markings, Contents </p>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="smal-label"> Photo </label>
 
-                                        <input class="form-control" type="file" id="formFile">
+                                <div class="col-lg-2">
+                                    <div class="form-check ps-4">
+                                      <input class="form-check-input" type="checkbox" value="Y" name="Hazardous[]" id="flexCheckDefault">
+                                      <label class="form-check-label m-0" for="flexCheckDefault">Hazardous</label>
+                                    </div>
+                               </div>
 
-                                        <p class="nu-text mt-2"> bmp, jpg, png, pdf, 2Mb </p>
+                               <div class="col-lg-2">
+                                    <div class="form-check ps-4">
+                                      <input class="form-check-input" type="checkbox" value="Y" name="Stackable[]" id="flexCheckDefault">
+                                      <label class="form-check-label m-0" for="flexCheckDefault">Stackable</label>
                                     </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Stackable
-                                            </label>
-                                        </div>
-                                        <p class="nu-text mt-2"> Allowed on outbound shipments. </p>
-                                    </div>
-                                </div>
+                               </div>
                             </div>
                         </div>
 
@@ -472,7 +531,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn add2 ms-5 mt-5">
+            <button type="submit" name="btnsubmit" class="btn add2 ms-5 mt-5">
                 Submit <span class="iou">
                  <i class="fas fa-plus"></i>
              </span> </button>
@@ -480,5 +539,6 @@
         </div>
     </section>
 </main>
+</form>
 
 <x-footer/>

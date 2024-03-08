@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tlc-expo Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -51,7 +52,7 @@
   margin-left: 0;
 }
 .pout-texr .form-check .form-check-label{
- 
+
 }
 .comobh-btn .but-diuv02{
     left: 24px;

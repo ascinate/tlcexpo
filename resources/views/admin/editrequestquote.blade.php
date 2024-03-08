@@ -57,8 +57,8 @@
 
                                 <div class="col-lg-2">
                                     <div class="form-check m-0">
-                                      <input class="form-check-input" name="return_to_origin" type="checkbox" value="Yes" id="return_to_origin" @php
-                                      if($data['return_to_origin']=='Y') { echo 'checked'; }
+                                      <input class="form-check-input" name="return_to_origin" type="checkbox" value="Yes" id="return_to_origin2" @php
+                                      if($data['return_to_origin']=='Yes') { echo 'checked'; }
                                   @endphp>
                                       <label class="form-check-label ms-0" for="return_to_origin">
                                          Return to Origin
@@ -167,6 +167,9 @@
                                         <option value="Expedited Ground" @php
                                         if($data['service_level']=='Expedited Ground') { echo 'selected'; }
                                     @endphp>Expedited Ground</option>
+                                    <option value="Expedited Ground" @php
+                                    if($data['service_level']=='Overnight Hotshot') { echo 'selected'; }
+                                @endphp>Overnight Hotshot</option>
                                       </select>
                                   </div>
                                 </div>
@@ -174,7 +177,29 @@
                                 <div class="col-lg-3">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Equipment </label>
-                                      <input type="text" class="form-control" value="{{ $data['equipment'] }}" name="equipment">
+                                      <select name="equipment" class="form-select">
+                                        <option value="LTL Less-than-Truckload"@php
+                                            if($data['equipment'] == 'LTL Less-than-Truckload') { echo 'selected'; }
+                                        @endphp>LTL Less-than-Truckload</option>
+                                        <option value="Linehaul w/Shuttles"@php
+                                        if($data['equipment'] == 'Linehaul w/Shuttles') { echo 'selected'; }
+                                    @endphp>Linehaul w/Shuttles</option>
+                                        <option value="Full Truckload 53' Dry Van"@php
+                                        if($data['equipment'] == "Full Truckload 53' Dry Van") { echo 'selected'; }
+                                    @endphp>Full Truckload 53' Dry Van</option>
+                                        <option value="Dropdeck Flatbed"@php
+                                        if($data['equipment'] == 'Dropdeck Flatbed') { echo 'selected'; }
+                                    @endphp>Dropdeck Flatbed</option>
+                                        <option value="26' Straight Truck"@php
+                                        if($data['equipment'] == "26' Straight Truck") { echo 'selected'; }
+                                    @endphp>26' Straight Truck</option>
+                                        <option value="16' Box Truck"@php
+                                        if($data['equipment'] == "16' Box Truck") { echo 'selected'; }
+                                    @endphp>16' Box Truck</option>
+                                        <option value="Sprinter Van"@php
+                                        if($data['equipment'] == 'Sprinter Van') { echo 'selected'; }
+                                    @endphp>Sprinter Van</option>
+                                      </select>
                                   </div>
                                 </div>
 
@@ -415,10 +440,10 @@
                                     </div>
 
                                     @php
-                                        if($data['return_to_origin']=='No')
-                                        {
+                                        //if($data['return_to_origin']=='No')
+                                       // {
                                     @endphp
-                                    <div class="col-lg-12" id="altaddress">
+                                    <div class="col-lg-12" id="altaddress2">
                                         <h5> Alt Return Address </h5>
 
                                         <div class="form-group">
@@ -462,7 +487,7 @@
                                         </div>
                                     </div>
                                     @php
-                                        }
+                                     // }
                                     @endphp
                                 </div>
                             </div>
@@ -622,4 +647,29 @@
         </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <script>
+            $(document).ready(function(){
+                //var xc = $("#return_to_origin2").val();
+
+                if($('#return_to_origin2').is(":checked"))
+                {
+                   $("#altaddress2").hide();
+                }
+                else
+                {
+                   $("#altaddress2").show();
+                }
+            });
+
+            $(function () {
+            $("#return_to_origin2").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#altaddress2").hide();
+                } else {
+                    $("#altaddress2").show();
+                }
+            });
+        });
+          </script>
           <x-adminfooter/>

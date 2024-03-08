@@ -40,6 +40,20 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic14" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Users & Roles</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic14">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/roles') }}">Role List</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/users') }}">User List</a></li>
+              </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic12" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-title">Manage Quotes</span>
               <i class="menu-arrow"></i>

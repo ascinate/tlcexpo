@@ -396,12 +396,12 @@ canvas {
 }
 .request-qoute{
   overflow: hidden;
-  height:721px;
+  height:771px;
   background: var(--lightcolor);
 }
 .qiute-img{
   overflow: hidden;
-  height:721px;
+  height:771px;
 }
 .qiute-img img{
   object-fit: cover;
@@ -1014,6 +1014,7 @@ margin-bottom: 0;
 color: #fff;
 font-family: 'Poppins', sans-serif;
 text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+width: 50%;
 
 }
 .banner-part .owl-carousel .items-sliders figure {
@@ -1983,7 +1984,7 @@ background: linear-gradient(4deg, rgba(0,0,0,0.9724264705882353) 0%, rgba(0,0,0,
 
 }
 .dater span{
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   color: #5e6f92;
   text-transform: capitalize;
@@ -1999,9 +2000,9 @@ background: linear-gradient(4deg, rgba(0,0,0,0.9724264705882353) 0%, rgba(0,0,0,
   color: var(--lightcolor);
 }
 .comonevents .events-timles{
-  font-size: 31px;
+  font-size: 25px;
   line-height: 54px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0;
   color: var(--darkcolor);
   font-family: "Poppins", sans-serif;
@@ -3437,6 +3438,34 @@ table.dataTable tbody tr td {
 .ship-user{
   display: flex;
   justify-content: space-between;
+}
+.events-page-part .img-boxu{
+  height:  346px;
+  overflow: hidden;
+  background: #f6f6f6;
+}
+.events-page-part .img-boxu img{
+  margin: auto;
+  text-align: center;
+  height: 100%;
+  object-fit:contain;
+  object-position: center;
+}
+.events-page-part .comonevents .events-timles{
+  font-size: 26px !important;
+  line-height: 37px;
+  margin-top: 15px;
+}
+.events-page-part .dater span{
+  font-size: 16px !important;
+  align-items: baseline;
+}
+.events-page-part .text-ar-events{
+  padding: 21px 28px;
+}
+.bhj{
+  color: var(--lightcolor);
+  font-size: 16px;
 }
 @-webkit-keyframes pulse{
   0%{

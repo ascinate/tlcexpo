@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ManagecontractorController;
 use App\Http\Controllers\RequestquoteController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TradeshowController;
 use App\Http\Controllers\TradevenueController;
@@ -48,6 +49,8 @@ Route::post('customerlogin',[CustomerController::class, 'customerlogin']);
 Route::view('register','register');
 Route::post('addcustomer',[CustomerController::class, 'addcustomer']);
 
+Route::view('thankyou','thankyou');
+Route::post('requestquote',[RequestquoteController::class,'requestquote']);
 
 /////////// Dashboard pages for customers /////////////////
 
@@ -99,6 +102,7 @@ Route::get('admin/editevent/{id}',[EventController::class,'showData'])->middlewa
 Route::get('admin/viewevent/{id}',[EventController::class,'viewData'])->middleware('adminauth');
 Route::post('updateevent',[EventController::class,'updateevent'])->middleware('adminauth');
 Route::get('admin/deleteevent/{id}', [EventController::class, 'delete'])->middleware('adminauth');
+Route::post('admin/getlocation',[EventController::class,'getlocation']);
 
 //// Whytlc
 Route::get('admin/whytlc',[WhytlcController::class, 'index'])->middleware('adminauth');
@@ -182,7 +186,23 @@ Route::post('updatequote',[RequestquoteController::class,'updatequote']);
 Route::get('admin/viewrequestquote/{id}',[RequestquoteController::class,'viewData'])->middleware('adminauth');
 Route::get('admin/deletequote/{id}', [RequestquoteController::class, 'delete'])->middleware('adminauth');
 
-Route::get('admin/testquote/{id}',[RequestquoteController::class,'testData']);
+//// Roles & users
+Route::view('admin/addrole','admin/addrole');
+Route::get('admin/roles',[RoleController::class,'index'])->middleware('adminauth');
+Route::post('insertrole',[RoleController::class,'insertrole']);
+Route::get('admin/editrole/{id}',[RoleController::class,'showData'])->middleware('adminauth');
+Route::post('updaterole',[RoleController::class,'updaterole']);
+Route::get('admin/deleterole/{id}', [RoleController::class, 'delete'])->middleware('adminauth');
+
+Route::view('admin/adduser','admin/adduser');
+Route::get('admin/users',[AdminController::class,'users'])->middleware('adminauth');
+Route::post('insertuser',[AdminController::class,'insertuser']);
+Route::get('admin/edituser/{id}',[AdminController::class,'showData'])->middleware('adminauth');
+Route::post('updateuser',[AdminController::class,'updateuser']);
+Route::get('admin/deleteuser/{id}', [AdminController::class, 'delete'])->middleware('adminauth');
+
+//// Loads
+Route::view('admin/addload','admin/addload');
 
 Route::get('admin/logout', function () {
     if(session()->has('adminuser'))

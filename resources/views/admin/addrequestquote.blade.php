@@ -140,6 +140,7 @@
                                         <option value=""></option>
                                         <option value="Standard Ground" selected>Standard Ground</option>
                                         <option value="Expedited Ground">Expedited Ground</option>
+                                        <option value="Overnight Hotshot">Overnight Hotshot</option>
                                       </select>
                                   </div>
                                 </div>
@@ -147,7 +148,15 @@
                                 <div class="col-lg-3">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Equipment </label>
-                                      <input type="text" class="form-control" name="equipment">
+                                      <select name="equipment" class="form-select">
+                                        <option value="LTL Less-than-Truckload">LTL Less-than-Truckload</option>
+                                        <option value="Linehaul w/Shuttles">Linehaul w/Shuttles</option>
+                                        <option value="Full Truckload 53' Dry Van">Full Truckload 53' Dry Van</option>
+                                        <option value="Dropdeck Flatbed">Dropdeck Flatbed</option>
+                                        <option value="26' Straight Truck">26' Straight Truck</option>
+                                        <option value="16' Box Truck">16' Box Truck</option>
+                                        <option value="Sprinter Van">Sprinter Van</option>
+                                      </select>
                                   </div>
                                 </div>
 
@@ -206,7 +215,7 @@
                                   <div class="col-lg-4">
                                     <div class="form-check d-flex align-items-center ps-4">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <input type="text" class="form-control ms-3" name="address" placeholder="Other">
+                                            <input type="text" class="form-control ms-3" name="other" placeholder="Other">
                                     </div>
                                   </div>
                                   <div class="col-lg-8"> </div>
@@ -397,10 +406,8 @@
                                                     </select>
                                               </div>
                                            </div>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 

@@ -67,7 +67,7 @@
           </div>
        </div>
        <hr class="mt-4"/>
-       <p class="text-white text-center copty my-3"> Copyright 2024 All Rights Reserved </p>
+       <p class="text-white text-center copty my-3"> Copyright {{ date('Y') }} All Rights Reserved. </p>
     </div>
  </footer>
 
@@ -153,6 +153,18 @@
             else
             {
                 $("#xother").hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $("#return_to_origin").click(function () {
+            if ($(this).is(":checked")) {
+                $("#altaddress").hide();
+            } else {
+                $("#altaddress").show();
             }
         });
     });

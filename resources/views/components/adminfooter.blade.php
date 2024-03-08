@@ -676,5 +676,30 @@ $(function () {
     });
 </script>
 
+<!---- Ajax Call Start ---->
+
+<script>
+$(document).ready(function(){
+
+    $("#eventloc").change(function(){
+
+        var locId = $("#eventloc").val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "https://ascinate.in/projects/tclexpo/admin/getlocation",
+            type: 'POST',
+            data: {id:locId},
+            success: function(data)
+            {
+                $("#addrss2").show();
+                $("#addrss2").html(data);
+            }
+        });
+    });
+
+});
+</script>
 </body>
 </html>

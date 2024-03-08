@@ -44,11 +44,35 @@
                                     <select name="main_venue" class="form-select">
                                         <option value="">--Select--</option>
                                         @php
-                                        $venues = \DB::table('venues')->get();
-                                        foreach($venues as $venue)
-                                        {
+                                          $venues = \DB::table('tradevenues')->get();
+                                          foreach($venues as $venue)
+                                          {
+                                            $parent = \DB::table('entities')->where('id',$venue->entity_id)->get();
+                                            $venueentity = @$parent[0]->legeal_name;
                                         @endphp
-                                          <option value="{{ $venue->id }}">{{ $venue->address }}</option>
+                                          <option value="{{ $venueentity }}">
+                                            {{ $venueentity }}
+                                         </option>
+                                        @php
+                                            }
+                                        @endphp
+                                    </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label> Show Contractor </label>
+                                    <select name="show_contractor" class="form-select">
+                                        <option value="">--Select--</option>
+                                        @php
+                                          $contractors = \DB::table('managecontractors')->get();
+                                          foreach($contractors as $contract)
+                                          {
+                                        @endphp
+                                          <option value="{{ $contract->id }}">
+                                            {{ $contract->contractor_name }}
+                                         </option>
                                         @php
                                             }
                                         @endphp
@@ -83,7 +107,6 @@
                                     <input type="file" name="event_logo" class="form-control" />
                                 </div>
                                 </div>
-
                             </div>
                       </div>
 
@@ -131,202 +154,226 @@
                         </div>
 
                         <div class="card-body">
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Warehouse Address</label>
-                                    <input type="text" class="form-control" name="warehouse_address" required>
+                         <div class="row">
+                                <div class="form-group mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Location Address</label>
+                                     <select name="location" id="eventloc" class="form-select" required>
+                                        <option value=""></option>
+                                         @php
+                                            $value = \DB::table('locations')->get();
+                                            foreach($value as $val)
+                                            {
+                                         @endphp
+                                           <option value="{{ $val->id }}"> {{ $val->location_descripton }}</option>
+                                          @php
+                                            }
+                                         @endphp
+                                      </select>
                                 </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Address line 1 </label>
-                                    <input type="text" name="address_line_1" class="form-control" required/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Address line 2</label>
-                                    <input type="text" class="form-control" name="address_line_2">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Address line 3 </label>
-                                    <input type="text" name="address_line_3" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">City</label>
-                                    <input type="text" class="form-control" name="city">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> State </label>
-                                    <input type="text" name="state" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Zipcode</label>
-                                    <input type="text" class="form-control" name="zipcode">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Country </label>
-                                    <input type="text" name="country" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Open Date</label>
-                                    <input type="date" class="form-control" name="open_date">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Adv Whse Deadline </label>
-                                    <input type="date" name="whse_deadline" class="form-control"/>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Operation Days / Hours </label>
-                                    <input type="text" name="operation_days_hours" class="form-control"/>
-                                    </div>
-                                </div>
-
-                            </div>
+                         </div>
                         </div>
 
-                        <div class="card-body pt-0">
-                            <div class="d-flex align-items-center">
-                              <h4 class="card-title">Marshaling Yard</h4>
-                              <div class="toggle-button-cover">
-                                <div class="button-cover">
-                                    <div class="button r" id="button-1">
-                                    <input type="checkbox" name="marshaling_yard" value="Y" class="checkbox" />
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                              </div>
-                            </div>
+                        <!--<div id="addrss">
+                            <div class="card-body" id="wareh">
 
-                           </div>
-                        </div>
-
-                        <div id="sho-card" class="card-body pb-0">
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Marshaling Address</label>
-                                    <input type="text" class="form-control" name="marshaling_address">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
                                     <div class="form-group">
-                                    <label> Address line 1 </label>
-                                    <input type="text" name="marshaling_address_line_1" class="form-control"/>
+                                        <label for="exampleInputName1">Warehouse Address</label>
+                                        <input type="text" class="form-control" name="warehouse_address" required>
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label> Address line 1 </label>
+                                        <input type="text" name="address_line_1" class="form-control" required/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Marshaling Address line 2</label>
-                                    <input type="text" class="form-control" name="marshaling_address_line_2">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
                                     <div class="form-group">
-                                    <label>Marshaling  Address line 3 </label>
-                                    <input type="text" name="marshaling_address_line_3" class="form-control"/>
+                                        <label for="exampleInputName1">Address line 2</label>
+                                        <input type="text" class="form-control" name="address_line_2">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label> Address line 3 </label>
+                                        <input type="text" name="address_line_3" class="form-control"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Marshaling City</label>
-                                    <input type="text" class="form-control" name="marshaling_city">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
                                     <div class="form-group">
-                                    <label>Marshaling  State </label>
-                                    <input type="text" name="marshaling_state" class="form-control"/>
+                                        <label for="exampleInputName1">City</label>
+                                        <input type="text" class="form-control" name="city">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label> State </label>
+                                        <input type="text" name="state" class="form-control"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Marshaling Zipcode</label>
-                                    <input type="text" class="form-control" name="marshaling_zipcode">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
                                     <div class="form-group">
-                                    <label>Marshaling Country </label>
-                                    <input type="text" name="marshaling_country" class="form-control"/>
+                                        <label for="exampleInputName1">Zipcode</label>
+                                        <input type="text" class="form-control" name="zipcode">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label> Country </label>
+                                        <input type="text" name="country" class="form-control"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="exampleInputName1">Marshaling Services</label>&nbsp;
-                                        <input type="checkbox" value="Y" name="marshaling_services">
+                                        <label for="exampleInputName1">Open Date</label>
+                                        <input type="date" class="form-control" name="open_date">
                                     </div>
                                     </div>
 
                                     <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputName1">Yard Fee($)</label>
-                                        <input type="text" class="form-control" name="yard_fee">
-                                    </div>
+                                        <div class="form-group">
+                                        <label> Adv Whse Deadline </label>
+                                        <input type="date" name="whse_deadline" class="form-control"/>
+                                        </div>
                                     </div>
 
                                     <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputName1">Marshaling Instruction</label>
-                                        <input type="text" class="form-control" name="marshaling_instruction">
+                                        <div class="form-group">
+                                        <label> Operation Days / Hours </label>
+                                        <input type="text" name="operation_days_hours" class="form-control"/>
+                                        </div>
                                     </div>
-                                    </div>
+
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="card-body pt-0">
+                                <div class="d-flex align-items-center">
+                                <h4 class="card-title">Marshaling Yard</h4>
+                                <div class="toggle-button-cover">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                        <input type="checkbox" name="marshaling_yard" value="Y" class="checkbox" />
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+                            </div>
+
+                            <div id="sho-card" class="card-body pb-0">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Marshaling Address</label>
+                                        <input type="text" class="form-control" name="marshaling_address">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label> Address line 1 </label>
+                                        <input type="text" name="marshaling_address_line_1" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Marshaling Address line 2</label>
+                                        <input type="text" class="form-control" name="marshaling_address_line_2">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label>Marshaling  Address line 3 </label>
+                                        <input type="text" name="marshaling_address_line_3" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Marshaling City</label>
+                                        <input type="text" class="form-control" name="marshaling_city">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label>Marshaling  State </label>
+                                        <input type="text" name="marshaling_state" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Marshaling Zipcode</label>
+                                        <input type="text" class="form-control" name="marshaling_zipcode">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                        <label>Marshaling Country </label>
+                                        <input type="text" name="marshaling_country" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling Services</label>&nbsp;
+                                            <input type="checkbox" value="Y" name="marshaling_services">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Yard Fee($)</label>
+                                            <input type="text" class="form-control" name="yard_fee">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling Instruction</label>
+                                            <input type="text" class="form-control" name="marshaling_instruction">
+                                        </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>-->
+
+                        <div id="addrss2" style="display: none;"></div>
 
                       </div>
                   </div>

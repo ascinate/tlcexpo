@@ -58,8 +58,9 @@
                             <td>{{ $event->event_name }}</td>
                             <td>
                               @php
-                                $venue = \DB::table('venues')->where('id', '=', $event->main_venue)->get();
-                                echo $venue[0]->address;
+                                /*$venue = \DB::table('venues')->where('id', '=', $event->main_venue)->get();
+                                echo @$venue[0]->address;*/
+                                echo $event->main_venue;
                               @endphp
                             </td>
                             <td>{{ $event->showsite }}</td>

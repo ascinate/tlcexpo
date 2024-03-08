@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -42,6 +43,7 @@ class EventController extends Controller
         $event->tradeshow = $request->tradeshow;
         $event->event_name = $request->event_name;
         $event->main_venue = $request->main_venue;
+        $event->show_contractor = $request->show_contractor;
         $event->showsite = $request->showsite;
         $event->event_start_date = $request->event_start_date;
         $event->event_end_date = $request->event_end_date;
@@ -124,6 +126,7 @@ class EventController extends Controller
         $event->tradeshow = $request->tradeshow;
         $event->event_name = $request->event_name;
         $event->main_venue = $request->main_venue;
+        $event->show_contractor = $request->show_contractor;
         $event->showsite = $request->showsite;
         $event->event_start_date = $request->event_start_date;
         $event->event_end_date = $request->event_end_date;
@@ -172,5 +175,215 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->delete();
         return redirect('admin/events');
+    }
+
+    public function getlocation(Request $request)
+    {
+        $datas = DB::table('locations')->where('id',$request->id)->get();
+        foreach($datas as $data)
+        {
+            //cho $data->address_line_1;
+
+
+    echo '
+        <div class="card-body" id="wareh">
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Warehouse Address</label>
+                    <input type="text" class="form-control" name="warehouse_address" value="">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label> Address line 1 </label>
+                    <input type="text" name="address_line_1" class="form-control" value="'.$data->address_line_1.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Address line 2</label>
+                    <input type="text" class="form-control" name="address_line_2" value="'.$data->address_line_2.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label> Address line 3 </label>
+                    <input type="text" name="address_line_3" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">City</label>
+                    <input type="text" class="form-control" name="city" value="'.$data->city.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label> State </label>
+                    <input type="text" name="state" class="form-control" value="'.$data->state.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Zipcode</label>
+                    <input type="text" class="form-control" name="zipcode" value="'.$data->zipcode.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label> Country </label>
+                    <input type="text" name="country" class="form-control" value="'.$data->country.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="exampleInputName1">Open Date</label>
+                    <input type="date" class="form-control" name="open_date">
+                </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                    <label> Adv Whse Deadline </label>
+                    <input type="date" name="whse_deadline" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                    <label> Operation Days / Hours </label>
+                    <input type="text" name="operation_days_hours" class="form-control"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body pt-0">
+            <div class="d-flex align-items-center">
+            <h4 class="card-title">Marshaling Yard</h4>
+            <div class="toggle-button-cover">
+                <div class="button-cover">
+                    <div class="button r" id="button-1">
+                    <input type="checkbox" name="marshaling_yard" value="Y" class="checkbox" />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        </div>
+
+        <div id="sho-card" class="card-body pb-0">
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Marshaling Address</label>
+                    <input type="text" class="form-control" name="marshaling_address">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label> Address line 1 </label>
+                    <input type="text" name="marshaling_address_line_1" class="form-control" value="'.$data->address_line_1.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Marshaling Address line 2</label>
+                    <input type="text" class="form-control" name="marshaling_address_line_2" value="'.$data->address_line_2.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label>Marshaling  Address line 3 </label>
+                    <input type="text" name="marshaling_address_line_3" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Marshaling City</label>
+                    <input type="text" class="form-control" name="marshaling_city" value="'.$data->city.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label>Marshaling  State </label>
+                    <input type="text" name="marshaling_state" class="form-control" value="'.$data->state.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputName1">Marshaling Zipcode</label>
+                    <input type="text" class="form-control" name="marshaling_zipcode" value="'.$data->zipcode.'">
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label>Marshaling Country </label>
+                    <input type="text" name="marshaling_country" class="form-control" value="'.$data->country.'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Marshaling Services</label>&nbsp;
+                        <input type="checkbox" value="Y" name="marshaling_services">
+                    </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Yard Fee($)</label>
+                        <input type="text" class="form-control" name="yard_fee">
+                    </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Marshaling Instruction</label>
+                        <input type="text" class="form-control" name="marshaling_instruction">
+                    </div>
+                    </div>
+            </div>
+
+        </div>';
+
+} /// end foreach
+
     }
 }
