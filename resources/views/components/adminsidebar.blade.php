@@ -95,6 +95,34 @@
             </div>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basicxs" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Shipments</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basicxs">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addshipment') }}">Add Shipment</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/shipments') }}">Shipment Lists</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basicx" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Loads</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basicx">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addload') }}">Add Load</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/loads') }}">Load List</a></li>
+              </ul>
+            </div>
+          </li>
+
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
             <span class="menu-title">Manage Tradeshows</span>
@@ -154,6 +182,22 @@
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/exhibitorcontractors') }}">Exhibit Contractors</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/managementcontractors') }}">Show Contractors</a></li>
+            </ul>
+          </div>
+
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basict" aria-expanded="false" aria-controls="ui-basic">
+            <span class="menu-title">Manage Tasks</span>
+            <i class="menu-arrow"></i>
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+          </a>
+
+          <div class="collapse" id="ui-basict">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addtask') }}">Add Task</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/tasks') }}">Task List</a></li>
             </ul>
           </div>
 

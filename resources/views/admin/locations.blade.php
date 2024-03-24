@@ -20,7 +20,6 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Location </th>
                           <th> Address </th>
                           <th> City </th>
                           <th> State </th>
@@ -34,7 +33,6 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{ $data->location_descripton }}</td>
                             <td>{{ $data->address_line_1 }}</td>
                             <td>{{ $data->city }}</td>
                             <td>{{ $data->state }}</td>

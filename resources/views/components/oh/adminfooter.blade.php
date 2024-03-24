@@ -688,7 +688,7 @@ $(document).ready(function()
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "/admin/getlocation",
+            url: "https://ascinate.in/projects/tclexpo/admin/getlocation",
             type: 'POST',
             data: {id:locId},
             success: function(data)
@@ -699,6 +699,7 @@ $(document).ready(function()
         });
     });
 
+
     $("#showloc").change(function(){
         var locId = $("#showloc").val();
 
@@ -706,14 +707,11 @@ $(document).ready(function()
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "/admin/exhibitorlocation",
+            url: "https://ascinate.in/projects/tclexpo/admin/exhibitorlocation",
             type: 'POST',
             data: {id:locId},
             success: function(data)
             {
-                $("#editexaddr").hide();
-                $("#editmanageaddr").hide();
-
                 $("#addrss22").show();
                 $("#addrss22").html(data);
             }
@@ -726,7 +724,7 @@ $(document).ready(function()
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "/admin/showmanagement",
+            url: "https://ascinate.in/projects/tclexpo/admin/showmanagement",
             type: 'POST',
             data: {id:tradeid},
             success: function(data)
@@ -743,26 +741,26 @@ $(document).ready(function()
 
     $("#shipment_type").change(function(){
 
-        var type = $("#shipment_type").val();
-        if(type == 'Inbound only')
-        {
-            $("#return").hide();
-            $("#origin").show();
-        }
-        else if(type == 'Outbound only')
-        {
-            $("#return").show();
-            $("#origin").hide();
-        }
-        else
-        {
-            $("#return").show();
-            $("#origin").show();
-            $("#marhyard").show();
-        }
-     });
+    var type = $("#shipment_type").val();
+    if(type == 'Inbound only')
+    {
+        $("#return").hide();
+        $("#origin").show();
+    }
+    else if(type == 'Outbound only')
+    {
+        $("#return").show();
+        $("#origin").hide();
+    }
+    else
+    {
+        $("#return").show();
+        $("#origin").show();
+        $("#marhyard").show();
+    }
+    });
 
-     if($("#shw2").prop("checked", true))
+    if($("#shw2").prop("checked", true))
     {
         $("#advance").hide();
         $("#direct").show();
@@ -786,7 +784,7 @@ $(document).ready(function()
                 $("#advance").show();
                 $("#advance").html(data);
             }
-        });
+    });
 
     }
 

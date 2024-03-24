@@ -183,9 +183,7 @@ class EventController extends Controller
         foreach($datas as $data)
         {
             //cho $data->address_line_1;
-
-
-    echo '
+       echo '
         <div class="card-body" id="wareh">
             <div class="row">
                 <div class="col-lg-6">

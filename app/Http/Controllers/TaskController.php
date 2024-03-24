@@ -8,7 +8,7 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     //
-    public function tasks()
+    public function index()
     {
         $data = Task::all();
         return view('admin/tasks',['datas' => $data]);
@@ -29,6 +29,8 @@ class TaskController extends Controller
         $task->description = $request->description;
         $task->links = $request->links;
         $task->notes = $request->notes;
+        $task->created_at = date('Y-m-d');
+        $task->updated_at = date('Y-m-d');
 
         $task->save();
         return redirect('admin/tasks');
@@ -43,6 +45,8 @@ class TaskController extends Controller
         $task->description = $request->description;
         $task->links = $request->links;
         $task->notes = $request->notes;
+        $task->status = $request->status;
+        $task->updated_at = date('Y-m-d');
 
         $task->save();
         return redirect('admin/tasks');

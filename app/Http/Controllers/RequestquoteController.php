@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Requestquote;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class RequestquoteController extends Controller
 {
@@ -249,5 +251,66 @@ class RequestquoteController extends Controller
 
         $requestquote->save();
         return redirect('thankyou');
+    }
+
+    public function tradequote(Request $request)
+    {
+       $tradeshow = $request->id;
+       $show_contractor = DB::table('events')->where('tradeshow', $tradeshow)->distinct('show_contractor')->get();
+       $show_venue = DB::table('events')->where('tradeshow', $tradeshow)->distinct('main_venue')->get();
+?>
+  <div class="col-lg-6">
+        <div class="form-group">
+            <label for="exampleInputName1" class="form-label"> Show Management Contractor </label>
+            <select name="show_management_contractor" id="contractor" class="form-select soy-hegiht">
+                <option value="">--Choose One--</option>
+                <?php
+                 foreach($show_contractor as $value)
+                 {
+                    $contractor = DB::table('managecontractors')->where('id', $value->show_contractor)->get();
+                    $cname = $contractor[0]->contractor_name;
+                ?>
+                  <option value="<?php echo $cname; ?>"><?php echo $cname; ?></option>
+                <?php
+                 }
+                ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="exampleInputName1" class="form-label"> Tradeshow Venue </label>
+            <select name="tradeshow_venue" class="form-select soy-hegiht">
+            <option value="">--Choose One--</option>
+                <?php
+                 foreach($show_venue as $val)
+                 {
+                ?>
+                  <option value="<?php echo $val->main_venue; ?>"><?php echo $val->main_venue; ?></option>
+                <?php
+                 }
+                ?>
+            </select>
+        </div>
+    </div>
+<?php
+    }
+
+    public function destination(Request $request)
+    {
+        $contractor = $request->id;
+        $show_contractor = DB::table('managecontractors')->where('id', $contractor)->get();
+ ?>
+    <option value="">--Choose One--</option>
+     <?php
+        foreach($show_contractor as $val)
+        {
+            $location = DB::table('locations')->where('id', $val->warehouse_address)->get();
+            $wname = $location[0]->location_description;
+     ?>
+        <option value="<?php echo $val->warehouse_address; ?>"><?php echo $wname; ?></option>
+     <?php
+        }
     }
 }

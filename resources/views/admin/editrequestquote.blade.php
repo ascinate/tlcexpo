@@ -84,7 +84,7 @@
                                 <div class="col-lg-4">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Tradeshow Name <span class="text-danger">*</span> </label>
-                                      <select name="tradeshow_name" class="form-select soy-hegiht" required>
+                                      <select name="tradeshow_name" id="tradeshow" class="form-select soy-hegiht" required>
                                         <option value=""></option>
                                         @php
                                             $trades = \DB::table('tradeshows')->get();
@@ -103,34 +103,19 @@
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="row" id="show_m2" style="display: none;"></div>
+
+                                <div class="col-lg-4" id="show_m">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Show Management Contractor </label>
-                                      <input type="text" class="form-control" name="show_management_contractor" value="{{ $data['show_management_contractor'] }}">
+                                      <input type="text" class="form-control" name="show_management_contractor2" value="{{ $data['show_management_contractor'] }}" readonly>
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" id="tr_v">
                                   <div class="form-group">
-                                      <label for="exampleInputName1" class="form-label"> Tradeshow Venue <span class="text-danger">*</span> </label>
-                                      <select name="tradeshow_venue" class="form-select">
-                                        <option value=""></option>
-                                        @php
-                                            $value = \DB::table('locations')->get();
-                                            foreach($value as $val)
-                                            {
-
-                                            $address = @$val->address_line_1.', '.$val->city.', '.$val->state.', '.$val->zipcode;
-                                        @endphp
-                                           <option value="{{ $address }}"@php
-                                         if($data['tradeshow_venue']==$address) { echo 'selected'; }
-                                        @endphp>
-                                            {{ $address }}
-                                         </option>
-                                          @php
-                                            }
-                                        @endphp
-                                      </select>
+                                      <label for="exampleInputName1" class="form-label"> Tradeshow Venue </label>
+                                      <input type="text" class="form-control" name="tradeshow_venue2" value="{{ $data['tradeshow_venue'] }}" readonly>
                                   </div>
                                 </div>
 

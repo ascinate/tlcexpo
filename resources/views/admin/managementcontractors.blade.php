@@ -41,7 +41,12 @@
                         @foreach ($datas as $data)
                         <tr>
                             <td>{{ $data->contractor_name }}</td>
-                            <td>{{ $data->address_line_1.', '.$data->address_line_2 }}</td>
+                            <td>
+                                @php
+                                    $value = \DB::table('locations')->where('id', $data->warehouse_address)->get();
+                                    echo @$value[0]->location_descripton;
+                                @endphp
+                            </td>
                             <td>{{ $data->phone }}</td>
                             <td>{{ $data->website }}</td>
                             <td>

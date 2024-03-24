@@ -180,7 +180,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "/showmanagement",
+            url: "https://ascinate.in/projects/tclexpo/showmanagement",
             type: 'POST',
             data: {id:tradeid},
             success: function(data)
@@ -195,13 +195,13 @@
         });
     });
 
-    if($("#show2").prop("checked", true))
+    if($("#war2").prop("checked", true))
     {
         $("#advance").hide();
         $("#direct").show();
     }
 
-    if($("#show1").prop("checked", true))
+    if($("#war1").prop("checked", true))
     {
         var contractor = $("#contractor").val();
 
@@ -209,7 +209,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "/destination",
+            url: "https://ascinate.in/projects/tclexpo/destination",
             type: 'POST',
             data: {id:contractor},
             success: function(data)
@@ -241,7 +241,7 @@
             $("#return").show();
             $("#origin").show();
         }
-    });
+        });
 
     });
 </script>

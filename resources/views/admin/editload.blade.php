@@ -6,7 +6,8 @@
           <div class="content-wrapper">
 
            <!----Main Row--------->
-           <form name="addfrm" action="{{ URL::to('insertload') }}" method="POST" class="forms-sample">
+           <form name="addfrm" action="{{ URL::to('updateload') }}" method="POST" class="forms-sample">
+            <input type="hidden" name="id" value="{{ $data['id'] }}">
             @csrf
             <div class="row">
                  <div class="col-12 grid-margin stretch-card">
@@ -18,32 +19,35 @@
                                 <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Load Id</label>
-                                    <input type="text" class="form-control" name="load_id">
+                                    <input type="text" class="form-control" name="load_id" value="{{ $data['load_id'] }}">
                                 </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Shipment </label>
-                                        <select name="shipment" class="form-select">
-                                            <option value="">--Add New--</option>
-                                            @php
-                                                $loads = \DB::table('loads')->get();
-                                                foreach($loads as $load)
-                                                {
-                                                    $cust = \DB::table('customers')->where('id', $load->customer_id)->get();
-                                                    $cname = @$cust[0]->customer_name;
+                                    <select name="shipment" class="form-select">
+                                        <option value="">--Add New--</option>
+                                        @php
+                                            $loads = \DB::table('loads')->get();
+                                            foreach($loads as $load)
+                                            {
+                                                $customer = \DB::table('customers')->where('id', $data->customer_id)->get();
+                                                $cname = @$customer[0]->customer_name;
 
-                                                    $trade = \DB::table('tradeshows')->where('id', $load->destination_tradeshow_id)->get();
-                                                    $sname = @$trade[0]->show_name;
+                                                $tradeshow = \DB::table('tradeshows')->where('id', $data->destination_tradeshow_id)->get();
+                                                $sname = @$tradeshow[0]->show_name;
 
-                                                    $shipment = $load->load_id.'-'.$cname.'-'.$sname;
-                                            @endphp
-                                             <option value="{{ $shipment }}">{{ $shipment }}</option>
-                                            @php
-                                                }
-                                            @endphp
-                                        </select>
+                                                $shipment = $load->load_id.'-'.$cname.'-'.$sname;
+                                        @endphp
+                                         <option value="{{ $shipment }}"@php
+                                             if($data['shipment']==$shipment) { echo 'selected'; }
+                                         @endphp>
+                                            {{ $shipment }}
+                                        </option>
+                                        @php
+                                            }
+                                        @endphp
                                     </select>
                                     </div>
                                 </div>
@@ -55,17 +59,17 @@
                                     <label>Shipment Type</label>
                                     <select name="shipment_type" class="form-select">
                                         <option value=""></option>
-                                        <option value="TL-To Show">TL-To Show</option>
-                                        <option value="TL-To Advance Warehouse">TL-To Advance Warehouse </option>
-                                        <option value="TL-From Show">TL-From Show</option>
-                                        <option value="LTL-To Show"> LTL-To Show </option>
-                                        <option value="LTL-To Advance Warehouse"> LTL-To Advance Warehouse </option>
-                                        <option value="LTL-From Show"> LTL-From Show </option>
-                                        <option value="PT-To Show"> PT-To Show </option>
-                                        <option value="PT-To Advance Warehouse"> PT-To Advance Warehouse </option>
-                                        <option value="PT-From Show"> PT-From Show </option>
-                                        <option value="Show-To-Show"> Show-To-Show </option>
-                                        <option value="Whse-To-Whse"> Whse-To-Whse </option>
+                                        <option value="TL-To Show"@php if($data['shipment_type']=="TL-To Show") { echo 'selected'; } @endphp>TL-To Show</option>
+                                        <option value="TL-To Advance Warehouse"@php if($data['shipment_type']=="TL-To Advance Warehouse") { echo 'selected'; } @endphp>TL-To Advance Warehouse </option>
+                                        <option value="TL-From Show"@php if($data['shipment_type']=="TL-From Show") { echo 'selected'; } @endphp>TL-From Show</option>
+                                        <option value="LTL-To Show"@php if($data['shipment_type']=="LTL-To Show") { echo 'selected'; } @endphp> LTL-To Show </option>
+                                        <option value="LTL-To Advance Warehouse"@php if($data['shipment_type']=="LTL-To Advance Warehouse") { echo 'selected'; } @endphp> LTL-To Advance Warehouse </option>
+                                        <option value="LTL-From Show"@php if($data['shipment_type']=="LTL-From Show") { echo 'selected'; } @endphp> LTL-From Show </option>
+                                        <option value="PT-To Show"@php if($data['shipment_type']=="PT-To Show") { echo 'selected'; } @endphp> PT-To Show </option>
+                                        <option value="PT-To Advance Warehouse"@php if($data['shipment_type']=="PT-To Advance Warehouse") { echo 'selected'; } @endphp> PT-To Advance Warehouse </option>
+                                        <option value="PT-From Show"@php if($data['shipment_type']=="PT-From Show") { echo 'selected'; } @endphp> PT-From Show </option>
+                                        <option value="Show-To-Show"@php if($data['shipment_type']=="Show-To-Show") { echo 'selected'; } @endphp> Show-To-Show </option>
+                                        <option value="Whse-To-Whse"@php if($data['shipment_type']=="Whse-To-Whse") { echo 'selected'; } @endphp> Whse-To-Whse </option>
                                     </select>
                                 </div>
                                 </div>
@@ -80,7 +84,11 @@
                                             foreach($customer as $cust)
                                             {
                                         @endphp
-                                        <option value="{{ $cust->id }}">{{ $cust->customer_name }}</option>
+                                        <option value="{{ $cust->id }}"@php
+                                            if($data['customer_id']==$cust->id) { echo 'selected'; }
+                                        @endphp>
+                                            {{ $cust->customer_name }}
+                                        </option>
                                         @php
                                             }
                                         @endphp
@@ -100,7 +108,9 @@
                                          foreach($entity as $val)
                                           {
                                     @endphp
-                                     <option value="{{ $val->id }}">
+                                     <option value="{{ $val->id }}"@php
+                                         if($data['billing_entity_name']==$val->id) { echo 'selected'; }
+                                     @endphp>
                                         {{ $val->legeal_name }}
                                      </option>
                                     @php
@@ -109,6 +119,7 @@
                                 </select>
                                 </div>
                                 </div>
+
 
                             <!--<div class="row">
                                 <div class="col-lg-6">
@@ -187,41 +198,46 @@
                                             foreach($tradeshows as $trade)
                                             {
                                         @endphp
-                                        <option value="{{ $trade->id }}">{{ $trade->show_name }}</option>
+                                        <option value="{{ $trade->id }}"@php
+                                            if($data['destination_tradeshow_id']==$trade->id) { echo 'selected'; }
+                                        @endphp>
+                                            {{ $trade->show_name }}
+                                        </option>
                                         @php
                                             }
                                         @endphp
                                     </select>
                                 </div>
                                 </div>
+
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                     <label> Cargo Beams </label>
-                                    <input type="text" name="cargo_beams" class="form-control"/>
+                                    <input type="text" name="cargo_beams" value="{{ $data['cargo_beams'] }}" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                     <label> Logistic Straps </label>
-                                    <input type="text" name="logistic_straps" class="form-control"/>
+                                    <input type="text" name="logistic_straps" value="{{ $data['logistic_straps'] }}" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                     <label class="form-label"> Wheel Dollies </label>
-                                    <input type="text" name="wheel_dollies" class="form-control"/>
+                                    <input type="text" name="wheel_dollies" value="{{ $data['wheel_dollies'] }}" class="form-control"/>
                                 </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                     <label class="form-label"> Furniture Pad </label>
-                                    <input type="text" name="furniture_pad" class="form-control"/>
+                                    <input type="text" name="furniture_pad" value="{{ $data['furniture_pad'] }}" class="form-control"/>
                                 </div>
                                 </div>
                             </div>
@@ -231,15 +247,28 @@
                                     <div class="form-group">
                                     <label class="form-label"> Material Handling Equipment </label>
                                     <p>
-                                        <input type="checkbox" name="liftgate" value="Y"> Liftgate &nbsp;
-                                        <input type="checkbox" name="pallet_jack" value="Y"> Pallet Jack &nbsp;
-                                        <input type="checkbox" name="hand_truck" value="Y"> Hand truck&nbsp;
-                                        <input type="checkbox" name="dolly" value="Y"> Dolly &nbsp;
-                                        <input type="checkbox" name="driver_assist" value="Y"> Driver assist &nbsp;
-                                        <input type="checkbox" name="full_clearance_doors" value="Y"> Full clearance doors &nbsp;
+                                        <input type="checkbox" name="liftgate" value="Y"@php
+                                            if($data['liftgate']=='Y') { echo 'checked'; }
+                                        @endphp> Liftgate &nbsp;
+                                        <input type="checkbox" name="pallet_jack" value="Y"@php
+                                        if($data['pallet_jack']=='Y') { echo 'checked'; }
+                                    @endphp> Pallet Jack &nbsp;
+                                        <input type="checkbox" name="hand_truck" value="Y"@php
+                                        if($data['hand_truck']=='Y') { echo 'checked'; }
+                                    @endphp> Hand truck &nbsp;
+
+                                        <input type="checkbox" name="dolly" value="Y"@php
+                                        if($data['dolly']=='Y') { echo 'checked'; }
+                                    @endphp> Dolly &nbsp;
+                                        <input type="checkbox" name="driver_assist" value="Y"@php
+                                        if($data['driver_assist']=='Y') { echo 'checked'; }
+                                    @endphp> Driver assist &nbsp;
+                                        <input type="checkbox" name="full_clearance_doors" value="Y"@php
+                                        if($data['full_clearance_doors']=='Y') { echo 'checked'; }
+                                    @endphp> Full clearance doors &nbsp;
                                     </p>
                                     <p>
-                                        <input type="text" name="other" class="form-control" placeholder="Other">
+                                        <input type="text" name="other" class="form-control" value="{{ $data['other'] }}" placeholder="Other">
                                     </p>
                                     </div>
                                 </div>
@@ -247,7 +276,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label class="form-label"> Driver instruction </label>
-                                    <input type="text" name="driver_instruction" class="form-control"/>
+                                    <input type="text" name="driver_instruction" value="{{ $data['driver_instruction'] }}" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +285,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label"> Comments </label>
-                                        <input type="text" name="comments" class="form-control"/>
+                                        <input type="text" name="comments" class="form-control" value="{{ $data['comments'] }}"/>
                                     </div>
                                 </div>
                             </div>

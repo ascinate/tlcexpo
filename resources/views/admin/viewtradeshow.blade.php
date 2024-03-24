@@ -22,12 +22,22 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Main Venue </label>
-                                    <span class="d-block">
+                                    <select name="main_venue" class="form-select" @readonly(true)>
+                                        <option value="">--Select--</option>
                                         @php
-                                        $venues = \DB::table('venues')->where('id', $data['main_venue'])->get();
-                                        echo $venues[0]->address;
+                                        $venues = \DB::table('venues')->get();
+                                        foreach($venues as $venue)
+                                        {
                                         @endphp
-                                    </span>
+                                          <option value="{{ $venue->id }}"@php
+                                              if($venue->id==$data['main_venue']) { echo 'selected'; }
+                                          @endphp>
+                                            {{ $venue->address }}
+                                         </option>
+                                        @php
+                                            }
+                                        @endphp
+                                    </select>
                                     </div>
                                 </div>
 
@@ -55,21 +65,36 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label"> Show Manager </label>
-                                        <span class="d-block">
+                                        <select name="show_management" style="border:none;" class="form-select" readonly>
+                                            <option value="">--Select--</option>
                                             @php
-                                                $datas = \DB::table('managecontractors')->where('id',$data['show_management'])->get();
-                                                echo @$datas[0]->contractor_name;
+                                                $datas = \DB::table('managecontractors')->get();
+                                                foreach($datas as $ar) {
                                             @endphp
-                                        </span>
+                                            <option value="{{ $ar->id }}"@php
+                                                if($ar->id==$data['show_management']) { echo 'selected'; }
+                                            @endphp>
+                                                {{ $ar->contractor_name }}
+                                            </option>
+                                            @php
+                                                }
+                                            @endphp
+                                    </select>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label>  NAICS Industry Sector </label>
-                                    <span class="d-block">
-                                        {{ $data['naics_industry_sector'] }}
-                                    </span>
+                                    <select name="naics_industry_sector" style="border:none;" class="form-select" readonly>
+                                        <option value="">--Select--</option>
+                                        <option value="Construction"@php
+                                            if($data['naics_industry_sector']=='Construction') { echo 'selected'; }
+                                        @endphp>Construction</option>
+                                        <option value="Manufacturing"@php
+                                        if($data['naics_industry_sector']=='Manufacturing') { echo 'selected'; }
+                                    @endphp>Manufacturing</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -78,9 +103,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Frequency </label>
-                                    <span class="d-block">
-                                        {{ $data['frequency'] }}
-                                    </span>
+                                    <select name="frequency" style="border:none;" class="form-select" readonly>
+                                        <option value="">--Select--</option>
+                                        <option value="1 week" @php
+                                        if($data['frequency']=='1 week') { echo 'selected'; }
+                                    @endphp>1 week</option>
+                                        <option value="1 month" @php
+                                        if($data['frequency']=='1 month') { echo 'selected'; }
+                                    @endphp>1 month</option>
+                                    </select>
                                 </div>
                                 </div>
 
@@ -115,7 +146,7 @@
                                 </div>
 
                             </div>
-                          <button type="button" class="btn btn-gradient-primary me-2" onclick="javascript:history.go(-1);">Back</button>
+                          <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">Back</button>
                         </form>
                       </div>
                     </div>

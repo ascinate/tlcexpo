@@ -30,63 +30,6 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                    <label> Address line 1 </label>
-                                    <span class="d-block">{{ $data['address_line_1'] }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Address line 2</label>
-                                    <span class="d-block">{{ $data['address_line_2'] }}</span>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-label"> Address line 3 </label>
-                                        <span class="d-block">{{ $data['address_line_3'] }}</span>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> City</label>
-                                    <span class="d-block">{{ $data['city'] }}</span>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> State </label>
-                                        <span class="d-block">{{ $data['state'] }}</span>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Zipcode</label>
-                                    <span class="d-block">{{ $data['zipcode'] }}</span>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> Country </label>
-                                        <span class="d-block">{{ $data['country'] }}</span>
-                                 </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
                                     <label> Phone</label>
                                     <span class="d-block">{{ $data['phone'] }}</span>
                                 </div>
@@ -107,6 +50,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                  <label for="exampleFormControlInput1" class="form-label">Warehouse Location Address</label>
+                                  <span class="d-block">
+                                    @php
+                                        $warehouse = \DB::table('locations')->where('id', $data['warehouse_address'])->get();
+                                        echo @$warehouse[0]->location_descripton;
+                                    @endphp
+                                    </span>
+                                </div>
+
+                               <div class="col-lg-6">
+                                <label for="exampleFormControlInput1" class="form-label">Marshaling Yards Address</label>
+                                <span class="d-block">
+                                    @php
+                                        $marshaling = \DB::table('locations')->where('id', $data['marshaling_address'])->get();
+                                        echo @$marshaling[0]->location_descripton;
+                                    @endphp
+                                    </span>
+                               </div>
+                           </div>
+
                         </div>
 
                         <div class="card-body add-remove-div">

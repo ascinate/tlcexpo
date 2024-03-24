@@ -8,7 +8,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Edit Quote</h4>
+                        <h4 class="card-title">View Quote</h4>
 
                             <div class="row">
                                 <div class="col-lg-4">
@@ -63,10 +63,12 @@
                                 <div class="col-lg-4">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Tradeshow Name <span class="text-danger">*</span> </label>
-                                        @php
-                                            $trades = \DB::table('tradeshows')->where('id',$data['tradeshow_name'])->get();
-                                            echo $trades[0]->show_name;
-                                        @endphp
+                                      <span class="d-block">
+                                            @php
+                                                $trades = \DB::table('tradeshows')->where('id',$data['tradeshow_name'])->get();
+                                                echo $trades[0]->show_name;
+                                            @endphp
+                                     </span>
                                   </div>
                                 </div>
 
@@ -113,7 +115,6 @@
                                 <div class="col-lg-12">
                                   <h5> Accessorials  <span class="text-danger">*</span> </h5>
                                   <span class="d-block">{{ $data['accessorials'] }}</span>
-                                  </div>
                                   <div class="col-lg-8"> </div>
                                 </div>
 
@@ -273,7 +274,7 @@
                             @endphp
 
 
-                            <div id="ash-div" class="comonheadrt bg-light p-4">
+                            <div id="ash-div" class="comonheadrt bg-light p-4 mb-4">
 
                                 <div class="d-flex align-items-center mb-4">
                                     <a id="maiu" class="btn btn-clop p-0">
@@ -335,14 +336,14 @@
                                         </div>
                                    </div>
                                    <div class="col-lg-2">
-                                        <div class="form-check ps-4">
+                                        <div class="form-check">
                                             <label class="form-check-label m-0" for="flexCheckDefault">Hazardous</label>
                                             <span class="d-block">{{ @$items['Hazardous'][$j-1] }}</span>
                                         </div>
                                         <p class="mt-2 comon-texr"> Is this a hazardous material? </p>
                                    </div>
                                    <div class="col-lg-2">
-                                        <div class="form-check ps-4">
+                                        <div class="form-check">
                                           <label class="form-check-label m-0" for="flexCheckDefault">
                                           Stackable
                                           </label>
@@ -359,7 +360,7 @@
                                 }
                             @endphp
 
-                          <button type="button" name="cancel" class="btn btn-light" onclick="javascript:history.go(-1);">Back</button>
+                          <button type="button" name="cancel" class="btn btn-dark" onclick="javascript:history.go(-1);">Back</button>
                         </form>
                       </div>
                     </div>

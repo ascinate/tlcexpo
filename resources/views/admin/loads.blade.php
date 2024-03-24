@@ -13,8 +13,8 @@
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                       <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{{ URL::to('admin/addexhibitorcontractor') }}" class="btn btn-gradient-success btn-fw">
-                            Add Exhibitor Contractors
+                        <a href="{{ URL::to('admin/addload') }}" class="btn btn-gradient-success btn-fw">
+                            Add Load
                         </a>
                       </li>
                     </ul>
@@ -25,14 +25,15 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Exhibitor Contractors List</h4>
+                    <h4 class="card-title">Load List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Contractor Name </th>
-                          <th> Address </th>
-                          <th> Phone </th>
-                          <th> Website </th>
+                          <td>Load ID</td>
+                          <th> Ship Type </th>
+                          <th> Customer </th>
+                          <th> Tradeshow </th>
+                          <th> Location </th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -40,23 +41,32 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{ $data->contractor_name }}</td>
+                            <td>{{ $data->load_id }}</td>
+                            <td>{{ $data->shipment_type }}</td>
+                            <td>@php
+                                $customer = \DB::table('customers')->where('id', $data->customer_id)->get();
+                                echo @$customer[0]->customer_name;
+                            @endphp</td>
                             <td>
                                 @php
-                                  $value = \DB::table('locations')->where('id', $data->warehouse_address)->get();
-                                  echo @$value[0]->location_descripton;
+                                    $tradeshow = \DB::table('tradeshows')->where('id', $data->destination_tradeshow_id)->get();
+                                    echo @$tradeshow[0]->show_name;
                                 @endphp
                             </td>
-                            <td>{{ $data->phone }}</td>
-                            <td>{{ $data->website }}</td>
                             <td>
-                                <a href="{{ URL::to('admin/viewexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                @php
+                                    $entitie = \DB::table('entities')->where('id', $data->billing_entity_name)->get();
+                                    echo @$entitie[0]->legeal_name;
+                                @endphp
+                            </td>
+                            <td>
+                                <!--<a href="{{ URL::to('admin/viewload/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
-                                </a>
-                                <a href="{{ URL::to('admin/editexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                </a>-->
+                                <a href="{{ URL::to('admin/editload/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deleteexhibitorcontractor/'.$data->id }}" style="color: #333;">
+                                <a href="{{ 'deleteload/'.$data->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

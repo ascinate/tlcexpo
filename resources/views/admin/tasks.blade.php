@@ -13,8 +13,8 @@
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                       <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{{ URL::to('admin/addexhibitorcontractor') }}" class="btn btn-gradient-success btn-fw">
-                            Add Exhibitor Contractors
+                        <a href="{{ URL::to('admin/addtask') }}" class="btn btn-gradient-success btn-fw">
+                            Add Task
                         </a>
                       </li>
                     </ul>
@@ -25,14 +25,15 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Exhibitor Contractors List</h4>
+                    <h4 class="card-title">Task List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Contractor Name </th>
-                          <th> Address </th>
-                          <th> Phone </th>
-                          <th> Website </th>
+                          <td>Name</td>
+                          <th> Priority </th>
+                          <th> Type </th>
+                          <th> Status </th>
+                          <th> Last Updated </th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -40,23 +41,16 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{ $data->contractor_name }}</td>
+                            <td>{{ $data->task_name }}</td>
+                            <td>{{ $data->priority }}</td>
+                            <td>{{ $data->task_type }}</td>
+                            <td>{{ $data->status }}</td>
+                            <td>{{  $data->updated_at }} </td>
                             <td>
-                                @php
-                                  $value = \DB::table('locations')->where('id', $data->warehouse_address)->get();
-                                  echo @$value[0]->location_descripton;
-                                @endphp
-                            </td>
-                            <td>{{ $data->phone }}</td>
-                            <td>{{ $data->website }}</td>
-                            <td>
-                                <a href="{{ URL::to('admin/viewexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
-                                    <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
-                                </a>
-                                <a href="{{ URL::to('admin/editexhibitcontractor/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/edittask/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deleteexhibitorcontractor/'.$data->id }}" style="color: #333;">
+                                <a href="{{ 'deletetask/'.$data->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>

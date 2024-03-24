@@ -36,7 +36,7 @@
                                 <div class="col-lg-2">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Shipment Type </label>
-                                      <select name="shipment_type" class="form-select soy-hegiht">
+                                      <select name="shipment_type" id="shipment_type" class="form-select soy-hegiht">
                                         <option value=""></option>
                                         <option value="Round trip">Round trip</option>
                                         <option value="Inbound only">Inbound only</option>
@@ -46,7 +46,7 @@
                                   </div>
                                 </div>
 
-                                <div class="col-lg-2">
+                                <div class="col-lg-2" id="return">
                                     <div class="form-check m-0">
                                       <input class="form-check-input" name="return_to_origin" type="checkbox" value="Yes" id="return_to_origin" checked>
                                       <label class="form-check-label ms-0" for="return_to_origin">
@@ -70,10 +70,10 @@
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                               <div class="col-lg-4">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Tradeshow Name <span class="text-danger">*</span> </label>
-                                      <select name="tradeshow_name" class="form-select soy-hegiht" required>
+                                      <select name="tradeshow_name" id="tradeshow" class="form-select soy-hegiht" required>
                                         <option value=""></option>
                                         @php
                                             $data = \DB::table('tradeshows')->get();
@@ -88,46 +88,38 @@
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="row" id="show_m2" style="display: none;"></div>
+
+                                <div class="col-lg-4" id="show_m">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Show Management Contractor </label>
-                                      <input type="text" class="form-control" name="show_management_contractor">
+                                      <select name="" class="form-select soy-hegiht">
+                                        <option value=""></option>
+                                      </select>
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" id="tr_v">
                                   <div class="form-group">
                                       <label for="exampleInputName1" class="form-label"> Tradeshow Venue <span class="text-danger">*</span> </label>
-                                      <select name="tradeshow_venue" class="form-select">
+                                      <select name="tradeshow_venue" class="form-select soy-hegiht">
                                         <option value=""></option>
-                                        @php
-                                            $value = \DB::table('locations')->get();
-                                            foreach($value as $val)
-                                            {
-
-                                            $address = @$val->address_line_1.', '.$val->city.', '.$val->state.', '.$val->zipcode;
-                                        @endphp
-                                           <option value="{{ $address }}"> {{ $address }}</option>
-                                          @php
-                                            }
-                                        @endphp
                                       </select>
                                   </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                   <h5> Show Destination  <span class="text-danger">*</span> </h5>
-
                                   <div class="form-check m-0 ps-4">
-                                      <input class="form-check-input" type="radio" value="Advance Warehouse" name="show_destination" id="flexCheckCheckedrd" checked>
-                                      <label class="form-check-label ms-0" for="flexCheckChecked">
+                                      <input class="form-check-input" type="radio" value="Advance Warehouse" name="show_destination" id="shw1">
+                                      <label class="form-check-label ms-0" for="shw1">
                                       Advance Warehouse
                                       </label>
                                   </div>
 
                                   <div class="form-check m-0 ps-4">
-                                      <input class="form-check-input" type="radio" value="Direct to Show" name="show_destination" id="flexCheckCheckedrd2">
-                                      <label class="form-check-label ms-0" for="flexCheckChecked">
+                                      <input class="form-check-input" type="radio" value="Direct to Show" name="show_destination" id="shw2" checked>
+                                      <label class="form-check-label ms-0" for="shw2">
                                       Direct to Show
                                       </label>
                                   </div>
@@ -232,6 +224,7 @@
                                 <div class="col-lg-8"> </div>
 
                                 <div class="col-lg-6 mt-4">
+                                    <div class="row"  id="origin">
                                     <h5> Origin Location </h5>
 
                                     <div class="form-group">
@@ -286,13 +279,26 @@
                                           </div>
                                        </div>
                                     </div>
-
-                                    <div class="col-lg-12">
+                                </div>
+                                    <div class="col-lg-12" id="marhyard" style="display: none;">
                                           <div class="form-group">
                                              <label for="exampleInputName1" class="form-label"> Marshaling Yard Address </label>
-                                             <input type="text" class="form-control" name="marshaling_address_line_1" placeholder="Address Line 1">
+                                             <select class="form-select" name="marshaling_address_line_1" id="marh">
+                                                <option value="">--Select--</option>
+                                                 @php
+                                                    $value = \DB::table('locations')->get();
+                                                    foreach($value as $val)
+                                                    {
+                                                 @endphp
+                                                   <option value="{{ $val->id }}">
+                                                    {{ $val->location_descripton }}
+                                                  </option>
+                                                  @php
+                                                    }
+                                                 @endphp
+                                            </select>
                                           </div>
-                                          <div class="form-group">
+                                          <!--<div class="form-group">
                                              <input type="text" class="form-control" name="marshaling_address_line_2" placeholder="Address Line 2">
                                           </div>
                                           <div class="row">
@@ -310,7 +316,7 @@
                                           <div class="form-group">
                                              <input type="text" class="form-control" name="marshaling_zipcode" placeholder="Zip Code">
                                              <p class="comon-texr"> (No worries. We'll look it up for you if it's not handy). </p>
-                                          </div>
+                                          </div>-->
                                     </div>
                                 </div>
 
@@ -318,15 +324,30 @@
                                     <h5> Destination Location </h5>
 
                                     <div class="form-group">
-                                      <input type="text" class="form-control" name="destination_address_line_1" placeholder="Address Line 1">
+                                      <select name="destination_address_line_1" id="advance" class="form-select" style="display: none;">
+
+                                      </select>
                                     </div>
 
                                     <div class="form-group">
-                                      <input type="text" class="form-control" name="destination_address_line_2" placeholder="Address Line 2">
+                                        <select name="destination_address_line_1" id="direct" class="form-select">
+                                            <option value="">--Choose one--</option>
+                                             @php
+                                                 $venue = \DB::table('tradevenues')->get();
+                                                 foreach($venue as $val)
+                                                 {
+                                                     $entity = \DB::table('entities')->where('id', $val->entity_id)->get();
+                                                     $location = $entity[0]->legeal_name;
+                                             @endphp
+                                                 <option value="{{ $val->entity_id }}">{{ $location }}</option>
+                                             @php
+                                                 }
+                                             @endphp
+                                         </select>
                                     </div>
 
                                     <div class="row">
-                                       <div class="col-lg-6">
+                                       <!--<div class="col-lg-6">
                                           <div class="form-group">
                                             <input type="text" class="form-control" name="destination_city" placeholder="City">
                                           </div>
@@ -350,7 +371,7 @@
                                                   <option value="Canada">Canada</option>
                                                 </select>
                                           </div>
-                                       </div>
+                                       </div>-->
 
                                        <div class="col-lg-6">
                                           <div class="form-group">

@@ -10,7 +10,7 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Add Show Contractor</h4>
+                        <h4 class="card-title">Edit Show Contractor</h4>
                         <form name="addfrm" action="{{ URL::to('updatecontractor') }}" method="POST" class="forms-sample">
                         <input type="hidden" name="id" value="{{ $data['id'] }}" />
                             @csrf
@@ -27,70 +27,6 @@
                                     <div class="form-group">
                                     <label>Short Name </label>
                                     <input type="text" name="short_name" class="form-control" value="{{ $data['short_name'] }}"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Address line 1 </label>
-                                    <input type="text" name="address_line_1" class="form-control" value="{{ $data['address_line_1'] }}"/>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Address line 2</label>
-                                    <input type="text" name="address_line_2" class="form-control" value="{{ $data['address_line_2'] }}"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-label"> Address line 3 </label>
-                                        <input type="text" name="address_line_3" class="form-control" value="{{ $data['address_line_3'] }}"/>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> City</label>
-                                    <input type="text" name="city" class="form-control" value="{{ $data['city'] }}"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> State </label>
-                                        <input type="text" name="state" class="form-control" value="{{ $data['state'] }}"/>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Zipcode</label>
-                                    <input type="text" name="zipcode" class="form-control" value="{{ $data['zipcode'] }}"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> Country </label>
-                                        <select class="form-select" name="country">
-                                            <option value="USA"@php
-                                                if($data['country']=='USA') { echo 'selected'; }
-                                            @endphp>United State</option>
-                                            <option value="Canada"@php
-                                            if($data['country']=='Canada') { echo 'selected'; }
-                                        @endphp>Canada</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +53,193 @@
                                     </select>
                                     </div>
                                 </div>
-                            </div>
+                               </div>
+
+                               <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Warehouse Location Address</label>
+                                     <select name="warehouse_address" id="" class="form-select" placeholder="Select Location" required>
+                                        <option value=""></option>
+                                         @php
+                                            $value = \DB::table('locations')->get();
+                                            foreach($value as $val)
+                                            {
+                                         @endphp
+                                           <option value="{{ $val->id }}" @php
+                                               if( $data['warehouse_address']==$val->id ) { echo 'selected'; }
+                                           @endphp>
+                                            {{ $val->location_descripton }}
+                                          </option>
+                                          @php
+                                            }
+                                         @endphp
+                                      </select>
+                                </div>
+
+                            <div class="col-lg-6">
+                                <label for="exampleFormControlInput1" class="form-label">Marshaling Yards Address</label>
+                                 <select name="marshaling_address" id="" class="form-select" placeholder="Select Location" required>
+                                    <option value=""></option>
+                                     @php
+                                        $value = \DB::table('locations')->get();
+                                        foreach($value as $val)
+                                        {
+                                     @endphp
+                                       <option value="{{ $val->id }}" @php
+                                           if( $data['marshaling_address']==$val->id ) { echo 'selected'; }
+                                       @endphp>
+                                        {{ $val->location_descripton }}
+                                      </option>
+                                      @php
+                                        }
+                                     @endphp
+                                  </select>
+                             </div>
+                          </div>
+
+                           <!--<div class="row" id="editmanageaddr">
+                            <div class="card-body" id="wareh">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Warehouse </h4>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Warehouse Address</label>
+                                            <input type="text" class="form-control" name="warehouse_address" value="">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label> Address line 1 </label>
+                                            <input type="text" name="address_line_1" class="form-control" value="{{ $data['address_line_1'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Address line 2</label>
+                                            <input type="text" class="form-control" name="address_line_2" value="{{ $data['address_line_2'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label> Address line 3 </label>
+                                            <input type="text" name="address_line_3" class="form-control" value="{{ $data['address_line_3'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">City</label>
+                                            <input type="text" class="form-control" name="city" value="{{ $data['city'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label> State </label>
+                                            <input type="text" name="state" class="form-control" value="{{ $data['state'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Zipcode</label>
+                                            <input type="text" class="form-control" name="zipcode" value="{{ $data['zipcode'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label> Country </label>
+                                            <input type="text" name="country" class="form-control" value="{{ $data['country'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="sho-card" class="card-body pb-0">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Marshaling Yard</h4>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling Address</label>
+                                            <input type="text" class="form-control" name="marshaling_address" value="{{ $data['marshaling_address'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label> Address line 1 </label>
+                                            <input type="text" name="marshaling_address_line_1" class="form-control" value="{{ $data['marshaling_address_line_1'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling Address line 2</label>
+                                            <input type="text" class="form-control" name="marshaling_address_line_2" value="{{ $data['marshaling_address_line_2'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label>Marshaling  Address line 3 </label>
+                                            <input type="text" name="marshaling_address_line_3" class="form-control" value="{{ $data['marshaling_address_line_3'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling City</label>
+                                            <input type="text" class="form-control" name="marshaling_city"  value="{{ $data['marshaling_city'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label>Marshaling  State </label>
+                                            <input type="text" name="marshaling_state" class="form-control" value="{{ $data['marshaling_state'] }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Marshaling Zipcode</label>
+                                            <input type="text" class="form-control" name="marshaling_zipcode" value="{{ $data['marshaling_zipcode'] }}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label>Marshaling Country </label>
+                                            <input type="text" name="marshaling_country" class="form-control" value="{{ $data['marshaling_country'] }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                           </div>
+
+                           <div class="row" id="addrss22" style="display: none;"></div>-->
                         </div>
 
                         <div class="card-body add-remove-div">

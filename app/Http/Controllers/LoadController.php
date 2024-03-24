@@ -8,7 +8,7 @@ use App\Models\Load;
 class LoadController extends Controller
 {
     //
-    public function loads()
+    public function index()
     {
         $data = Load::all();
         return view('admin/loads',['datas' => $data]);
@@ -20,12 +20,19 @@ class LoadController extends Controller
         return view('admin/editload',['data' => $data]);
     }
 
+    public function viewload($id)
+    {
+        $data = Load::find($id);
+        return view('admin/viewload',['data' => $data]);
+    }
+
     public function insertload(Request $request)
     {
         $load = new Load();
         $load->load_id = $request->load_id;
         $load->shipment = $request->shipment;
         $load->shipment_type = $request->shipment_type;
+        $load->customer_id = $request->customer_id;
         $load->billing_entity_name = $request->billing_entity_name;
         $load->address_line_1 = $request->address_line_1;
         $load->address_line_2 = $request->address_line_2;
@@ -59,6 +66,7 @@ class LoadController extends Controller
         $load->load_id = $request->load_id;
         $load->shipment = $request->shipment;
         $load->shipment_type = $request->shipment_type;
+        $load->customer_id = $request->customer_id;
         $load->billing_entity_name = $request->billing_entity_name;
         $load->address_line_1 = $request->address_line_1;
         $load->address_line_2 = $request->address_line_2;

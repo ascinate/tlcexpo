@@ -33,67 +33,6 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                    <label> Address line 1 </label>
-                                    <input type="text" name="address_line_1" class="form-control"/>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                    <label> Address line 2</label>
-                                    <input type="text" name="address_line_2" class="form-control"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-label"> Address line 3 </label>
-                                        <input type="text" name="address_line_3" class="form-control"/>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> City</label>
-                                    <input type="text" name="city" class="form-control"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> State </label>
-                                        <input type="text" name="state" class="form-control"/>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label> Zipcode</label>
-                                    <input type="text" name="zipcode" class="form-control"/>
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-label"> Country </label>
-                                        <select class="form-select" name="country">
-                                            <option value="USA">United State</option>
-                                            <option value="Canada">Canada</option>
-                                        </select>
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
                                     <label> Phone</label>
                                     <input type="text" name="phone" class="form-control"/>
                                 </div>
@@ -113,6 +52,46 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Warehouse Location Address</label>
+                                     <select name="warehouse_address" id="" class="form-select" placeholder="Select Location" required>
+                                        <option value=""></option>
+                                         @php
+                                            $value = \DB::table('locations')->get();
+                                            foreach($value as $val)
+                                            {
+                                         @endphp
+                                           <option value="{{ $val->id }}">
+                                            {{ $val->location_descripton }}
+                                          </option>
+                                          @php
+                                            }
+                                         @endphp
+                                      </select>
+                                </div>
+
+                                <div class="col-lg-6">
+                                  <label for="exampleFormControlInput1" class="form-label">Marshaling Yards Address</label>
+                                 <select name="marshaling_address" id="" class="form-select" placeholder="Select Location" required>
+                                    <option value=""></option>
+                                     @php
+                                        $value = \DB::table('locations')->get();
+                                        foreach($value as $val)
+                                        {
+                                     @endphp
+                                       <option value="{{ $val->id }}">
+                                        {{ $val->location_descripton }}
+                                      </option>
+                                      @php
+                                        }
+                                     @endphp
+                                  </select>
+                               </div>
+                          </div>
+
+                         <!--<div class="row" id="addrss22" style="display: none;"></div>-->
 
                         </div>
                         <div class="card-body add-remove-div">

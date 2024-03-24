@@ -6,10 +6,13 @@ use App\Http\Controllers\EntityController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExhibitorcontractorController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoadController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ManagecontractorController;
 use App\Http\Controllers\RequestquoteController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TradeshowController;
 use App\Http\Controllers\TradevenueController;
@@ -48,6 +51,8 @@ Route::view('login','login');
 Route::post('customerlogin',[CustomerController::class, 'customerlogin']);
 Route::view('register','register');
 Route::post('addcustomer',[CustomerController::class, 'addcustomer']);
+
+Route::post('showmanagement', [RequestquoteController::class, 'tradequote']);
 
 Route::view('thankyou','thankyou');
 Route::post('requestquote',[RequestquoteController::class,'requestquote']);
@@ -167,6 +172,8 @@ Route::get('admin/editexhibitcontractor/{id}',[ExhibitorcontractorController::cl
 Route::post('updateexhibitorcontractor',[ExhibitorcontractorController::class,'updateexhibitorcontractor']);
 Route::get('admin/viewexhibitcontractor/{id}',[ExhibitorcontractorController::class,'viewData'])->middleware('adminauth');
 Route::get('admin/deleteexhibitorcontractor/{id}', [ExhibitorcontractorController::class, 'delete'])->middleware('adminauth');
+Route::post('admin/exhibitorlocation', [ExhibitorcontractorController::class, 'exhibitorlocation']);
+
 
 //// Location
 Route::view('admin/addlocation','admin/addlocation');
@@ -185,6 +192,8 @@ Route::get('admin/editrequestquote/{id}',[RequestquoteController::class,'showDat
 Route::post('updatequote',[RequestquoteController::class,'updatequote']);
 Route::get('admin/viewrequestquote/{id}',[RequestquoteController::class,'viewData'])->middleware('adminauth');
 Route::get('admin/deletequote/{id}', [RequestquoteController::class, 'delete'])->middleware('adminauth');
+Route::post('admin/showmanagement', [RequestquoteController::class, 'tradequote']);
+
 
 //// Roles & users
 Route::view('admin/addrole','admin/addrole');
@@ -203,6 +212,30 @@ Route::get('admin/deleteuser/{id}', [AdminController::class, 'delete'])->middlew
 
 //// Loads
 Route::view('admin/addload','admin/addload');
+Route::get('admin/loads', [LoadController::class, 'index'])->middleware('adminauth');
+Route::post('insertload', [LoadController::class, 'insertload'])->middleware('adminauth');
+Route::get('admin/editload/{id}',[LoadController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewload/{id}',[LoadController::class,'viewload'])->middleware('adminauth');
+Route::post('updateload',[LoadController::class,'updateload']);
+Route::get('admin/deleteload/{id}', [LoadController::class, 'delete'])->middleware('adminauth');
+
+//// Tasks
+Route::view('admin/addtask','admin/addtask');
+Route::get('admin/tasks', [TaskController::class, 'index'])->middleware('adminauth');
+Route::post('inserttask', [TaskController::class, 'inserttask'])->middleware('adminauth');
+Route::get('admin/edittask/{id}',[TaskController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewtask/{id}',[TaskController::class,'viewData'])->middleware('adminauth');
+Route::post('updatetask',[TaskController::class,'updatetask']);
+Route::get('admin/deletetask/{id}', [TaskController::class, 'delete'])->middleware('adminauth');
+
+//// Shipment
+Route::view('admin/addshipment','admin/addshipment');
+Route::get('admin/shipments', [ShipmentController::class, 'index'])->middleware('adminauth');
+Route::post('insertshipment', [ShipmentController::class, 'insertshipment'])->middleware('adminauth');
+Route::get('admin/editshipment/{id}',[ShipmentController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewshipment/{id}',[ShipmentController::class,'viewData'])->middleware('adminauth');
+Route::post('updateshipment',[ShipmentController::class,'updateshipment']);
+Route::get('admin/deleteshipment/{id}', [ShipmentController::class, 'delete'])->middleware('adminauth');
 
 Route::get('admin/logout', function () {
     if(session()->has('adminuser'))

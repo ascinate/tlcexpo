@@ -29,6 +29,68 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                <label> Phone</label>
+                                <input type="text" name="phone" class="form-control"/>
+                            </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                <label> Email</label>
+                                <input type="email" name="email" class="form-control"/>
+                            </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label"> Website </label>
+                                    <input type="text" name="website" class="form-control"/>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="exampleFormControlInput1" class="form-label">Warehouse Location Address</label>
+                                 <select name="warehouse_address" id="" class="form-select" placeholder="Select Location" required>
+                                    <option value=""></option>
+                                     @php
+                                        $value = \DB::table('locations')->get();
+                                        foreach($value as $val)
+                                        {
+                                     @endphp
+                                       <option value="{{ $val->id }}">
+                                        {{ $val->location_descripton }}
+                                      </option>
+                                      @php
+                                        }
+                                     @endphp
+                                  </select>
+                            </div>
+
+                            <div class="col-lg-6">
+                              <label for="exampleFormControlInput1" class="form-label">Marshaling Yards Address</label>
+                             <select name="marshaling_address" id="" class="form-select" placeholder="Select Location" required>
+                                <option value=""></option>
+                                 @php
+                                    $value = \DB::table('locations')->get();
+                                    foreach($value as $val)
+                                    {
+                                 @endphp
+                                   <option value="{{ $val->id }}">
+                                    {{ $val->location_descripton }}
+                                  </option>
+                                  @php
+                                    }
+                                 @endphp
+                              </select>
+                           </div>
+                      </div>
+
+                        <!--<div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                 <label> Address line 1 </label>
@@ -87,31 +149,10 @@
                                 </select>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                <label> Phone</label>
-                                <input type="text" name="phone" class="form-control"/>
-                            </div>
-                            </div>
+                        <!--<div class="row" id="addrss22" style="display: none;"></div>-->
 
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                <label> Email</label>
-                                <input type="email" name="email" class="form-control"/>
-                            </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-label"> Website </label>
-                                    <input type="text" name="website" class="form-control"/>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
                       </div>
 
                         <div class="card-body add-remove-div">
