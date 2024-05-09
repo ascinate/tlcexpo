@@ -74,6 +74,7 @@ class CustomerController extends Controller
 
         if($count!=0)
         {
+           $request->session()->put('id',$data[0]->id);
            $request->session()->put('user',$credential->email);
            $request->session()->put('name',$data[0]->customer_name);
            return redirect('dashboard');

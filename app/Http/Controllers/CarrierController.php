@@ -8,7 +8,7 @@ use App\Models\Carrier;
 class CarrierController extends Controller
 {
     //
-    public function carriers()
+    public function index()
     {
         $data = Carrier::all();
         return view('admin/carriers',['datas' => $data]);
@@ -20,27 +20,44 @@ class CarrierController extends Controller
         return view('admin/editcarrier',['data' => $data]);
     }
 
+    public function viewData($id)
+    {
+        $data = Carrier::find($id);
+        return view('admin/viewcarrier',['data' => $data]);
+    }
+
     public function insertcarrier(Request $request)
     {
         $carrier = new Carrier();
+        $contact_values = array("first_name_carrier" => $request->first_name_carrier,
+                                "last_name_carrier" => $request->last_name_carrier,
+                                "title_carrier" => $request->title_carrier,
+                                "phone_carrier" => $request->phone_carrier,
+                                "email_carrier" => $request->email_carrier);
+
+        $contacts = json_encode($contact_values);
+
+        if($request->equipment!='')
+        {
+            $equipment = @implode(",",$request->equipment);
+        }
+        else
+        {
+            $equipment = '';
+        }
+
         $carrier->carrier_name = $request->carrier_name;
-        $carrier->address = $request->address;
-        $carrier->address_line_1 = $request->address_line_1;
-        $carrier->address_line_2 = $request->address_line_2;
-        $carrier->address_line_3 = $request->address_line_3;
-        $carrier->city = $request->city;
-        $carrier->state = $request->state;
-        $carrier->zipcode = $request->zipcode;
-        $carrier->country = $request->country;
+        $carrier->location = $request->location;
+        $carrier->parent_office = $request->parent_office;
         $carrier->phone = $request->phone;
         $carrier->dot = $request->dot;
         $carrier->scac = $request->scac;
         $carrier->mc = $request->mc;
         $carrier->ein = $request->ein;
         $carrier->terms = $request->terms;
-        $carrier->equipment = $request->equipment;
+        $carrier->equipment = $equipment;
         $carrier->groups = $request->groups;
-        $carrier->contact = $request->contact;
+        $carrier->contact = $contacts;
         $carrier->notes = $request->notes;
 
         $carrier->save();
@@ -50,24 +67,34 @@ class CarrierController extends Controller
     public function updatecarrier(Request $request)
     {
         $carrier = Carrier::find($request->id);
+        $contact_values = array("first_name_carrier" => $request->first_name_carrier,
+                                "last_name_carrier" => $request->last_name_carrier,
+                                "title_carrier" => $request->title_carrier,
+                                "phone_carrier" => $request->phone_carrier,
+                                "email_carrier" => $request->email_carrier);
+
+        $contacts = json_encode($contact_values);
+        if($request->equipment!='')
+        {
+            $equipment = @implode(",",$request->equipment);
+        }
+        else
+        {
+            $equipment = '';
+        }
+
         $carrier->carrier_name = $request->carrier_name;
-        $carrier->address = $request->address;
-        $carrier->address_line_1 = $request->address_line_1;
-        $carrier->address_line_2 = $request->address_line_2;
-        $carrier->address_line_3 = $request->address_line_3;
-        $carrier->city = $request->city;
-        $carrier->state = $request->state;
-        $carrier->zipcode = $request->zipcode;
-        $carrier->country = $request->country;
+        $carrier->location = $request->location;
+        $carrier->parent_office = $request->parent_office;
         $carrier->phone = $request->phone;
         $carrier->dot = $request->dot;
         $carrier->scac = $request->scac;
         $carrier->mc = $request->mc;
         $carrier->ein = $request->ein;
         $carrier->terms = $request->terms;
-        $carrier->equipment = $request->equipment;
+        $carrier->equipment = $equipment;
         $carrier->groups = $request->groups;
-        $carrier->contact = $request->contact;
+        $carrier->contact = $contacts;
         $carrier->notes = $request->notes;
 
         $carrier->save();

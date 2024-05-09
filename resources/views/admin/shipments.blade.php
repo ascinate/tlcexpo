@@ -29,7 +29,7 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <td>Shipment</td>
+                          <th>Order</th>
                           <th> Ship Type </th>
                           <th> Customer </th>
                           <th> Tradeshow </th>
@@ -44,20 +44,36 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{ $data->order_no }}</td>
+                            <td>{{ 'T00'.$data->order_no }}</td>
                             <td>{{ $data->trip }}</td>
                             <td>@php
                                 $customer = \DB::table('customers')->where('id', $data->customer)->get();
-                                echo @$customer[0]->customer_name;
+                                $cname = @$customer[0]->customer_name;
+                                echo $cname ;
                             @endphp</td>
                             <td>
                                 @php
-                                   // $tradeshow = \DB::table('tradeshows')->where('id', $data->destination_tradeshow_id)->get();
-                                  //  echo @$tradeshow[0]->show_name;
+                                    $tradeshow = \DB::table('tradeshows')->where('id', $data->tradeshow)->get();
+                                    $sname = @$tradeshow[0]->show_name;
+                                    echo $sname;
                                 @endphp
                             </td>
-                            <td>{{ $data->quote }}</td>
-                            <td>{{ $data->loads }}</td>
+                            <td>
+                                @php
+                                    $quote = \DB::table('requestquotes')->where('id',$data->quote)->get();
+                                    echo @$quote[0]->customer_contact_name;
+                                @endphp
+                            </td>
+                            <td>
+                                @php
+                                    $exp = explode(",",$data->loads);
+                                    for($i=0;$i<=count($exp)-1;$i++)
+                                    {
+                                        $load = \DB::table('loads')->where('id', $exp[$i])->get();
+                                        echo @$load[0]->load_id.'-'.$cname.'-'.$sname.'<br><br>';
+                                    }
+                                @endphp
+                            </td>
                             <td>{{ $data->invoice_no }}</td>
                             <td>{{ $data->updated_at }}</td>
                             <td>

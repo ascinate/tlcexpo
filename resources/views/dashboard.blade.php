@@ -31,11 +31,11 @@
                              </a>
                         </li>
                         <li>
-                            <a href="#" class="link05">
+                            <a href="{{ URL::to('tradeshows') }}" class="link05">
                                 <span class="cion02">
                                     <i data-feather="package"></i>
                                 </span>
-                                <span> Cargo Items </span>
+                                <span> Tradeshows </span>
                              </a>
                         </li>
                     </ul>
@@ -56,16 +56,16 @@
                                 <div class="amount-shopiments01 d-flex align-items-start justify-content-between">
                                 <div class="tec-div">
                                     <h5> Total Shipments </h5>
-                                    <h2 class="mt-2 d-block"> 19.89 </h2>
+                                    @php
+                                        $shipcount = \DB::table('shipments')->where('customer', session('id'))->count();
+                                    @endphp
+                                    <h2 class="mt-2 d-block"> {{  $shipcount }} </h2>
                                 </div>
                                 <span class="iconu-comon one1">
                                     <i data-feather="truck"></i>
                                 </span>
                                 </div>
-                                <div class="stat-txer mt-3">
-                                    Overview of Last month
-                                    <span class="float-end">70%</span>
-                                </div>
+
                                 <div class="progress mt-2">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -78,16 +78,16 @@
                                 <div class="amount-shopiments01 d-flex align-items-start justify-content-between">
                                 <div class="tec-div">
                                     <h5> Total Loads </h5>
-                                    <h2 class="mt-2 d-block"> 25.45 </h2>
+                                    @php
+                                        $loadcount = \DB::table('loads')->where('customer_id', session('id'))->count();
+                                    @endphp
+                                    <h2 class="mt-2 d-block"> {{ $loadcount }} </h2>
                                 </div>
                                 <span class="iconu-comon one2">
                                     <i data-feather="archive"></i>
                                 </span>
                                 </div>
-                                <div class="stat-txer mt-3">
-                                    Overview of Last month
-                                    <span class="float-end">60%</span>
-                                </div>
+
                                 <div class="progress mt-2">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -100,16 +100,13 @@
                                 <div class="amount-shopiments01 d-flex align-items-start justify-content-between">
                                 <div class="tec-div">
                                     <h5> Cargo Items </h5>
-                                    <h2 class="mt-2 d-block"> 48.89 </h2>
+                                    <h2 class="mt-2 d-block"> N/A </h2>
                                 </div>
                                 <span class="iconu-comon one3">
                                     <i data-feather="box"></i>
                                 </span>
                                 </div>
-                                <div class="stat-txer mt-3">
-                                    Overview of Last month
-                                    <span class="float-end">55%</span>
-                                </div>
+
                                 <div class="progress mt-2">
                                     <div class="progress-bar progress-bar-striped  progress-bar-animated" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -121,25 +118,6 @@
                         <div class="table-cart">
                             <div class="d-flex top-head05 align-items-center justify-content-between">
                                 <h2 class="box-headr"> Current Shipments </h2>
-                                <div class="dropdown comu08">
-                                    <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icou">
-                                            <i data-feather="eye"></i>
-                                        </span>
-                                        <span> View all</span>
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="#">
-                                        <span class="icou">
-                                            <i data-feather="download-cloud"></i>
-                                        </span>
-                                        <span> Download </span>
-                                    </a></li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <div class="g table-responsive">
@@ -154,86 +132,41 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $datas = \DB::table('shipments')->where('customer', session('id'))->get();
+                                            foreach($datas as $data)
+                                            {
+                                        @endphp
                                         <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
+                                            <td>{{ 'T00'.$data->order_no }}</td>
+                                            <td>
+                                                @php
+                                                    $tradeshow = \DB::table('tradeshows')->where('id', $data->tradeshow)->get();
+                                                    $sname = @$tradeshow[0]->show_name;
+                                                    echo $sname;
+                                                @endphp
+                                           </td>
+                                            <td>
+                                                @php
+                                                    $quote = \DB::table('requestquotes')->where('id',$data->quote)->get();
+                                                    echo @$quote[0]->customer_contact_name;
+                                                @endphp
+                                           </td>
+                                            <td>
+                                                @php
+                                                    $exp = explode(",",$data->loads);
+                                                    for($i=0;$i<=count($exp)-1;$i++)
+                                                    {
+                                                        $load = \DB::table('loads')->where('id', $exp[$i])->get();
+                                                        echo @$load[0]->load_id.'-'.$sname.'<br>';
+                                                    }
+                                                @endphp
+                                            </td>
+                                            <td>{{ $data->status }}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Tendered</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>20752</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Tendered</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20756</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                        </tr>
+                                        @php
+                                            }
+                                        @endphp
 
                                     </tbody>
                                 </table>
@@ -244,45 +177,21 @@
                         <div class="tradeb-div">
                             <div class="d-flex top-head05 align-items-center justify-content-between">
                                 <h2 class="box-headr"> Tradeshows </h2>
-                                <div class="dropdown comu08">
-                                    <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">
-                                            <span class="icou">
-                                                <i data-feather="eye"></i>
-                                            </span>
-                                            <span> View all</span>
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="#">
-                                            <span class="icou">
-                                                <i data-feather="download-cloud"></i>
-                                            </span>
-                                            <span> Download </span>
-                                        </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                             <hr/>
                             <div class="tard-show-div">
+                                @php
+                                    $shows = \DB::table('tradeshows')->get();
+                                    foreach($shows as $trade)
+                                    {
+                                @endphp
                                 <div class="comon-shouwi">
-                                    <h5> Impressions LB 2024 - Long Beach, CA  </h5>
-                                    <p> <span class="clae"><i data-feather="calendar"></i> </span> 2024-01-19 </p>
+                                    <h5>{{ $trade->show_name }}</h5>
+                                    <!--<p> <span class="clae"><i data-feather="calendar"></i> </span> 2024-01-19 </p>-->
                                 </div>
-                                <div class="comon-shouwi">
-                                    <h5> Impressions LB 2024 - Long Beach, CA  </h5>
-                                    <p> <span class="clae"><i data-feather="calendar"></i> </span> 2024-01-19 </p>
-                                </div>
-                                <div class="comon-shouwi">
-                                    <h5> Impressions LB 2024 - Long Beach, CA  </h5>
-                                    <p> <span class="clae"><i data-feather="calendar"></i> </span> 2024-01-19 </p>
-                                </div>
-                                <div class="comon-shouwi">
-                                    <h5> Impressions LB 2024 - Long Beach, CA  </h5>
-                                    <p> <span class="clae"><i data-feather="calendar"></i> </span> 2024-01-19 </p>
-                                </div>
+                                @php
+                                    }
+                                @endphp
 
                             </div>
                         </div>
@@ -292,26 +201,6 @@
                         <div class="table-cart">
                             <div class="d-flex top-head05 align-items-center justify-content-between">
                                 <h2 class="box-headr"> Current Loads </h2>
-                                <div class="dropdown comu08">
-                                    <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">
-                                            <span class="icou">
-                                                <i data-feather="eye"></i>
-                                            </span>
-                                            <span> View all</span>
-                                        </a></li>
-                                        <li><a class="dropdown-item" href="#">
-                                            <span class="icou">
-                                                <i data-feather="download-cloud"></i>
-                                            </span>
-                                            <span> Download </span>
-                                        </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <hr class="my-0"/>
@@ -321,90 +210,50 @@
                                     <thead>
                                         <tr>
                                             <th>Load</th>
-                                        <th>Pickup</th>
-                                        <th>Deliver By</th>
-                                        <th>Status</th>
-                                        <th>Ship Type</th>
-                                        <th>Customer</th>
-                                        <th>Booth#</th>
-                                        <th>Tradeshow</th>
-                                        <th>Origin</th>
-                                        <th>Destination</th>
+                                            <th>Shipment Type</th>
+                                            <th>Customer</th>
+                                            <th>Status</th>
+                                            <th>Tradeshow</th>
+                                            <th>Origin</th>
+                                            <th>Destination</th>
+                                            <th>Billing Entity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $loads = \DB::table('loads')->where('customer_id',session('id'))->get();
+                                            foreach($loads as $data)
+                                            {
+                                        @endphp
                                         <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
+                                            <td>{{ $data->load_id }}</td>
+                                            <td>{{ $data->shipment_type }}</td>
+                                            <td>
+                                                @php
+                                                    $customer = \DB::table('customers')->where('id', $data->customer_id)->get();
+                                                    echo @$customer[0]->customer_name;
+                                                @endphp
+                                            </td>
+                                            <td>{{ $data->status }}</td>
+                                            <td>
+                                                @php
+                                                    $tradeshow = \DB::table('tradeshows')->where('id', $data->destination_tradeshow_id)->get();
+                                                    echo @$tradeshow[0]->show_name;
+                                                @endphp
+                                            </td>
+                                            <td>{{ $data->origin }}</td>
+                                            <td>{{ $data->destination }}</td>
+                                            <td>
+                                                @php
+                                                    $entitie = \DB::table('entities')->where('id', $data->billing_entity_name)->get();
+                                                    echo @$entitie[0]->legeal_name;
+                                                @endphp
+                                           </td>
                                         </tr>
-                                        <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2075501</td>
-                                            <td>02/07/2024</td>
-                                            <td></td>
-                                            <td>Pending</td>
-                                            <td>TL-From Show</td>
-                                            <td>Alvarado Dormakaba Group</td>
-                                            <td>213</td>
-                                            <td>NRF Protect 2022</td>
-                                            <td>Cleveland, OH</td>
-                                            <td>Chino, CA</td>
-                                        </tr>
+                                        @php
+                                            }
+                                        @endphp
+
                                     </tbody>
                                 </table>
 

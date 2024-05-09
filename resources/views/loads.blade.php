@@ -58,66 +58,50 @@
                                 <thead>
                                     <tr>
                                         <th>Load</th>
-                                    <th>Pickup</th>
-                                    <th>Deliver By</th>
-                                    <th>Status</th>
-                                    <th>Ship Type</th>
-                                    <th>Customer</th>
-                                    <th>Booth#</th>
-                                    <th>Tradeshow</th>
-                                    <th>Origin</th>
-                                    <th>Destination</th>
+                                        <th>Shipment Type</th>
+                                        <th>Customer</th>
+                                        <th>Status</th>
+                                        <th>Tradeshow</th>
+                                        <th>Origin</th>
+                                        <th>Destination</th>
+                                        <th>Billing Entity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $loads = \DB::table('loads')->where('customer_id',session('id'))->get();
+                                        foreach($loads as $data)
+                                        {
+                                    @endphp
                                     <tr>
-                                        <td> <a href="{{ URL::to('load-details') }}"> 2075501 </a> </td>
-                                        <td>02/07/2024</td>
-                                        <td></td>
-                                        <td>Pending</td>
-                                        <td>TL-From Show</td>
-                                        <td>Alvarado Dormakaba Group</td>
-                                        <td>213</td>
-                                        <td>NRF Protect 2022</td>
-                                        <td>Cleveland, OH</td>
-                                        <td>Chino, CA</td>
+                                        <td><a href="{{ URL::to('load-details') }}/{{ $data->id }}">{{ $data->load_id }}</a></td>
+                                        <td>{{ $data->shipment_type }}</td>
+                                        <td>
+                                            @php
+                                                $customer = \DB::table('customers')->where('id', $data->customer_id)->get();
+                                                echo @$customer[0]->customer_name;
+                                            @endphp
+                                        </td>
+                                        <td>{{ $data->status }}</td>
+                                        <td>
+                                            @php
+                                                $tradeshow = \DB::table('tradeshows')->where('id', $data->destination_tradeshow_id)->get();
+                                                echo @$tradeshow[0]->show_name;
+                                            @endphp
+                                        </td>
+                                        <td>{{ $data->origin }}</td>
+                                        <td>{{ $data->destination }}</td>
+                                        <td>
+                                            @php
+                                                $entitie = \DB::table('entities')->where('id', $data->billing_entity_name)->get();
+                                                echo @$entitie[0]->legeal_name;
+                                            @endphp
+                                       </td>
                                     </tr>
-                                    <tr>
-                                        <td> <a href="{{ URL::to('load-details') }}"> 2075501 </a> </td>
-                                        <td>02/07/2024</td>
-                                        <td></td>
-                                        <td>Pending</td>
-                                        <td>TL-From Show</td>
-                                        <td>Alvarado Dormakaba Group</td>
-                                        <td>213</td>
-                                        <td>NRF Protect 2022</td>
-                                        <td>Cleveland, OH</td>
-                                        <td>Chino, CA</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <a href="{{ URL::to('load-details') }}"> 2075508 </a> </td>
-                                        <td>02/07/2024</td>
-                                        <td></td>
-                                        <td>Pending</td>
-                                        <td>TL-From Show</td>
-                                        <td>Alvarado Dormakaba Group</td>
-                                        <td>213</td>
-                                        <td>NRF Protect 2022</td>
-                                        <td>Cleveland, OH</td>
-                                        <td>Chino, CA</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <a href="{{ URL::to('load-details') }}"> 2075508 </a> </td>
-                                        <td>02/07/2024</td>
-                                        <td>01/23/2024</td>
-                                        <td>Pending</td>
-                                        <td>TL-From Show</td>
-                                        <td>Alvarado Dormakaba Group</td>
-                                        <td>213</td>
-                                        <td>NRF Protect 2022</td>
-                                        <td>Cleveland, OH</td>
-                                        <td>Chino, CA</td>
-                                    </tr>
+                                    @php
+                                        }
+                                    @endphp
+
                                 </tbody>
                             </table>
 

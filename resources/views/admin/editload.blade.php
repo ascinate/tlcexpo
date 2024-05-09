@@ -209,8 +209,54 @@
                                     </select>
                                 </div>
                                 </div>
-
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                    <label for="exampleFormControlInput1" class="form-label">Original Location</label>
+                                     <select name="origin" id="origin" class="form-select" placeholder="Select Location" required>
+                                        <option value=""></option>
+                                         @php
+                                            $value = \DB::table('locations')->get();
+                                            foreach($value as $val)
+                                            {
+                                         @endphp
+                                           <option value="{{ $val->location_descripton }}"@php
+                                               if($val->location_descripton==$data['origin']) { echo 'selected'; }
+                                           @endphp>
+                                            {{ $val->location_descripton }}
+                                          </option>
+                                          @php
+                                            }
+                                         @endphp
+                                      </select>
+                                </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                  <label for="exampleFormControlInput1" class="form-label">Destination Location</label>
+                                 <select name="destination" id="destination" class="form-select" placeholder="Select Location" required>
+                                    <option value=""></option>
+                                     @php
+                                        $value = \DB::table('locations')->get();
+                                        foreach($value as $val)
+                                        {
+                                     @endphp
+                                       <option value="{{ $val->location_descripton }}"@php
+                                               if($val->location_descripton==$data['destination']) { echo 'selected'; }
+                                           @endphp>
+                                        {{ $val->location_descripton }}
+                                      </option>
+                                      @php
+                                        }
+                                     @endphp
+                                  </select>
+                               </div>
+                                </div>
+                          </div>
 
                             <div class="row">
                                 <div class="col-lg-3">

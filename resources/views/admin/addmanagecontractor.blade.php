@@ -8,12 +8,11 @@
              <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
+
                       <div class="card-body">
                         <h4 class="card-title">Add Show Contractor</h4>
-
                         <form name="addfrm" action="{{ URL::to('insertcontractor') }}" method="POST" class="forms-sample">
                             @csrf
-
                             <div class="row">
                                 <div class="col-lg-6">
                                 <div class="form-group">
@@ -94,6 +93,7 @@
                          <!--<div class="row" id="addrss22" style="display: none;"></div>-->
 
                         </div>
+
                         <div class="card-body add-remove-div">
                             <h4 class="card-title">Exhibit Manager Contacts</h4>
                                 <div class="row input-form" id="primary-div">

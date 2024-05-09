@@ -16,34 +16,31 @@
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Load</label>
-                                    <select name="loads" class="form-select">
-                                        <option value="">--Select--</option>
-                                        @php
-                                            $loads = \DB::table('loads')->get();
-                                            foreach($loads as $load)
-                                            {
-                                                $cust = \DB::table('customers')->where('id', $load->customer_id)->get();
-                                                $cname = @$cust[0]->customer_name;
-
-                                                $trade = \DB::table('tradeshows')->where('id', $load->destination_tradeshow_id)->get();
-                                                $sname = @$trade[0]->show_name;
-
-                                                $shipment = $load->load_id.'-'.$cname.'-'.$sname;
-                                        @endphp
-                                         <option value="{{ $load->id }}">{{ $shipment }}</option>
-                                        @php
-                                            }
-                                        @endphp
-                                    </select>
-                                </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label>Customer</label>
+                                        <select name="customer" id="customers" class="form-select">
+                                            <option value=""></option>
+                                            @php
+                                                $customer = \DB::table('customers')->get();
+                                                foreach($customer as $cust)
+                                                {
+                                            @endphp
+                                            <option value="{{ $cust->id }}">{{ $cust->customer_name }}</option>
+                                            @php
+                                                }
+                                            @endphp
+                                        </select>
+                                    </div>
+                                    </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                     <label> Order No </label>
-                                    <input type="text" name="order_no" class="form-control" />
+                                    @php
+                                        $data = \DB::table('shipments')->get();
+                                        $cnt = @$data[0]->order_no;
+                                    @endphp
+                                    <input type="text" name="order_no" value="{{ $cnt+1 }}" class="form-control" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -61,26 +58,35 @@
                                 </div>
 
                                 <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Customer</label>
-                                    <select name="customer" class="form-select">
-                                        <option value=""></option>
-                                        @php
-                                            $customer = \DB::table('customers')->get();
-                                            foreach($customer as $cust)
-                                            {
-                                        @endphp
-                                        <option value="{{ $cust->id }}">{{ $cust->customer_name }}</option>
-                                        @php
-                                            }
-                                        @endphp
-                                    </select>
-                                </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Load</label>
+                                        <div id="xload"></div>
+                                        <select class="form-select" id="loads">
+                                            <option value="">--Select--</option>
+                                            @php
+                                                /*$loads = \DB::table('loads')->get();
+                                                foreach($loads as $load)
+                                                {
+                                                    $cust = \DB::table('customers')->where('id', $load->customer_id)->get();
+                                                    $cname = @$cust[0]->customer_name;
+
+                                                    $trade = \DB::table('tradeshows')->where('id', $load->destination_tradeshow_id)->get();
+                                                    $sname = @$trade[0]->show_name;
+
+                                                    $shipment = $load->load_id.'-'.$cname.'-'.$sname;
+                                            @endphp
+                                             <option value="{{ $load->id }}">{{ $shipment }}</option>
+                                            @php
+                                                }*/
+                                            @endphp
+                                        </select>
+                                    </div>
+                                    </div>
+
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6">
+                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label> Select A Quote Request </label>
                                     <select name="quote" class="form-select">
@@ -99,6 +105,24 @@
                                 </select>
                                 </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-label"> Trade Show </label>
+                                        <select name="tradeshow" class="form-select">
+                                            <option value=""></option>
+                                            @php
+                                                $tradeshows = \DB::table('tradeshows')->get();
+                                                foreach($tradeshows as $trade)
+                                                {
+                                            @endphp
+                                            <option value="{{ $trade->id }}">{{ $trade->show_name }}</option>
+                                            @php
+                                                }
+                                            @endphp
+                                        </select>
+                                    </div>
+                                 </div>
 
                             </div>
 
@@ -130,7 +154,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label"> Comments </label>
-                                        <input type="text" name="comments" class="form-control"/>
+                                        <textarea name="comments" rows="5" cols="20" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>

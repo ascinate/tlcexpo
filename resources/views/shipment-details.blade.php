@@ -1,5 +1,8 @@
 <x-header/>
-
+@php
+    $tradeshow = \DB::table('tradeshows')->where('id', $data['tradeshow'])->get();
+    $quote = \DB::table('requestquotes')->where('id', $data['quote'])->get();
+@endphp
 <main class="float-start dahsbo-body w-100">
 
     <div class="container">
@@ -41,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="berdcurm-div d-flex align-items-center justify-content-between">
-                    <h1 class="headm-dash"> Shipment Details #20756
+                    <h1 class="headm-dash"> Shipment Details #T00{{ $data['order_no'] }}
                         <small class="d-block col-subt mt-2">  Peripheral Dynamics, Inc  </small>
                     </h1>
                     <nav>
@@ -150,14 +153,17 @@
                             </div>
                             <div class="textr-block">
                                 <div class="top-serct-para">
-                                    <select class="form-select" aria-label="Default select example">
-
-                                        <option value="1">Pending</option>
-                                        <option value="2">Quoted</option>
-                                        <option value="3">Ordered</option>
+                                    <select name="status" class="form-select" aria-label="Default select example">
+                                        <option value="Pending"@php
+                                            if($data['status']=='Pending') { echo 'selected'; }
+                                        @endphp>Pending</option>
+                                        <option value="Standby"@php
+                                        if($data['status']=='Standby') { echo 'selected'; }
+                                    @endphp>Standby</option>
+                                        <option value="Completed"@php
+                                        if($data['status']=='Completed') { echo 'selected'; }
+                                    @endphp>Completed</option>
                                       </select>
-
-
                                 </div>
                             </div>
                         </div>
@@ -170,10 +176,10 @@
                                 <div class="top-serct-para">
                                     <ul>
                                         <li>
-                                            <strong> Trip: </strong> Inbound
+                                            <strong> Frequency: </strong> {{ $tradeshow[0]->frequency }}
                                         </li>
                                         <li>
-                                            <strong> Tradeshow:  </strong> ATMIA 2024
+                                            <strong> Tradeshow:  </strong> {{ $tradeshow[0]->show_name }}
                                         </li>
                                         <li>
                                             <strong> Venue:  </strong> Caesar's Resort and Casino - Las Vegas, NV 89109
@@ -189,58 +195,32 @@
 
                         <div class="comon-bolock-div mt-4">
                             <div class="top-header08">
-                                <h3> Qutoe Information </h3>
+                                <h3> Quote Information </h3>
                             </div>
                             <div class="textr-block">
 
                                 <div class="top-serct-para">
-                                    <p> R23-151 - Peripheral Dynamics - Plymouth Meeting,
-                                        PA → Peripheral Dynamics/Booth #608 - Las Vegas, NV </p>
+
+                                    <div class="top-serct-para">
+                                        <ul>
+                                            <li>
+                                                <strong> Contact: </strong> {{ $quote[0]->customer_contact_name }}
+                                            </li>
+                                            <li>
+                                                <strong> Shipment:  </strong> {{ $quote[0]->shipment_type }}
+                                            </li>
+                                            <li>
+                                                <strong> Venue:  </strong> {{ $quote[0]->tradeshow_venue }}
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
                         </div>
-
-                        <div class="comon-bolock-div mt-4">
-                            <div class="top-header08">
-                                <h3> Order For Service </h3>
-                            </div>
-                            <div class="textr-block">
-                                <div class="top-serct-para">
-                                    <div class="dtn-succes"> Dispatch </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="comon-bolock-div mt-4">
-                            <div class="top-header08">
-                                <h3> Pricing Information </h3>
-                            </div>
-                            <div class="textr-block">
-                                <div class="g table-responsive">
-                                    <table class="table border text-nowrap mb-0">
-                                        <thead>
-                                            <tr>
-                                            <th> 2075601: </th>
-                                            <th>TOTAL:</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>$1,146.00</td>
-                                                <td>$1,146.00</td>
-                                            </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
 
                     <div class="col-lg-12">
@@ -256,8 +236,6 @@
 
                         </div>
                     </div>
-
-
                 </div>
         </div>
     </div>

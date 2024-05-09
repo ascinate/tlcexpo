@@ -1984,7 +1984,7 @@ background: linear-gradient(4deg, rgba(0,0,0,0.9724264705882353) 0%, rgba(0,0,0,
 
 }
 .dater span{
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 400;
   color: #5e6f92;
   text-transform: capitalize;
@@ -2000,9 +2000,9 @@ background: linear-gradient(4deg, rgba(0,0,0,0.9724264705882353) 0%, rgba(0,0,0,
   color: var(--lightcolor);
 }
 .comonevents .events-timles{
-  font-size: 25px;
+  font-size: 31px;
   line-height: 54px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0;
   color: var(--darkcolor);
   font-family: "Poppins", sans-serif;

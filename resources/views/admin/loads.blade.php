@@ -33,7 +33,9 @@
                           <th> Ship Type </th>
                           <th> Customer </th>
                           <th> Tradeshow </th>
-                          <th> Location </th>
+                          <th> Billing Entity </th>
+                          <th> Origin </th>
+                          <th> Destination </th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -59,6 +61,8 @@
                                     echo @$entitie[0]->legeal_name;
                                 @endphp
                             </td>
+                            <td>{{ $data->origin }}</td>
+                            <td>{{ $data->destination }}</td>
                             <td>
                                 <!--<a href="{{ URL::to('admin/viewload/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>

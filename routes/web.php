@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CarrierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\EventController;
@@ -61,7 +62,7 @@ Route::post('requestquote',[RequestquoteController::class,'requestquote']);
 
 Route::view('dashboard','dashboard')->middleware('authverify');
 Route::view('shipments','shipments')->middleware('authverify');
-Route::view('shipment-details','shipment-details')->middleware('authverify');
+Route::get('shipment-details/{id}',[ShipmentController::class,'shipmentdetails'])->middleware('authverify');
 Route::view('loads','loads')->middleware('authverify');
 Route::view('load-details','load-details')->middleware('authverify');
 Route::view('tradeshows','tradeshows')->middleware('authverify');
@@ -179,6 +180,7 @@ Route::post('admin/exhibitorlocation', [ExhibitorcontractorController::class, 'e
 Route::view('admin/addlocation','admin/addlocation');
 Route::get('admin/locations', [LocationController::class,'index'])->middleware('adminauth');
 Route::post('insertdata',[LocationController::class,'insertdata']);
+Route::post('adddata',[LocationController::class,'adddata']);
 Route::get('admin/editlocation/{id}',[LocationController::class,'showData'])->middleware('adminauth');
 Route::post('updatedata',[LocationController::class,'updatedata']);
 Route::get('admin/viewlocation/{id}',[LocationController::class,'viewData'])->middleware('adminauth');
@@ -236,6 +238,17 @@ Route::get('admin/editshipment/{id}',[ShipmentController::class,'showData'])->mi
 Route::get('admin/viewshipment/{id}',[ShipmentController::class,'viewData'])->middleware('adminauth');
 Route::post('updateshipment',[ShipmentController::class,'updateshipment']);
 Route::get('admin/deleteshipment/{id}', [ShipmentController::class, 'delete'])->middleware('adminauth');
+Route::post('admin/getloads',[ShipmentController::class, 'loads']);
+
+//// Carriers
+Route::view('admin/addcarrier','admin/addcarrier');
+Route::get('admin/carriers', [CarrierController::class, 'index'])->middleware('adminauth');
+Route::post('insertcarrier', [CarrierController::class, 'insertcarrier'])->middleware('adminauth');
+Route::get('admin/editcarrier/{id}',[CarrierController::class,'showData'])->middleware('adminauth');
+Route::get('admin/viewcarrier/{id}',[CarrierController::class,'viewData'])->middleware('adminauth');
+Route::post('updatecarrier',[CarrierController::class,'updatecarrier']);
+Route::get('admin/deletecarrier/{id}', [CarrierController::class, 'delete'])->middleware('adminauth');
+
 
 Route::get('admin/logout', function () {
     if(session()->has('adminuser'))

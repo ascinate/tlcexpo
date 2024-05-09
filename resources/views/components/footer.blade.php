@@ -5,7 +5,7 @@
           <div class="col">
               <div class="left-footer d-inline-block w-100">
                  <a href="#" class="logo-footer">
-                    <img alt="ser" src="images/ft-logo.png"/>
+                    <img alt="ser" src="{{ asset('images/ft-logo.png') }}"/>
                  </a>
                  <p class="mt-3 text-white"> TLC-Expo is your best choice for tradeshow logistics consulting. We help you get your trade show materials
                     to and from the venue with excellent service every step of the way. </p>
@@ -133,10 +133,10 @@
      </div>
  </div>
 
- <script src="js/bootstrap.bundle.min.js" ></script>
- <script src="js/jquery.min.js" ></script>
- <script src="js/custom.js" ></script>
- <script src="js/owl.carousel.min.js"></script>
+ <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script>
+ <script src="{{ asset('js/jquery.min.js') }}" ></script>
+ <script src="{{ asset('js/custom.js') }}" ></script>
+ <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
  <script src="https://unpkg.com/feather-icons"></script>
  <script>
    feather.replace();

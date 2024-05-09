@@ -76,95 +76,56 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $datas = \DB::table('shipments')->where('customer', session('id'))->get();
+                                            $i=1;
+                                            foreach($datas as $data)
+                                            {
+                                        @endphp
                                         <tr>
-                                            <td>1</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20756 </a> </td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
+                                            <td>{{ $i }}</td>
+                                            <td> <a href="{{ URL::to('shipment-details') }}/{{ $data->id }}"> {{ 'T00'.$data->order_no }} </a> </td>
+                                            <td>{{ session('name') }}</td>
+                                            <td>
+                                                @php
+                                                    $tradeshow = \DB::table('tradeshows')->where('id', $data->tradeshow)->get();
+                                                    $sname = @$tradeshow[0]->show_name;
+                                                    echo $sname;
+                                                @endphp
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $quote = \DB::table('requestquotes')->where('id',$data->quote)->get();
+                                                    echo @$quote[0]->customer_contact_name;
+                                                @endphp
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $exp = explode(",",$data->loads);
+                                                    for($i=0;$i<=count($exp)-1;$i++)
+                                                    {
+                                                        $load = \DB::table('loads')->where('id', $exp[$i])->get();
+                                                        echo @$load[0]->load_id.'-'.$sname.'<br>';
+                                                    }
+                                                @endphp
+                                            </td>
+                                            <td>{{ $data->status }}</td>
+                                            <td>{{ $data->invoice_no }}</td>
+                                            <td>{{ $data->updated_at }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20786 </a></td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20786 </a> </td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20756 </a></td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20756 </a> </td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20756 </a> </td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td> <a href="{{ URL::to('shipment-details') }}"> 20756 </a> </td>
-                                            <td>Peripheral Dynamics, Inc</td>
-                                            <td>ATMIA 2024</td>
-                                            <td>R23-151</td>
-                                            <td>2075601</td>
-                                            <td>Standby</td>
-                                            <td></td>
-                                            <td>2024-01-17 17:24:03</td>
-                                        </tr>
+                                        @php
+                                            $i++;
+                                           }
+                                        @endphp
 
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
         </div>
     </div>
 </main>
-
 
 <x-footer/>

@@ -96,6 +96,20 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basicc" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Manage Carriers</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-account menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basicc">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/addcarrier') }}">Add Carrier</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('admin/carriers') }}">Carriers Lists</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basicxs" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-title">Manage Shipments</span>
               <i class="menu-arrow"></i>

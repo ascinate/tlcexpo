@@ -42,6 +42,8 @@ class LoadController extends Controller
         $load->zipcode = $request->zipcode;
         $load->country = $request->country;
         $load->destination_tradeshow_id = $request->destination_tradeshow_id;
+        $load->origin = $request->origin;
+        $load->destination = $request->destination;
         $load->cargo_beams = $request->cargo_beams;
         $load->logistic_straps = $request->logistic_straps;
         $load->wheel_dollies = $request->wheel_dollies;
@@ -76,6 +78,8 @@ class LoadController extends Controller
         $load->zipcode = $request->zipcode;
         $load->country = $request->country;
         $load->destination_tradeshow_id = $request->destination_tradeshow_id;
+        $load->origin = $request->origin;
+        $load->destination = $request->destination;
         $load->cargo_beams = $request->cargo_beams;
         $load->logistic_straps = $request->logistic_straps;
         $load->wheel_dollies = $request->wheel_dollies;

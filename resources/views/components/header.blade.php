@@ -7,15 +7,15 @@
     <meta name="author" content="marhansolutions.com" />
     <title>TLC Expro - Home</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Kanit:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&family=Racing+Sans+One&family=Roboto+Condensed:wght@300;400;500;600;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,700;1,900&display=swap" rel="stylesheet"/>
-    <link href="css/all.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="css/owl.theme.default.min.css"/>
+    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"/>
   </head>
 <body>
 @php
@@ -67,7 +67,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="justify-content-between justify-content-lg-end align-items-center d-flex w-100">
             <a class="navbar-brand" href="{{ URL::to('/') }}">
-              <img alt="logo" src="images/tlcexpo-logo-300.png"/>
+              <img alt="logo" src="{{ asset('images/tlcexpo-logo-300.png') }}"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobile-menu">
               <span class="navbar-toggler-icon"></span>
@@ -107,7 +107,7 @@
                 <li class="nav-item dropdown pe-lg-0">
                   <a class="nav-link dropdown-toggle position-relative ship-user" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <div class="piv-user">
-                        <img alt="ser" src="images/4202843.png"/>
+                        <img alt="ser" src="{{ asset('images/4202843.png') }}"/>
                      </div>
                   </a>
                   <ul class="dropdown-menu acout dropdown-menu-end" aria-labelledby="navbarDropdown">

@@ -16,16 +16,13 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Location List</h4>
+                    <h4 class="card-title">Carrier List</h4>
                     <table class="table table-striped">
                       <thead>
                         <tr>
                           <th> # </th>
                           <th> Address </th>
-                          <th> City </th>
-                          <th> State </th>
-                          <th> Zipcode </th>
-                          <th> Type </th>
+                          <th> Phone </th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -33,20 +30,22 @@
                       <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{ $data->location_descripton }}</td>
-                            <td>{{ $data->address_line_1 }}</td>
-                            <td>{{ $data->city }}</td>
-                            <td>{{ $data->state }}</td>
-                            <td>{{ $data->zipcode }}</td>
-                            <td>{{ $data->location_type }}</td>
+                            <td>{{ $data->carrier_name }}</td>
                             <td>
-                                <!--<a href="{{ URL::to('admin/viewlocation/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                @php
+                                    $location = \DB::table('locations')->where('id',$data->location)->get();
+                                    echo @$location[0]->location_descripton;
+                                @endphp
+                            </td>
+                            <td>{{ $data->phone }}</td>
+                            <td>
+                                <!--<a href="{{ URL::to('admin/viewcarrier/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-magnify" style="font-size: 20px;"></i>
                                 </a>-->
-                                <a href="{{ URL::to('admin/editlocation/'.$data->id) }}" style="color: #333; text-decoration: none;">
+                                <a href="{{ URL::to('admin/editcarrier/'.$data->id) }}" style="color: #333; text-decoration: none;">
                                     <i class="mdi mdi-border-color" style="font-size: 20px;"></i>
                                 </a>
-                                <a href="{{ 'deletelocation/'.$data->id }}" style="color: #333;">
+                                <a href="{{ 'deletecarrier/'.$data->id }}" style="color: #333;">
                                     <i class="mdi mdi-delete" style="font-size: 20px;"></i>
                                 </a>
                             </td>
